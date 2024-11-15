@@ -13,19 +13,19 @@
             <th scope="col">Employee ID</th>
             <th scope="col">Surname</th>
             <th scope="col">Name</th>
-            <th scope="col">Section</th>
+            <th scope="col">Middle Name</th>
             <th scope="col">Action</th>
           </tr>
         </thead>
         <tbody>
-            {% for i in faculty %}
+            {% for i in guidance %}
                   <tr>
-                    <td>{{i.faculty_staff_id}}</td>
+                    <td>{{i.guidance_staff_id}}</td>
                     <td>{{i.surname}}</td>
                     <td>{{i.first_name}}</td>
-                    <td>{{i.section}}</td>
+                    <td>{{i.middle_name}}</td>
                     <td>
-                      <button class="btn btn-primary" type="submit" title="Edit"><a href="{% url "faculty_profile" i.faculty_staff_id %}" style="text-decoration: none; color: inherit" >View</a></button>
+                      <button class="btn btn-primary" type="submit" title="Edit"><a href="" style="text-decoration: none; color: inherit" >View</a></button>
                     </td>
                   </tr>
             {% endfor %}

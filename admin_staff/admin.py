@@ -1,5 +1,5 @@
 from django.contrib import admin
-from admin_staff.models import StudentProfile,Announcement, FacultyStaff, AdminStaff, AdmissionStaff, GuidanceStaff, RegistrarStaff, section, level, subject
+from admin_staff.models import StudentProfile,Announcement, FacultyStaff, section, level, subject
 
 # Register your models here.
 

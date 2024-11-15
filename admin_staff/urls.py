@@ -8,14 +8,37 @@ urlpatterns = [
     
     #admin board
     path('', views.admin_dashboard, name='home'),
+    path('update_annoucement<str:pk>', views.announcement, name='announcement'),
     path('class/', views.classes, name='classes'),
     path('student/', views.student_list, name='student_list'),
     path('student/<int:pk>', views.student, name='studentinfo'),   
+    path('addstudent', views.addstudent, name='addstd'),
+
     path('faculty-list/', views.faculty_list, name='faculty_list'),
     path('profile/<int:pk>', views.faculty_profile, name='faculty_profile'),
+    path('addflt', views.addstfaculty, name='addflt'),
+
+    path('guidace',views.guidance_list, name='guidance_list'),
+
+
+
     path('record', views.accademic_record, name='record'),
     path('finance', views.financial_record, name='financ'),
-    path("anecdotal", views.anecdotal_record, name="anecdotalrecord"),
+    path("anecdotal", views.anecdotal_record, name="anecdotal"),
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     #accounting board
     path("financial", views.financial_record, name="financialrecord"),

@@ -1,0 +1,36 @@
+{% extends "admin/admin_dashboard.html" %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+<form action='' method='POST'>
+    <div class="row g-3">
+        {% csrf_token %}
+        <div class="col-md-4">
+            {{guidance.guidance_staff_id|as_crispy_field }}
+        </div>
+        <div class="col-md-4">
+            {{guidance.surname|as_crispy_field }}
+        </div>
+        <div class="col-md-4">
+            {{guidance.first_name|as_crispy_field }}
+        </div>
+        <div class="col-md-4">
+            {{guidance.middle_name|as_crispy_field }}
+        </div>
+        <div class="col-md-4">
+            {{guidance.gender|as_crispy_field }}
+        </div>
+        <div class="col-md-4">
+            {{guidance.contact|as_crispy_field }}
+        </div>
+        <div class="col-md-4">
+            {{guidance.email|as_crispy_field }}
+        </div>        
+        <div class="d-grid gap-2">
+            <button class="btn btn-primary" type="submit">Confirm</button>
+        </div>
+    </div>
+</form>
+
+{% endblock content %}

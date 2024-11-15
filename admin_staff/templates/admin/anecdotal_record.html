@@ -45,94 +45,87 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <th scope="row">136644080098</th>
-                                <td>Mujar</td>
-                                <td>Mark Melvin</td>
-                                <td>Grade 7</td>
-                                <td>Genesis</td>
-                                <td>2</td>
-                                <td>
-                                    <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#viewModal">View</button>
-                                </td>
-                                <!-- Modal Structure -->
-                                <div class="modal modal-xl fade" id="viewModal" tabindex="-1" aria-labelledby="viewModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog modal-dialog-centered">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h3 class="modal-title" id="viewVioHistory"><b>Violation History</b></h3>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                            </div>
-                                            <div class="modal-body">
-                                                <!-- Modal content goes here -->
-                                                <div class="container">
-                                                    <div class="row g-2">
-                                                        <div class="col-md-6">
-                                                            <h5><b>Student Name:</b></h5>
-                                                        </div>
-                                                        <div class="col-md-4">
-                                                            <h5><b>LRN:</b></h5>
-                                                        </div>
-                                                        <div class="col-md-5">
-                                                            <h5><b>Grade Level:</b></h5>
-                                                        </div>
-                                                        <div class="col-md-4">
-                                                            <h5><b>Section:</b></h5>
-                                                        </div>
-                                                        <div class="col-md-3">
-                                                            <h5><b>Violation Count:</b></h5>
-                                                        </div>
-                                                    </div>
+                            {% for student in student %}
+                                <tr>
+                                    <th scope="row">{{student.student_lrn}}</th>
+                                    <td>{{student.surname}}</td>
+                                    <td>{{student.first_name}}</td>
+                                    <td>{{student.level}}</td>
+                                    <td>{{student.section}}</td>
+                                    <td></td>
+                                    <td>
+                                        <button class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#viewModal">View</button>
+                                    </td>
+                                    
+                                    <!-- Modal Structure -->
+                                    {% csrf_token %}
+                                    <div class="modal modal-xl fade" id="viewModal" tabindex="-1" aria-labelledby="viewModalLabel" aria-hidden="true">
+                                        <div class="modal-dialog modal-dialog-centered">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h3 class="modal-title" id="viewVioHistory"><b>Violation History</b></h3>
+                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                 </div>
-                                                <span><hr></span>
+                                                <div class="modal-body">
+                                                    <!-- Modal content goes here -->
+                                                    <div class="container">
+                                                        <div class="row g-2">
+                                                            <div class="col-md-6">
+                                                                <h5><b>Student Name: {{studentviolation.surname}} {{studentviolation.first_name}}</b></h5>
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <h5><b>LRN: {{studentviolation.student_lrn}}</b></h5>
+                                                            </div>
+                                                            <div class="col-md-5">
+                                                                <h5><b>Grade Level: {{studentviolation.level}}</b></h5>
+                                                            </div>
+                                                            <div class="col-md-4">
+                                                                <h5><b>Section: {{studentviolation.section}}</b></h5>
+                                                            </div>
+                                                            <div class="col-md-3">
+                                                                <h5><b>Violation Count:</b></h5>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <span><hr></span>
 
-                                                <!-- Scrollable container for cards -->
-                                                <div class="scrollable-cards-container" style="max-height: 20vw; overflow-y: auto; justify-items: center;">
-                                                    <div class="card m-3 p-2" style="width: 65vw;">
-                                                        <div class="card-body">
-                                                            <h5 class="card-title">Violation 1</h5>
+                                                    <!-- Scrollable container for cards -->
+                                                    <div class="scrollable-cards-container" style="max-height: 20vw; overflow-y: auto; justify-items: center;">
+                                                        <div class="card m-3 p-2" style="width: 65vw;">
+                                                            <div class="card-body">
+                                                                <h5 class="card-title">Violation 1</h5>
+                                                            </div>
+                                                            <ul class="list-group list-group-flush">
+                                                                <li class="list-group-item">Date of Occurrence:</li>
+                                                                <li class="list-group-item">Time</li>
+                                                                <li class="list-group-item">Violation Type</li>
+                                                                <li class="list-group-item">Violation Description</li>
+                                                                <li class="list-group-item">Violation Count</li>
+                                                            </ul>
                                                         </div>
-                                                        <ul class="list-group list-group-flush">
-                                                            <li class="list-group-item">Date of Occurrence:</li>
-                                                            <li class="list-group-item">Time</li>
-                                                            <li class="list-group-item">Violation Type</li>
-                                                            <li class="list-group-item">Violation Description</li>
-                                                            <li class="list-group-item">Violation Count</li>
-                                                        </ul>
-                                                    </div>
-                                                    <div class="card m-3 p-2" style="width: 65vw;">
-                                                        <div class="card-body">
-                                                            <h5 class="card-title">Violation 2</h5>
+                                                        <div class="card m-3 p-2" style="width: 65vw;">
+                                                            <div class="card-body">
+                                                                <h5 class="card-title">Violation 2</h5>
+                                                            </div>
+                                                            <ul class="list-group list-group-flush">
+                                                                <li class="list-group-item">Date of Occurrence:</li>
+                                                                <li class="list-group-item">Time</li>
+                                                                <li class="list-group-item">Violation Type</li>
+                                                                <li class="list-group-item">Violation Description</li>
+                                                                <li class="list-group-item">Violation Count</li>
+                                                            </ul>
                                                         </div>
-                                                        <ul class="list-group list-group-flush">
-                                                            <li class="list-group-item">Date of Occurrence:</li>
-                                                            <li class="list-group-item">Time</li>
-                                                            <li class="list-group-item">Violation Type</li>
-                                                            <li class="list-group-item">Violation Description</li>
-                                                            <li class="list-group-item">Violation Count</li>
-                                                        </ul>
-                                                    </div>
-                                                    <!-- Add more cards as needed -->
-                                                </div> 
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-success" data-bs-dismiss="modal">Edit</button>
+                                                        <!-- Add more cards as needed -->
+                                                    </div> 
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-success" data-bs-dismiss="modal">Edit</button>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </div>                               
-                            </tr>
-                            <tr>
-                                <th scope="row">136644080057</th>
-                                <td>Mendoza</td>
-                                <td>Luigi</td>
-                                <td>Grade 8</td>
-                                <td>Genesis</td>
-                                <td>3</td>
-                                <td>
-                                    <button class="btn btn-primary btn-sm">View</button>
-                                </td> 
-                            </tr>
+                                    </div>                               
+                                </tr>
+                            {% endfor %}
                         </tbody>
                     </table>
                 </div>

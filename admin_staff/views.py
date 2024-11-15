@@ -1,11 +1,11 @@
 from django.shortcuts import render, redirect
-from .models import StudentProfile, FacultyStaff, Announcement
+from .models import StudentProfile, FacultyStaff, Announcement, GuidanceStaff
 from django.shortcuts import render
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .decorators import unauthenticated_user, allowed_user, admin_only
-
+from .form import announcementForm, studentForm, facultyForm, guidanceForm
 # Create your views here.
 
 
@@ -39,6 +39,19 @@ def admin_dashboard(request):
     context = {'announcement': announcement}
     return render(request, 'admin/admin_dashboard.html', context)
 
+def announcement(request, pk):
+    annouce = Announcement.objects.get(announcement_id=pk)
+    form = announcementForm(instance=annouce)
+    if request.method == 'POST':
+        form = announcementForm(request.POST, instance=annouce)
+        if form.is_valid():
+            form.save()
+            return redirect('/')
+
+    context = {'form': form}
+    return render(request, 'admin/announcement_form.html', context)
+
+
 @login_required(login_url='login')
 @allowed_user(allow_roles=['admin'])
 def classes(request):
@@ -56,12 +69,60 @@ def student(request, pk):
     student = StudentProfile.objects.get(student_lrn = pk)
     return render(request, 'admin/student_profile.html', {'student': student})
 
+@login_required(login_url='login')
+@allowed_user(allow_roles=['admin'])
+def addstudent(request):
+    student = studentForm()
+    if request.method == "POST":
+        student = studentForm(request.POST)
+        if student.is_valid():
+            student.save()
+            return redirect('/')
+
+    context = {'student': student}
+    return render(request, 'admin/addstudent.html', context)
+
+@login_required(login_url='login')
+@allowed_user(allow_roles=['admin'])
+def addstfaculty(request):
+    faculty = facultyForm()
+    if request.method == "POST":
+        faculty = facultyForm(request.POST)
+        if faculty.is_valid():
+            faculty.save()
+            return redirect('/')
+
+    context = {'faculty': faculty}
+    return render(request, 'admin/addfaculty.html', context)
+    
+@login_required(login_url='login')
+@allowed_user(allow_roles=['admin'])
+def addstguidance(request):
+    guidace = guidanceForm()
+    if request.method == "POST":
+        guidace = guidanceForm(request.POST)
+        if guidace.is_valid():
+            guidace.save()
+            return redirect('/')
+
+    context = {'guidance': guidace}
+    return render(request, 'admin/addfaculty.html', context)
+
+
 
 @login_required(login_url='login')
 @allowed_user(allow_roles=['admin'])
 def faculty_list(request):
     faculty = FacultyStaff.objects.all()
     return render(request, 'admin/faculty_list.html', { 'faculty': faculty})
+
+@login_required(login_url='login')
+@allowed_user(allow_roles=['admin'])
+def guidance_list(request):
+    guidance = GuidanceStaff.objects.all()
+    return render(request, 'admin/guidanc_list.html', { 'guidance': guidance})
+
+
 
 @login_required(login_url='login')
 @allowed_user(allow_roles=['admin'])
@@ -77,7 +138,9 @@ def accademic_record(request):
 @login_required(login_url='login')
 @allowed_user(allow_roles=['admin'])
 def anecdotal_record(request):
-    return render(request, "admin/anecdotal_record.html")
+    student = StudentProfile.objects.all()
+    context = {'student': student}
+    return render(request, "admin/anecdotal_record.html", context)
 
 def financial_record(request):
     return render(request, "admin/financial_record.html")
