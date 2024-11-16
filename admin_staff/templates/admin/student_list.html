@@ -1,14 +1,28 @@
 {% extends "admin/admin_dashboard.html" %}
 
 {% block content %}
+<!-- Title Page -->
+<div class="page-title mb-4" style="margin:15px;">
+  <h2 style="color: #615EFC; font-weight: bold; margin-right: 20px; padding-left: 50px;">Students List</h2>
+  <hr style="margin-top: 0; color: black;">
+</div>
 
-<div class="container-fluid border rounded" style="margin: 5px">
+<div class="container border rounded">
   
-  <div class="d-grid gap-2 d-md-flex justify-content-md-end" style='margin: 10px'>
-    <a href="{% url "addstd" %}" role='btn' class='btn btn-primary'>
-      <i class="bi bi-plus-circle"></i> add student
-    </a>
+  <div class="row g-2">
+    <div class="col-md-4 col-sm-6 m-3 p-2">
+      <div class="input-group">
+          <input type="text" class="form-control" placeholder="Student LRN" aria-label="Student's LRN" aria-describedby="button-addon2">
+          <button class="btn btn-outline-primary" type="button" id="button-addon2">Search</button>
+      </div>
+    </div>
+    <div class="col-md-6 m-3 p-2" >
+      <a href="{% url "addstd" %}" role='btn' class='btn btn-primary'>
+        <i class="bi bi-plus-circle"></i> add student
+      </a>
+    </div>
   </div>
+  
 
   <table class="table table-hover" >
         <thead>
@@ -16,6 +30,7 @@
             <th scope="col">LRN</th>
             <th scope="col">Surname</th>
             <th scope="col">Name</th>
+            <th scope="col">Grade</th>
             <th scope="col">Section</th>
             <th scope="col">Action</th>
           </tr>
@@ -26,10 +41,11 @@
                     <td>{{i.student_lrn}}</td>
                     <td>{{i.surname}}</td>
                     <td>{{i.first_name}}</td>
+                    <td>{{i.level}}</td>
                     <td>{{i.section}}</td>
                     <td>
                       <button class="btn btn-primary" type="submit" title="Edit"><a href="{% url "studentinfo" i.student_lrn %}" style="text-decoration: none; color: inherit" >
-                        <i class="bi bi-eye"></i>
+                        view
                       </a></button>
                     </td>
                   </tr>

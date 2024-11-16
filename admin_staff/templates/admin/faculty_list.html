@@ -1,10 +1,15 @@
 {% extends "admin/admin_dashboard.html" %}
 
 {% block content %}
-<div class="container-fluid border rounded" style="margin: 5px">
-    <div class="d-grid gap-2 d-md-flex justify-content-md-end" style='margin: 10px'>
+<div class="page-title mb-4" style="margin:15px;">
+  <h2 style="color: #615EFC; font-weight: bold; margin-right: 20px; padding-left: 50px;">Faculty List</h2>
+  <hr style="margin-top: 0; color: black;">
+</div>
+
+<div class="container border rounded-4">
+    <div class="d-grid gap-2 d-md-flex p-2 justify-content-md-end" style='margin: 10px'>
       <a href="{% url "addflt" %}" role='btn' class='btn btn-primary'>
-        <i class="bi bi-plus-circle"></i> add student
+        <i class="bi bi-plus-circle"></i> add teacher
       </a>
     </div>
     <table class="table table-hover" >

@@ -53,6 +53,7 @@ urlpatterns = [
     path('advisory', views.advisory, name='advisory'),
     path('info/<int:pk>', views.student_info, name='info'),
     path('adviser', views.faculty_info, name='faculty_info'),
+    path('attendance', views.attendance_record, name="attendance"),
 
     #accounting
     path('accounting', views.accounting_dashboard, name='accounting' ),

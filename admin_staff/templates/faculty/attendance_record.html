@@ -1,0 +1,142 @@
+{% extends "faculty/faculty-dashboard.html" %}
+
+{% block content %}
+
+<!-- Title Page -->
+<div class="page-title mb-4" style="margin:15px;">
+    <h2 style="color: #615EFC; font-weight: bold; margin-right: 20px; padding-left: 50px;">Attendance Record</h2>
+    <hr style="margin-top: 0; color: black;">
+  </div>
+
+<!--ATTENDANCE RECORD-->
+<div class="container">
+  <div class="card">
+      <div class="card-header pb-0">
+          <!-- DISPLAY GRADE AND SECTION -->
+          <div class="row g-2">
+          <div class="col-sm-6">
+              <h3 style="font-weight: bold;">GRADE 7 - SECTION Genesis</h3>
+          </div>
+          </div>
+      </div>
+      <div class="card-body">
+          <div class="row g-2 mb-2">
+              <div class="col-md-10">
+                  <h5 class="card-title p-1">Student Count:</h5>
+              </div>
+              <div class="col-md-2">
+                  <button class="btn btn-primary" id="updateTable" disabled>Update Table</button>
+              </div>
+              <div class="col-md-2">
+                  <!-- Week Dropdown -->
+                  <label for="weekPicker" class="form-label">Select Week:</label>
+                  <select id="weekPicker" class="form-select form-select-sm">
+                  <option value="" selected disabled>Choose a week...</option>
+                  <option value="1">Week 1</option>
+                  <option value="2">Week 2</option>
+                  <option value="3">Week 3</option>
+                  <option value="4">Week 4</option>
+                  </select>
+              </div>
+              <div class="col-md-8"></div>
+          </div>
+  
+          <table class="table table-sm table-hover border">
+              <thead>
+                  <tr>
+                  <th scope="col" style="width: 5vw;">#</th>
+                  <th scope="col" style="width: 18vw;">Student Name</th>
+                  <th scope="col" style="width: 10vw;">MONDAY</th>
+                  <th scope="col" style="width: 10vw;">TUESDAY</th>
+                  <th scope="col" style="width: 10vw;">WEDNESDAY</th>
+                  <th scope="col" style="width: 10vw;">THURSDAY</th>
+                  <th scope="col" style="width: 10vw;">FRIDAY</th>
+                  </tr>
+                  <tr>
+                  <th scope="col" colspan="2"></th>
+                  <th scope="col"><input type="date" id="mondayDate"></th>
+                  <th scope="col"><input type="date" id="tuesdayDate"></th>
+                  <th scope="col"><input type="date" id="wednesdayDate"></th>
+                  <th scope="col"><input type="date" id="thursdayDate"></th>
+                  <th scope="col"><input type="date" id="fridayDate"></th>
+                  </tr>
+              </thead>
+              <tbody id="studentTableBody">
+                  <tr>
+                  <th scope="row">1</th>
+                  <td>Mujar, Mark Melvin</td>
+                  </tr>
+                  <tr>
+                  <th scope="row">2</th>
+                  <td>Belmonte, Maria Andrea Mae</td>
+                  </tr>
+              </tbody>
+          </table>
+      </div>
+  </div>
+</div>
+
+<script>
+  // Function to enable the button when a valid week is selected
+  function enableUpdateButton() {
+    const weekPicker = document.getElementById("weekPicker");
+    const updateButton = document.getElementById("updateTable");
+
+    // Enable the button if a valid week is selected
+    if (weekPicker.value) {
+      updateButton.disabled = false;
+    } else {
+      updateButton.disabled = true;
+    }
+  }
+
+  // Function to clear all checkboxes and date inputs
+  function clearInputs() {
+    // Clear checkbox states
+    document.querySelectorAll("#studentTableBody input[type='checkbox']").forEach((checkbox) => {
+      checkbox.checked = false;
+    });
+
+    // Clear date inputs
+    document.querySelectorAll("thead input[type='date']").forEach((input) => {
+      input.value = ""; // Reset to empty
+    });
+  }
+
+  // Add checkboxes to student rows
+  function addCheckboxesToTable() {
+    const tableBody = document.getElementById("studentTableBody");
+
+    tableBody.querySelectorAll("tr").forEach((row) => {
+      const existingColumns = row.querySelectorAll("td").length;
+
+      if (existingColumns < 6) {
+        for (let i = 0; i < 5; i++) {
+          const checkboxCell = document.createElement("td");
+          const checkbox = document.createElement("input");
+          checkbox.type = "checkbox";
+          checkboxCell.classList.add("text-center");
+          checkboxCell.appendChild(checkbox);
+          row.appendChild(checkboxCell);
+        }
+      }
+    });
+  }
+
+  // Update table and clear inputs when the button is clicked
+  document.getElementById("updateTable").addEventListener("click", (event) => {
+    event.preventDefault(); // Prevent default behavior
+    clearInputs(); // Reset inputs
+  });
+
+  // Add event listener to the week picker dropdown
+  document.getElementById("weekPicker").addEventListener("change", enableUpdateButton);
+
+  // Initialize the table on page load
+  document.addEventListener("DOMContentLoaded", () => {
+    addCheckboxesToTable();
+    enableUpdateButton(); // Check if the button should be enabled initially
+  });
+</script>
+
+{% endblock content %}
