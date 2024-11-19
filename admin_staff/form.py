@@ -1,5 +1,5 @@
 from django.forms import ModelForm
-from .models import Announcement, StudentProfile, FacultyStaff, GuidanceStaff, AdminStaff, AdmissionStaff
+from .models import Announcement, StudentProfile, FacultyStaff
 
 class announcementForm(ModelForm):
     class Meta:
@@ -16,17 +16,3 @@ class facultyForm(ModelForm):
         model = FacultyStaff
         fields = '__all__'
 
-class guidanceForm(ModelForm):
-    class Meta:
-        model = GuidanceStaff
-        fields = '__all__'
-
-class adminForm(ModelForm):
-    class Meta:
-        model = AdminStaff
-        fields = '__all__'
-
-class admitionForm(ModelForm):
-    class Meta:
-        model = AdmissionStaff
-        fields = '__all__'

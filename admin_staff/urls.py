@@ -18,7 +18,6 @@ urlpatterns = [
     path('profile/<int:pk>', views.faculty_profile, name='faculty_profile'),
     path('addflt', views.addstfaculty, name='addflt'),
 
-    path('guidace',views.guidance_list, name='guidance_list'),
 
 
 

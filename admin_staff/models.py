@@ -4,7 +4,13 @@ from django.contrib.auth.models import User
 # Create your models here.
 
 class subject(models.Model):
-    subjectname = models.CharField(max_length=30)
+    subjectname = models.CharField(max_length=30, null=True, blank=True)
+    subject_discripiton = models.CharField(max_length=30, null=True, blank=True)
+    subject_grade_firstQ = models.IntegerField(null=True, blank=True)
+    subject_grade_secondQ = models.IntegerField(null=True, blank=True)
+    subject_grade_thirdQ = models.IntegerField(null=True, blank=True)
+    subject_grade_fourthQ = models.IntegerField(null=True, blank=True)
+    average = models.IntegerField(null=True, blank=True)
     
     def __str__(self):
         return self.subjectname
@@ -106,95 +112,8 @@ class StudentProfile(models.Model):
     
     def __str__(self):
         return self.surname
-    
-    
 
 
-    
-class AdminStaff(models.Model):
-    admin_staff_id = models.IntegerField(primary_key=True)
-    surname = models.CharField(max_length=24)
-    first_name = models.CharField(max_length=24)
-    middle_name = models.CharField(max_length=24, blank=True, null=True)
-    
-    gender_choice = (
-        ('Male', 'Male'),
-        ('Female', 'Female'),
-    )
-    gender = models.CharField(max_length=24, default="Gender", choices=gender_choice, null=True)
-
-    contact = models.IntegerField(blank=True, null=True)
-    email = models.CharField(max_length=100, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'admin_staff'
-    
-    def __str__(self):
-        return self.surname
-
-
-class AdmissionStaff(models.Model):
-    admission_staff_id = models.IntegerField(primary_key=True)
-    surname = models.CharField(max_length=24)
-    first_name = models.CharField(max_length=24)
-    middle_name = models.CharField(max_length=24, blank=True, null=True)
-    gender_choice = (
-        ('Male', 'Male'),
-        ('Female', 'Female'),
-    )
-    gender = models.CharField(max_length=10, default="Gender", choices=gender_choice, null=True)
-    contact = models.IntegerField(blank=True, null=True)
-    email = models.CharField(max_length=100, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'admission_staff'
-
-    def __str__(self):
-        return self.surname
-
-
-class GuidanceStaff(models.Model):
-    guidance_staff_id = models.IntegerField(primary_key=True)
-    surname = models.CharField(max_length=24)
-    first_name = models.CharField(max_length=24)
-    middle_name = models.CharField(max_length=24, blank=True, null=True)
-    gender_choice = (
-        ('Male', 'Male'),
-        ('Female', 'Female'),
-    )
-    gender = models.CharField(max_length=10, default="Gender", choices=gender_choice, null=True)
-    contact = models.IntegerField(blank=True, null=True)
-    email = models.CharField(max_length=100, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'guidance_staff'
-    
-    def __str__(self):
-        return self.surname
-
-
-class RegistrarStaff(models.Model):
-    registrar_staff_id = models.IntegerField(primary_key=True)
-    surname = models.CharField(max_length=24)
-    first_name = models.CharField(max_length=24)
-    middle_name = models.CharField(max_length=24, blank=True, null=True)
-    gender_choice = (
-        ('Male', 'Male'),
-        ('Female', 'Female'),
-    )
-    gender = models.CharField(max_length=10, default="Gender", choices=gender_choice, null=True)
-    contact = models.IntegerField(blank=True, null=True)
-    email = models.CharField(max_length=100, blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'registrar_staff'
-
-    def __str__(self):
-        return self.surname
 
 
 class Announcement(models.Model):
@@ -210,5 +129,6 @@ class Announcement(models.Model):
     def __str__(self):
         return self.title
     
+
 
 
