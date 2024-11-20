@@ -15,8 +15,8 @@
 </head>
 <body>
     <div class="d-flex" id="wrapper" style="width: 100vw; height: 100vh;">
-      <div id="page-content-wrapper">
-        <nav class="navbar navbar-expand-lg navbar-light border-bottom" style='background-color: #615EFC;'>
+      <div id="page-content-wrapper" style="background: linear-gradient(to bottom, #eeeeee, #ffffff);">
+        <nav class="navbar navbar-expand-lg border-bottom" style="background: linear-gradient(to right, #615efc, #4f2fb8, #7856e8);">
           <div class="container-fluid">
             <a href="{% url "home" %}" rel="noopener noreferrer"><img src="{% static "img/nobg.png" %}" alt="Logo" width="38" height="38"></a>
             <div class="ms-2 d-none d-md-block">
@@ -79,7 +79,7 @@
 
           <!-- Page content-->
           <div class="container">
-            <div class="container mb-3 p-5 shadow" style="width: 85vw; height: 30vh; border-radius: 20px; margin-top: 4vh;">
+            <div class="container mb-3 p-5 shadow bg-white" style="width: 85vw; height: 30vh; border-radius: 20px; margin-top: 4vh;">
               <h2 class="card-title" style="font-weight: bold;">Announcement</h2>
               <hr>
               <h4>Title: {{announcement.title}}</h4>

@@ -1,3 +1,4 @@
+
 /*---------- NAVBAR ----------*/
 .container-fluid {
     font-family: "Lato", sans-serif;
@@ -58,6 +59,7 @@
   }
 }
 
+
 /*---------- END OF NAVBAR ----------*/
 
 
@@ -77,6 +79,3 @@
 
 /*---------- DASHBOARD CARD ---------*/
 
-.card-body {
-  text-align: left !important;
-}

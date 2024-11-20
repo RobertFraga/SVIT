@@ -10,14 +10,36 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="{% static "css/sidebar.css" %}">
-    <link rel="stylesheet" href="{% static "css\admin.css" %}">
+    <link rel="stylesheet" href="{% static "css/admin.css" %}">
     <script src="{% static 'js/sidebar.js' defer %}"></script>
     <link rel="shortcut icon" href="{% static "img/nobg.png" %}" type="image/x-icon">
   </head>
+
+  <style>
+    .carousel-inner {
+      display: flex;
+      padding: 1 rem;
+    }
+    .carousel-item {
+      display: flex;
+      margin-right: 0;
+      flex: 0 0 calc(100%/3);
+    }
+    .carousel-control-prev, .carousel-control-next{
+      background-color: #e1e1e1;
+      width: 6vh;
+      height: 6vh;
+      border-radius: 50%;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+  </style>
+
   <body>
     <div class="d-flex" id="wrapper" style="width: 100vw; height: 100vh;">
-      <div id="page-content-wrapper">
-        <nav class="navbar navbar-expand-lg navbar-light border-bottom p-1" style='background-color: #615EFC;'>
+      <div id="page-content-wrapper" style="background: linear-gradient(to bottom, #eeeeee, #ffffff);">
+        <!--NAVBAR-->
+        <nav class="navbar navbar-expand-lg border-bottom shadow-sm-3" style="background: linear-gradient(to right, #615efc, #4f2fb8, #7856e8);">
           <div class="container-fluid">
             <a href="{% url "student" %}" rel="noopener noreferrer"><img src="{% static "img/nobg.png" %}" alt="Logo" width="38" height="38"></a>
             <div class="ms-2 d-none d-md-block">
@@ -94,64 +116,257 @@
             </div>
           </div>
         </nav>
+
         {% block content %}
         <!-- Title Page -->
-        <div class="page-title mb-4" style="margin:15px;">
-          <h2 style="color: #615EFC; font-weight: bold; margin-right: 20px; padding-left: 50px;">Dashboard</h2>
+        <div class="row g-2 align-items-center mt-0">
+          <div class="col-md-5">
+            <div class="page-title mb-0 mt-0" style="margin:10px;">
+              <h2 style="color: #615EFC; font-weight: bold; margin-right: 20px; padding-left: 50px;">
+                Welcome to Dashboard!
+              </h2>
+            </div>
+          </div>
+          <div class="col-md-2 mt-4 d-flex justify-content-center">
+            <h6 id="schoolYear" style="font-weight: bold; font-size: large;">
+              School Year: 2024-2025
+            </h6>
+          </div>
+          <div class="col-md-5 text-end">
+            <span id="live-time" style="color: #333; font-weight: normal; font-size: 1em; padding-right: 5vw;"></span>
+          </div>
           <hr style="margin-top: 0; color: black;">
         </div>
-          <!-- Page content-->
-        <div class="container" style="padding: 10px;">
-          <div class="container mb-3 p-5 shadow" style="width: 85vw; height: 30vh; border-radius: 20px; margin-top: 0vh;">
-            <h2 class="card-title" style="font-weight: bold;">Announcement</h2>
-            <hr>
-            <h5>Titile: {{announcement.title}}</h5>
-            <h6>{{announcement.body}}</h6>
+        <!-- JavaScript FOR LIVE TIME -->
+        <script>
+          function updateLiveTime() {
+            const timeElement = document.getElementById('live-time');
+            const now = new Date();
+            const formattedTime = now.toLocaleTimeString(); // Formats time as HH:MM:SS AM/PM
+            timeElement.textContent = ` ${formattedTime}`;
+          }
+
+          // Update time every second
+          setInterval(updateLiveTime, 1000);
+
+          // Initialize the time immediately
+          updateLiveTime();
+        </script>
+
+        <div class="container mt-2 mb-4">
+          <div class="row g-3">
+            <div class="col-md-3 d-flex justify-content-center"> <!--CARD 1-->
+              <div class="card rounded-4 shadow" style="padding: 0 3vw; background: linear-gradient(to bottom, rgba(97, 94, 252, 0.9), rgba(79, 47, 184, 0.9)); color: white;">
+                <div class="card-body p-4">
+                  <h5 class="card-title" style="font-weight: bold; font-size: 50px;">
+                    <i class="bi bi-person-workspace"></i> 300
+                  </h5>
+                  <p class="card-text mb-0" style="font-weight: bold;">Student Population</p>
+                  <a href="#" class="text-light"><i>See Classes</i></a>
+                </div>
+              </div>              
+            </div>
+            <div class="col-md-3 d-flex justify-content-center">  <!--CARD 2-->
+              <div class="card rounded-4 shadow" style="padding: 0 3vw; background: linear-gradient(to bottom, rgba(97, 94, 252, 0.9), rgba(79, 47, 184, 0.9)); color: white;">
+                <div class="card-body p-4">
+                  <h5 class="card-title" style="font-weight: bold; font-size: 50px;">
+                    <i class="bi bi-person-workspace"></i> 300
+                  </h5>
+                  <p class="card-text mb-0" style="font-weight: bold;">Student Population</p>
+                  <a href="#" class="text-light"><i>See Classes</i></a>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3 d-flex justify-content-center">  <!--CARD 3-->
+              <div class="card rounded-4 shadow" style="padding: 0 3vw; background: linear-gradient(to bottom, rgba(97, 94, 252, 0.9), rgba(79, 47, 184, 0.9)); color: white;">
+                <div class="card-body p-4">
+                  <h5 class="card-title" style="font-weight: bold; font-size: 50px;">
+                    <i class="bi bi-person-workspace"></i> 300
+                  </h5>
+                  <p class="card-text mb-0" style="font-weight: bold;">Student Population</p>
+                  <a href="#" class="text-light"><i>See Classes</i></a>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-3 d-flex justify-content-center">  <!--CARD 4-->
+              <div class="card rounded-4 shadow" style="padding: 0 3vw; background: linear-gradient(to bottom, rgba(97, 94, 252, 0.9), rgba(79, 47, 184, 0.9)); color: white;">
+                <div class="card-body p-4">
+                  <h5 class="card-title" style="font-weight: bold; font-size: 50px;">
+                    <i class="bi bi-person-workspace"></i> 300
+                  </h5>
+                  <p class="card-text mb-0" style="font-weight: bold;">Student Population</p>
+                  <a href="#" class="text-light"><i>See Classes</i></a>
+                </div>
+              </div>
+            </div>
           </div>
-  
-          {% comment %} cards {% endcomment %}
-  
-        <!-- Bottom Cards -->
-        <div class="container" id="container-card" style="color: white;">
-          <div class="row d-flex justify-content-end align-items-stretch" style="width: max;">
-              <!-- Left Card -->
-              <div class="col-lg-6 col-md-12 mb-5 d-flex">
-                  <div class="card p-2 shadow w-100 h-100" style="border-radius: 20px;">
-                      <div class="card-body text-start" style="padding-left: 3vw;">
-                          <h3 class="card-title" style="color: #615EFC; font-weight: bold;">Hello,</h3>
-                          <p class="card-text">Welcome to Student Management System</p>
-                          <p class="card-text">ADMIN</p>
+        </div>
+
+        <div class="container mb-0 mt-0" style="margin-right: 0; margin-left: 0; padding-left: 5vw;">
+          <div class="row  m-0">
+            <div class="col-md-4">
+              <h2 style="font-weight: bold;">
+                Announcement Slides <i class="bi bi-megaphone-fill"></i>
+              </h2>
+            </div>
+            <!-- Add New Announcement Button -->
+            <div class="col-md-5 text-start">
+              <button id="addCardButton" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addAnnouncementModal">Add New Announcement</button>
+            </div>
+          </div>
+        </div>
+        <!--CONTENTS OF ANNOUNCEMENT SLIDES-->
+        <div class="container mt-0" style="height: 20vh;">
+          <div id="announcementCarousel" class="carousel">
+              <div class="carousel-inner">
+                  <!-- First set of cards -->
+                  <div class="carousel-item">
+                    <div class="card d-block row m-2 p-3 border rounded-4 shadow" style="width: 30rem; height: 15rem;">
+                      <div class="card-body">
+                        <h5 class="card-title" style="font-weight: bold; color: #615efc;">Title</h5>
+                        <p class="card-text">This description is for testing. This description is for testing. This description is for testing. This description is for testing. This description is for testing. This description is for testing.</p>
+                        <p><small>Date: 11/25/2024</small></p>
                       </div>
-                      <div class="d-grid gap-2 p-3">
-                        <a href="{% url 'student-profile' %}" role='btn' class="btn btn-primary" style="text-decoration: none; color: white;">
-                            <i class="bi bi-eye"></i> View
-                        </a>
                     </div>
                   </div>
               </div>
-              <!-- Right Card -->
-              <div class="col-lg-6 col-md-12 mb-5 d-flex">
-                  <div class="card p-2 shadow w-100" style="border-radius: 20px;">
-                      <div class="card-body text-start" style="padding-left: 3vw; padding-top: 3vh;">
-                          <br>
-                          <h4>See the list of</h4>
-                          <h2 class="card-title" style="font-weight: bold; color: black;">
-                            <a href="">Classes</a>, <a href="">Records</a>, and <a href="">Users</a>
-                          </h2><br>
-                          <p class="card-text" style="font-size: small; font-weight: normal; color:#615EFC;">School Year 2024-2025</p>
-                      </div>
-                  </div>
-              </div>
+              <!-- Carousel controls -->
+              <button class="carousel-control-prev" type="button" data-bs-target="#announcementCarousel" data-bs-slide="prev">
+                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">Previous</span>
+              </button>
+              <button class="carousel-control-next" type="button" data-bs-target="#announcementCarousel" data-bs-slide="next">
+                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">Next</span>
+              </button>
           </div>
         </div>
-        
+  
+        <!-- Modal for Adding New Announcement -->
+        <div class="modal fade" id="addAnnouncementModal" tabindex="-1" aria-labelledby="addAnnouncementModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header" style="color: white; background: linear-gradient(to right, #4f2fb8, #615efc, #4f2fb8);">
+                        <h5 class="modal-title" id="addAnnouncementModalLabel">Add New Announcement</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <form id="announcementForm">
+                            <div class="mb-3">
+                                <label for="announcementTitle" class="form-label">Title</label>
+                                <input type="text" class="form-control" id="announcementTitle" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="announcementDescription" class="form-label">Description</label>
+                                <textarea class="form-control" id="announcementDescription" rows="3" required></textarea>
+                            </div>
+                            <div class="mb-3">
+                                <label for="announcementDateTime" class="form-label">Date</label>
+                                <input type="date" class="form-control" id="announcementDateTime" required>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                        <button type="button" id="saveAnnouncementButton" class="btn btn-primary">Save Announcement</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+        <script>
+          $(document).ready(function () {
+              // Recalculate dimensions dynamically
+              function updateCarouselDimensions() {
+                  carouselWidth = $(".carousel-inner")[0].scrollWidth; // Total carousel width
+                  cardWidth = $(".carousel-item").outerWidth(true); // Width of a single card (including margin)
+              }
+      
+              // Initialize variables
+              let carouselWidth = $(".carousel-inner")[0].scrollWidth;
+              let cardWidth = $(".carousel-item").outerWidth(true);
+              let scrollPosition = 0;
+      
+              // Update dimensions on window resize
+              $(window).resize(updateCarouselDimensions);
+      
+              // Next button click
+              $(".carousel-control-next").on("click", function () {
+                  if (scrollPosition < (carouselWidth - cardWidth)) { // Check if further scrolling is possible
+                      scrollPosition += cardWidth; // Move forward by one card width
+                      $(".carousel-inner").animate({ scrollLeft: scrollPosition }, 600); // Smooth scroll
+                  }
+              });
+      
+              // Previous button click
+              $(".carousel-control-prev").on("click", function () {
+                  if (scrollPosition > 0) { // Check if backward scrolling is possible
+                      scrollPosition -= cardWidth; // Move backward by one card width
+                      $(".carousel-inner").animate({ scrollLeft: scrollPosition }, 600); // Smooth scroll
+                  }
+              });
+      
+              // Update dimensions initially
+              updateCarouselDimensions();
+      
+              // For adding new announcement
+              const carouselInner = document.querySelector('.carousel-inner');
+              const saveAnnouncementButton = document.getElementById('saveAnnouncementButton');
+              let announcementCount = 1; // Track the number of announcements
+      
+              saveAnnouncementButton.addEventListener('click', () => {
+                  const title = document.getElementById('announcementTitle').value;
+                  const description = document.getElementById('announcementDescription').value;
+                  const date = document.getElementById('announcementDateTime').value;
+      
+                  if (!title || !description || !date) {
+                      alert('Please fill out all fields!');
+                      return;
+                  }
+      
+                  announcementCount++;
+                  const newCardHTML = `
+                      <div class="carousel-item">
+                          <div class="card d-block row m-2 p-3 border rounded-4 shadow" style="width: 30rem; height: 15rem;">
+                            <div class="card-body">
+                                <h5 class="card-title" style="font-weight: bold; color: #615efc;">${title}</h5>
+                                <p class="card-text">${description}</p>
+                                <p><small>Date: ${new Date(date).toLocaleString()}</small></p>
+                            </div>
+                        </div>
+                      </div>  
+                  `;
+      
+                  const firstCarouselItem = carouselInner.querySelector('.carousel-item:first-child');
+                  if (firstCarouselItem && firstCarouselItem.children.length < 1) {
+                      firstCarouselItem.insertAdjacentHTML('afterbegin', newCardHTML);
+                  } else {
+                      const newCarouselItemHTML = `
+                          <div class="carousel-item active">
+                              ${newCardHTML}
+                          </div>
+                      `;
+                      const currentActive = carouselInner.querySelector('.carousel-item.active');
+                      if (currentActive) currentActive.classList.remove('active');
+                      carouselInner.insertAdjacentHTML('afterbegin', newCarouselItemHTML);
+                  }
+      
+                  // Recalculate carousel dimensions after adding a new card
+                  updateCarouselDimensions();
+      
+                  // Close the modal and reset the form
+                  const modal = document.getElementById('addAnnouncementModal');
+                  const bootstrapModal = bootstrap.Modal.getInstance(modal);
+                  bootstrapModal.hide();
+                  document.getElementById('announcementForm').reset();
+              });
+          });
+        </script>
 
         {% endblock content %}
       </div>
     </div>
-    
-  
-  
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 </html>
