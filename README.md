@@ -17,6 +17,7 @@ here are some
 7. Manage grades (Add, Update and Delete)
 8. Manage Subjects (Add, Update and Delete)
 9. View Student Attendance
+10. Add Academic Year
 
 ### A. Faculty Staff or Advisory
 1. Manage Student Attendance (Add, Update and Delete)
