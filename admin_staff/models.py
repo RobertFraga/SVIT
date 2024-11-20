@@ -136,5 +136,6 @@ class registrarStaff(models.Model):
     surname = models.CharField(max_length=24)
     first_name = models.CharField(max_length=24)
     middle_name = models.CharField(max_length=24, blank=True, null=True)
+    prefix = models.CharField(max_length=24, blank=True, null=True)
 
 
