@@ -1,5 +1,5 @@
 from django.contrib import admin
-from admin_staff.models import StudentProfile,Announcement, FacultyStaff, section, level, subject
+from admin_staff.models import StudentProfile,Announcement, FacultyStaff, guidanceStaff, registrarStaff, cashierStaff, section, level, subject
 
 # Register your models here.
 
@@ -15,10 +15,33 @@ class faculty(admin.ModelAdmin):
     list_display = ('faculty_staff_id', 'surname', 'first_name', 'section')
     ordering = ('faculty_staff_id', )
     search_fields = ('surname', 'faculty_staff_id')
+
+
+
+
+@admin.register(registrarStaff)
+class faculty(admin.ModelAdmin):
+    list_display = ('registrar_staff_id', 'surname', 'first_name', 'middle_name')
+    ordering = ('registrar_staff_id', )
+    search_fields = ('surname', 'registrar_staff_id')
+
+
+@admin.register(guidanceStaff)
+class faculty(admin.ModelAdmin):
+    list_display = ('guidance_staff_id', 'surname', 'first_name', 'middle_name')
+    ordering = ('guidance_staff_id', )
+    search_fields = ('surname', 'guidance_staff_id')
+
+
+@admin.register(cashierStaff)
+class faculty(admin.ModelAdmin):
+    list_display = ('cashier_staff_id', 'surname', 'first_name', 'middle_name')
+    ordering = ('cashier_staff_id', )
+    search_fields = ('surname', 'cashier_staff_id')
+
+
+admin.site.register(subject)
 admin.site.register(section)
-
-
- 
 @admin.register(level)
 class level(admin.ModelAdmin):
     list_display = ('level',  )
@@ -32,5 +55,3 @@ class announcement(admin.ModelAdmin):
     ordering = ('title', )
     search_fields = ('title', )
 
-
-admin.site.register(subject)
