@@ -37,7 +37,8 @@ class FacultyStaff(models.Model):
     surname = models.CharField(max_length=24)
     first_name = models.CharField(max_length=24)
     middle_name = models.CharField(max_length=24, blank=True, null=True)
-    
+    sufix = models.CharField(max_length=24, blank=True, null=True)
+
     
     gender_choice = (
         ('Male', 'Male'),
@@ -79,7 +80,8 @@ class StudentProfile(models.Model):
     surname = models.CharField(max_length=24)
     first_name = models.CharField(max_length=24)
     middle_name = models.CharField(max_length=24, blank=True, null=True)
-    
+    sufix = models.CharField(max_length=24, blank=True, null=True)
+
     gender_choice = (
         ('Male', 'Male'),
         ('Female', 'Female'),
@@ -132,10 +134,69 @@ class Announcement(models.Model):
 
 class registrarStaff(models.Model):
     user = models.OneToOneField(User, null=True, on_delete=models.CASCADE)
-    faculty_staff_id = models.BigIntegerField(primary_key=True)
+    registrar_staff_id = models.BigIntegerField(primary_key=True)
     surname = models.CharField(max_length=24)
     first_name = models.CharField(max_length=24)
     middle_name = models.CharField(max_length=24, blank=True, null=True)
-    prefix = models.CharField(max_length=24, blank=True, null=True)
+    sufix = models.CharField(max_length=24, blank=True, null=True)
 
+    
+    gender_choice = (
+        ('Male', 'Male'),
+        ('Female', 'Female'),
+    )
+    gender = models.CharField(max_length=10, default="Gender", choices=gender_choice, null=True)
+    
+    civil_choice = (
+        ('Single', 'Single'),
+        ('Married', 'Married'),
+        ('Divorced', 'Divorced'),
+        ('Widowed', 'Widowed'),
+    )
+    civil_status = models.CharField(max_length=10, default="Status", choices=civil_choice, blank=True, null=True)
+
+    birth_date = models.DateField(null=True)
+    birth_place = models.CharField(max_length=200, blank=True, null=True)
+    religion = models.CharField(max_length=24, blank=True, null=True)
+
+    contact = models.BigIntegerField(blank=True, null=True)
+    email = models.CharField(max_length=100, blank=True, null=True)
+
+    
+    def __str__(self):
+        return self.surname
+
+class guidanceStaff(models.Model):
+    user = models.OneToOneField(User, null=True, on_delete=models.CASCADE)
+    guidance_staff_id = models.BigIntegerField(primary_key=True)
+    surname = models.CharField(max_length=24)
+    first_name = models.CharField(max_length=24)
+    middle_name = models.CharField(max_length=24, blank=True, null=True)
+    sufix = models.CharField(max_length=24, blank=True, null=True)
+
+    
+    gender_choice = (
+        ('Male', 'Male'),
+        ('Female', 'Female'),
+    )
+    gender = models.CharField(max_length=10, default="Gender", choices=gender_choice, null=True)
+    
+    civil_choice = (
+        ('Single', 'Single'),
+        ('Married', 'Married'),
+        ('Divorced', 'Divorced'),
+        ('Widowed', 'Widowed'),
+    )
+    civil_status = models.CharField(max_length=10, default="Status", choices=civil_choice, blank=True, null=True)
+
+    birth_date = models.DateField(null=True)
+    birth_place = models.CharField(max_length=200, blank=True, null=True)
+    religion = models.CharField(max_length=24, blank=True, null=True)
+
+    contact = models.BigIntegerField(blank=True, null=True)
+    email = models.CharField(max_length=100, blank=True, null=True)
+
+    
+    def __str__(self):
+        return self.surname
 
