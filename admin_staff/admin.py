@@ -1,5 +1,5 @@
 from django.contrib import admin
-from admin_staff.models import StudentProfile,Announcement, FacultyStaff, guidanceStaff, registrarStaff, cashierStaff, section, level, subject
+from admin_staff.models import StudentProfile,Announcement, FacultyStaff, guidanceStaff, registrarStaff, cashierStaff, section, level, subject, accademicYear
 
 # Register your models here.
 
@@ -55,3 +55,4 @@ class announcement(admin.ModelAdmin):
     ordering = ('title', )
     search_fields = ('title', )
 
+admin.site.register(accademicYear)
