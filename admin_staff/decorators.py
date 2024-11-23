@@ -54,9 +54,11 @@ def admin_only(view_func):
         if group == 'schooladmin':
             return redirect('schooladmin')
         
-        
-        
         if group == 'admin':
             return view_func(request, *args, **kwargs)
         
+        if group == 'cashier':
+            return redirect('cashier')
+
+
     return wrapper_func
