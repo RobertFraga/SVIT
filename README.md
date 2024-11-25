@@ -61,7 +61,7 @@ For Windows
 
 For Mac
 ```
-$  source venv/bin/activate
+source venv/bin/activate
 ```
 
 **3. Clone this project**
