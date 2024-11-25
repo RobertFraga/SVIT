@@ -75,19 +75,19 @@ cd django-student-management-system
 ```
 
 **4. Install Requirements from 'requirements.txt'**
-```python
+```
 pip install -r requirements.txt
 ```
 
 **5. Now Run Server**
 
 Command for PC:
-```python
+```
 $ python manage.py runserver
 ```
 
 Command for Mac:
-```python
+```
 $ python3 manage.py runserver
 ```
 
