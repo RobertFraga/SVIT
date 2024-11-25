@@ -71,7 +71,7 @@ git clone https://github.com/RobertFraga/SVIT?tab=readme-ov-file
 
 Then, Enter the project
 ```
-cd django-student-management-system
+cd SVIT
 ```
 
 **4. Install Requirements from 'requirements.txt'**
