@@ -9,18 +9,6 @@ class accademicYear(models.Model):
     def __str__(self):
         return self.accademicYear
 
-class subject(models.Model):
-    subjectname = models.CharField(max_length=30, null=True, blank=True)
-    subject_discripiton = models.CharField(max_length=30, null=True, blank=True)
-    subject_grade_firstQ = models.IntegerField(null=True, blank=True)
-    subject_grade_secondQ = models.IntegerField(null=True, blank=True)
-    subject_grade_thirdQ = models.IntegerField(null=True, blank=True)
-    subject_grade_fourthQ = models.IntegerField(null=True, blank=True)
-    average = models.IntegerField(null=True, blank=True)
-    
-    def __str__(self):
-        return self.subjectname
-
 class level(models.Model):
     level = models.CharField(max_length=20);
     
@@ -67,7 +55,6 @@ class FacultyStaff(models.Model):
     contact = models.BigIntegerField(blank=True, null=True)
     email = models.CharField(max_length=100, blank=True, null=True)
     section = models.OneToOneField('section', blank=True, null=True, on_delete=models.SET_NULL)
-    subject = models.OneToOneField('subject', blank=True, null=True, on_delete=models.SET_NULL)
 
     
     class Meta:
@@ -113,6 +100,7 @@ class StudentProfile(models.Model):
     section = models.ForeignKey('section', null=True, on_delete=models.SET_NULL)
     adviser = models.ForeignKey('FacultyStaff', blank=True, null=True, on_delete=models.SET_NULL)
     level = models.ForeignKey('level', blank=True, null=True, on_delete=models.SET_NULL)
+    
 
     class Meta:
         managed = True

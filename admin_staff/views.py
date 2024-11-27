@@ -153,6 +153,14 @@ def student_profile(request):
     return render(request, 'student/student_profile.html', {'student': student})
 
 
+@login_required(login_url='login')
+@allowed_user(allow_roles=['student'])
+def student_grades(request):
+    grades = request.user.studentprofile
+    context = {'grades': grades}
+    return render(request, 'student/grades.html', context)
+
+
 #faculty end
 @login_required(login_url='login')
 @allowed_user(allow_roles=['faculty'])

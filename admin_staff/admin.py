@@ -1,5 +1,5 @@
 from django.contrib import admin
-from admin_staff.models import StudentProfile,Announcement, FacultyStaff, guidanceStaff, registrarStaff, cashierStaff, section, level, subject, accademicYear, admissionStaff, accountingStaff
+from admin_staff.models import StudentProfile,Announcement, FacultyStaff, guidanceStaff, registrarStaff, cashierStaff, section, level, accademicYear, admissionStaff, accountingStaff
 
 # Register your models here.
 
@@ -38,7 +38,7 @@ class faculty(admin.ModelAdmin):
     search_fields = ('surname', 'cashier_staff_id')
 
 
-admin.site.register(subject)
+
 admin.site.register(section)
 @admin.register(level)
 class level(admin.ModelAdmin):
