@@ -1,14 +1,16 @@
 from django.contrib import admin
 from admin_staff.models import StudentProfile,Announcement, FacultyStaff, guidanceStaff, registrarStaff, cashierStaff, section, level, accademicYear, admissionStaff, accountingStaff
-
+from import_export.admin import ImportExportModelAdmin
 # Register your models here.
 
-@admin.register(StudentProfile)
+""" @admin.register(StudentProfile)
 class students(admin.ModelAdmin):
     list_display = ('student_lrn', 'surname', 'first_name', 'adviser','section') 
     ordering = ('student_lrn', )
-    search_fields = ('surname', 'student_lrn')
+    search_fields = ('surname', 'student_lrn') """
 
+
+admin.site.register(StudentProfile, ImportExportModelAdmin)
 
 @admin.register(FacultyStaff)
 class faculty(admin.ModelAdmin):
