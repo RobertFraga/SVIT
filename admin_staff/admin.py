@@ -3,14 +3,11 @@ from admin_staff.models import StudentProfile,Announcement, FacultyStaff, guidan
 from import_export.admin import ImportExportModelAdmin
 # Register your models here.
 
-""" @admin.register(StudentProfile)
-class students(admin.ModelAdmin):
+@admin.register(StudentProfile)
+class students(ImportExportModelAdmin):
     list_display = ('student_lrn', 'surname', 'first_name', 'adviser','section') 
     ordering = ('student_lrn', )
-    search_fields = ('surname', 'student_lrn') """
-
-
-admin.site.register(StudentProfile, ImportExportModelAdmin)
+    search_fields = ('surname', 'student_lrn')
 
 @admin.register(FacultyStaff)
 class faculty(admin.ModelAdmin):
@@ -41,7 +38,13 @@ class faculty(admin.ModelAdmin):
 
 
 
-admin.site.register(section)
+
+@admin.register(section)
+class section(admin.ModelAdmin):
+    list_display = ('section_name', 'level')
+    ordering = ('level', )
+
+
 @admin.register(level)
 class level(admin.ModelAdmin):
     list_display = ('level',  )
