@@ -17,6 +17,7 @@ urlpatterns = [
     path('faculty-list/', views.faculty_list, name='faculty_list'),
     path('profile/<int:pk>', views.faculty_profile, name='faculty_profile'),
     path('addflt', views.addstfaculty, name='addflt'),
+    path('chart', views.chart, name='chart'),
 
 
 

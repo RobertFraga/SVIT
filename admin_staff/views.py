@@ -39,6 +39,9 @@ def admin_dashboard(request):
     context = {'announcement': announcement}
     return render(request, 'admin/admin_dashboard.html', context)
 
+def chart(request):
+    return render(request, 'admin/charts.html')
+
 def announcement(request, pk):
     annouce = Announcement.objects.get(announcement_id=pk)
     form = announcementForm(instance=annouce)
