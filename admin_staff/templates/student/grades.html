@@ -2,22 +2,25 @@
 
 {% block content %}
 
-<div class="container-fluid">
-  <li class="nav-item">
-    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
-        aria-expanded="true" aria-controls="collapseTwo">
-        <i class="fas fa-fw fa-cog"></i>
-        <span>Components</span>
-    </a>
-    <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-        <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">Custom Components:</h6>
-            <a class="collapse-item" href="buttons.html">Buttons</a>
-            <a class="collapse-item" href="cards.html">Cards</a>
-        </div>
-    </div>
-  </li>
-</div>
+<nav class="navbar navbar-expand navbar-light bg-light mb-4">
+  <a class="navbar-brand" href="#">Accademic Grades</a>
+  <ul class="navbar-nav ml-auto">
+      <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+              role="button" data-toggle="dropdown" aria-haspopup="true"
+              aria-expanded="false">
+              Grade level
+          </a>
+          <div class="dropdown-menu dropdown-menu-right animated--fade-in"
+              aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="#">Grade 7</a>
+              <a class="dropdown-item" href="#">Grade 8</a>
+              <a class="dropdown-item" href="#">Grade 9</a>
+              <a class="dropdown-item" href="#">Grade 10</a>
+          </div>
+      </li>
+  </ul>
+</nav>
 
 <table class="table">
     {% csrf_token %}
