@@ -9,17 +9,8 @@
 </div>
 
 <div class="container">
-    <div class="row">
-        <!--SIDEBAR-->
-        <div class="col-4 p-0">
-            <div class="list-group" id="list-tab" role="tablist">
-              <a class="list-group-item list-group-item-action active" id="acc-prof-list" data-bs-toggle="list" href="#acc-prof" role="tab" aria-controls="acc-prof">Account Profile</a>
-              <a class="list-group-item list-group-item-action" id="acc-security-list" data-bs-toggle="list" href="#acc-security" role="tab" aria-controls="acc-security">Account Security</a>
-            </div>
-        </div>
-
         <!--CONTENTS-->
-        <div class="class col-8 p-0">
+        <div class="container">
             <div class="tab-content" id="nav-tabContent">
                 <!--PROFILE-->
                 <div class="tab-pane fade show active" id="acc-prof" role="tabpanel" aria-labelledby="acc-prof-list">
@@ -99,42 +90,9 @@
                         </div>
                     </div>
                 </div>
-
-                <!-- SECURITY-->
-                <div class="tab-pane fade" id="acc-security" role="tabpanel" aria-labelledby="acc-security-list">
-                    <div class="container border rounded">
-                        <!--Title-->
-                        <div class="page-title mb-4" style="margin: 15px;">
-                            <h3 style="color: #615EFC; font-weight: bold; margin-right: 20px; padding-left: 30px;">Account Security</h3>
-                            <hr style="margin-top: 0; color: black;">
-                        </div>
-                        <!--Contents-->
-                        <form class="row g-4 pt-2 p-3 pb-4 justify-content-center">
-                            <div class="col-md-10">
-                                <label for="inputCurrentPass" class="form-label">Current Password</label>
-                                <input type="text" class="form-control" id="inputCurrentPass" placeholder="Enter current password" aria-describedby="New password">
-                                <div class="form-text" id="basic-addon4">Please input your currently password correctly.</div>
-                            </div>
-                            <div class="col-md-10">
-                                <label for="inputNewPass" class="form-label">New Password</label>
-                                <input type="text" class="form-control" id="inputNewPass" placeholder="Enter new password" aria-describedby="New Password">
-                                <div class="form-text" id="basic-addon4">Please input strong password.</div>
-                            </div>
-                            <div class="col-md-10">
-                                <label for="inputNewPass" class="form-label">Confirm New Password</label>
-                                <input type="text" class="form-control" id="inputNewPass" placeholder="Enter new confirmed password" aria-describedby="New Password">
-                                <div class="form-text" id="basic-addon4">Please enter your new password.</div>
-                            </div>
-                            <div class="col-12 text-end">
-                                <button type="reset" class="btn btn-danger">Reset</button>
-                                <button type="submit" class="btn btn-primary">Confirm</button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
             </div>
         </div>
-    </div>
+    
 </div>
 
 
