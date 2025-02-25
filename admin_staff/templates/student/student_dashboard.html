@@ -163,11 +163,20 @@
                 </div>
 
 
-                <div class="card mb-4 py-3 border-left-primary">
-                    <div class="card-body">
-                        start of class may 10
+                <div class="card shadow mb-4">
+                    <!-- Card Header - Accordion -->
+                    <a href="#collapseCardExample" class="d-block card-header py-3" data-toggle="collapse"
+                        role="button" aria-expanded="true" aria-controls="collapseCardExample">
+                        <h6 class="m-0 font-weight-bold text-primary">{{announcement.title}}</h6>
+                    </a>
+                    <!-- Card Content - Collapse -->
+                    <div class="collapse show" id="collapseCardExample">
+                        <div class="card-body">
+                            {{announcement.body}}
+                        </div>
                     </div>
                 </div>
+
             </div>
             <!-- /.container-fluid -->
 
