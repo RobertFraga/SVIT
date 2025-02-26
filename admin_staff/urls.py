@@ -56,6 +56,7 @@ urlpatterns = [
     path('info/<int:pk>', views.student_info, name='info'),
     path('adviser', views.faculty_info, name='faculty_info'),
     path('attendance', views.attendance_record, name="attendance"),
+    path('advisory-grades', views.advisory_grades, name="advisory_grades"),
 
     #accounting
     path('accounting', views.accounting_dashboard, name='accounting' ),
