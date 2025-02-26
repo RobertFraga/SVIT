@@ -9,37 +9,36 @@
 
 <div class="container">
   <div class="container-fluid border rounded-4 shadow" style="margin: 5px">
-    
-    <table class="table table-hover">
-          <thead>
-            <tr>
-              <th scope="col">LRN</th>
-              <th scope="col">Surname</th>
-              <th scope="col">Name</th>
-              <th scope="col">Grade Level</th>
-              <th scope="col">Action</th>
-            </tr>
-          </thead>
-          <tbody>
-              <label for="" style="padding: 4vh 1vw 0;">Adviser</label>
-              <h3  style="padding: 0 1vw;">{{adviser.surname}} {{adviser.first_name}}</h3>
-              <h4 style='color: #615EFC; padding: 0 1vw;'>Section: {{adviser.section}}</h4>
-              <label for="" style="padding: 2vh 1vw 0;">Students</label>
-              {% for advisoryClass in advisoryClass %}
-                    <tr>
-                      <td>{{advisoryClass.student_lrn}}</td>
-                      <td>{{advisoryClass.surname}}</td>
-                      <td>{{advisoryClass.first_name}}</td>
-                      <td>{{advisoryClass.level}}</td>
-                      <td>
-                        <button class="btn btn-primary" type="submit" title="Edit"><a href="{% url "info" advisoryClass.student_lrn %}" style="text-decoration: none; color: inherit" >
-                          View
-                        </a></button>
-                      </td>
-                    </tr>
-              {% endfor %}
-          </tbody>
-      </table>
+    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+      <thead>
+        <tr>
+          <th scope="col">LRN</th>
+          <th scope="col">Surname</th>
+          <th scope="col">Name</th>
+          <th scope="col">Grade Level</th>
+          <th scope="col">Action</th>
+        </tr>
+      </thead>
+      <tbody>
+          <label for="" style="padding: 4vh 1vw 0;">Adviser</label>
+          <h3  style="padding: 0 1vw;">{{adviser.surname}} {{adviser.first_name}}</h3>
+          <h4 style='color: #615EFC; padding: 0 1vw;'>Section: {{adviser.section}}</h4>
+          <label for="" style="padding: 2vh 1vw 0;">Students</label>
+          {% for advisoryClass in advisoryClass %}
+                <tr>
+                  <td>{{advisoryClass.student_lrn}}</td>
+                  <td>{{advisoryClass.surname}}</td>
+                  <td>{{advisoryClass.first_name}}</td>
+                  <td>{{advisoryClass.level}}</td>
+                  <td>
+                    <button class="btn btn-primary" type="submit" title="Edit"><a href="{% url "info" advisoryClass.student_lrn %}" style="text-decoration: none; color: inherit" >
+                      View
+                    </a></button>
+                  </td>
+                </tr>
+          {% endfor %}
+      </tbody>
+    </table>
   </div>
 </div>
 
