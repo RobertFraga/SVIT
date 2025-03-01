@@ -13,7 +13,7 @@
     {% bootstrap_css %}
     {% bootstrap_javascript %}
 
-    <title>Welcom</title>
+    <title>Welcome</title>
 
     <!-- Custom fonts for this template-->
     <link href= "{% static "vendor/fontawesome-free/css/all.min.css" %}"  rel="stylesheet" type="text/css">
@@ -22,25 +22,41 @@
     <!-- Custom styles for this template-->
     <link href= "{% static "css/sb-admin-2.min.css" %}" rel="stylesheet">
 
+    <style>
+        .logo {
+            position: absolute;
+            top: 8vh;  /* Distance from top */
+            left: 7vw; /* Distance from left */
+            width: 80px; /* Adjust width as needed */
+            height: auto;
+            z-index: 1000; /* Ensures it stays on top */
+        }
+        
+        .logo img {
+            width: 15vw; /* Makes sure image scales properly */
+            height: auto;
+            border-radius: 100%;
+        }
+    </style>
 </head>
 
-<body class="bg-gradient-primary">
+<body class="bg-gradient-light overlay-bg" style="background: linear-gradient(rgba(0, 0, 0, 0.0), rgba(0, 0, 0, 0.0)), 
+    url('{% static "img/bg.png" %}') no-repeat center center/cover;">
+
+    <!-- Logo positioned absolutely -->
+    <div class="logo">
+        <img src="{% static "img/logo.png" %}" alt="Logo">
+    </div>
 
     <div class="container">
-
         <!-- Outer Row -->
-        <div class="row justify-content-center">
+        <div class="row justify-content-end my-5">
 
-            <div class="col-xl-10 col-lg-12 col-md-9">
+            <div class="col-xl-6 col-lg-12 col-md-9">
 
                 <div class="card o-hidden border-0 shadow-lg my-5">
                     <div class="card-body p-0">
-                        <!-- Nested Row within Card Body -->
-                        <div class="row">
-                            <div class="col-lg-6 d-none d-lg-block bg-login-image">
-                                
-                            </div>
-                            <div class="col-lg-6">
+                            
                                 <div class="p-5">
                                     <div class="text-center">
                                         <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
@@ -79,8 +95,8 @@
                                         <a class="small" href="forgot-password.html">Forgot Password?</a>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
+                            
+                        
                     </div>
                 </div>
 
@@ -89,6 +105,11 @@
         </div>
 
     </div>
+
+    <footer class="bg-gradient-warning text-white text-center py-3">
+        &copy; 2025 Connext SMS. All rights reserved.
+    </footer>
+
 
     <!-- Bootstrap core JavaScript-->
     <script src="{% static "vendor/jquery/jquery.min.js" %}"></script>
