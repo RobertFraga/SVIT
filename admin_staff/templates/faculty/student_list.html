@@ -8,7 +8,15 @@
 </div>
 
 <div class="container">
-  <div class="container-fluid border rounded-4 shadow" style="margin: 5px">
+  <div class="container-fluid border rounded-4 shadow" style="margin: 5px; padding: 15px;">
+    
+    <!-- Adviser Information -->
+    <label style="padding: 4vh 1vw 0;">Adviser</label>
+    <h3 style="padding: 0 1vw;">{{ adviser.surname }} {{ adviser.first_name }}</h3>
+    <h4 style="color: #615EFC; padding: 0 1vw;">Section: {{ adviser.section }}</h4>
+
+    <label style="padding: 2vh 1vw 0;">Students</label>
+
     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
       <thead>
         <tr>
@@ -20,27 +28,26 @@
         </tr>
       </thead>
       <tbody>
-          <label for="" style="padding: 4vh 1vw 0;">Adviser</label>
-          <h3  style="padding: 0 1vw;">{{adviser.surname}} {{adviser.first_name}}</h3>
-          <h4 style='color: #615EFC; padding: 0 1vw;'>Section: {{adviser.section}}</h4>
-          <label for="" style="padding: 2vh 1vw 0;">Students</label>
-          {% for advisoryClass in advisoryClass %}
-                <tr>
-                  <td>{{advisoryClass.student_lrn}}</td>
-                  <td>{{advisoryClass.surname}}</td>
-                  <td>{{advisoryClass.first_name}}</td>
-                  <td>{{advisoryClass.level}}</td>
-                  <td>
-                    <button class="btn btn-primary" type="submit" title="Edit"><a href="{% url "info" advisoryClass.student_lrn %}" style="text-decoration: none; color: inherit" >
-                      View
-                    </a></button>
-                  </td>
-                </tr>
-          {% endfor %}
+        {% for student in advisoryClass %}
+        <tr>
+          <td>{{ student.student_lrn }}</td>
+          <td>{{ student.surname }}</td>
+          <td>{{ student.first_name }}</td>
+          <td>{{ student.level }}</td>
+          <td>
+            <a href="{% url 'info' student.student_lrn %}" class="btn btn-primary" title="View" style="text-decoration: none; color: white;">
+              View
+            </a>
+
+            <a href="{% url 'view_attendance' student.student_lrn %}" class="btn btn-secondary" title="View" style="text-decoration: none; color: white;">
+              Attendance
+            </a>
+          </td>
+        </tr>
+        {% endfor %}
       </tbody>
     </table>
   </div>
 </div>
-
 
 {% endblock content %}

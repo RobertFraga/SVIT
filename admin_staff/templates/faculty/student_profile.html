@@ -1,16 +1,17 @@
 {% extends "faculty/faculty-dashboard.html" %}
 
+
 {% block content %}
 <div class="container-fluid">
     <form class="row g-3" >
         {% csrf_token %}
         <fieldset class="col-md-6" disabled>
-            <label for="inputEmail4" class="form-label">LRN</label>
-            <input type="text" class="form-control" id="inputEmail4" placeholder='student LRN' value="{{student.student_lrn}}">
+            <label for="inputLrn" class="form-label">LRN</label>
+            <input type="text" class="form-control" id="inputLrn" placeholder='student LRN' value="{{student.student_lrn}}">
         </fieldset>
         <fieldset class="col-md-6" disabled>
-            <label for="inputEmail4" class="form-label">Username</label>
-            <input type="text" class="form-control" id="inputEmail4" placeholder='student LRN' value="{{student.user}}">
+            <label for="inputUsername" class="form-label">Username</label>
+            <input type="text" class="form-control" id="inputUsername" placeholder='student Username' value="{{student.user}}">
         </fieldset>
         <fieldset class="col-md-4" disabled>
             <label for="inputsurname" class="form-label">Surname</label>
@@ -61,5 +62,170 @@
 
         
     </form>
+
+    <pre>{{ student }}</pre>
+
+    <div class="mt-4">
+        <h3 class="text-center">Grading Table</h3>
+        <div class="table-responsive">
+            <table class="table table-bordered table-hover text-center">
+                <thead class="table-primary">
+                    <tr>
+                        <th>Subject Code</th>
+                        <th>Subject Name</th>
+                        <th>1st Grading</th>
+                        <th>2nd Grading</th>
+                        <th>3rd Grading</th>
+                        <th>4th Grading</th>
+                        <th>Final Grade</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>ENG</td>
+                        <td>English</td>
+                        <td contenteditable="true" class="editable">{{ grades.ENG.first_grading|default_if_none:'' }}</td>
+                        <td contenteditable="true" class="editable">{{ grades.ENG.second_grading|default_if_none:'' }}</td>
+                        <td contenteditable="true" class="editable">{{ grades.ENG.third_grading|default_if_none:'' }}</td>
+                        <td contenteditable="true" class="editable">{{ grades.ENG.fourth_grading|default_if_none:'' }}</td>
+                        <td><strong>{{ grades.ENG.final_grade|default_if_none:'' }}</strong></td>
+                    </tr>
+                    <tr>
+                        <td>FIL</td>
+                        <td>Filipino</td>
+                        <td contenteditable="true" class="editable">{{ grades.FIL.first_grading|default_if_none:'' }}</td>
+                        <td contenteditable="true" class="editable">{{ grades.FIL.second_grading|default_if_none:'' }}</td>
+                        <td contenteditable="true" class="editable">{{ grades.FIL.third_grading|default_if_none:'' }}</td>
+                        <td contenteditable="true" class="editable">{{ grades.FIL.fourth_grading|default_if_none:'' }}</td>
+                        <td><strong>{{ grades.FIL.final_grade|default_if_none:'' }}</strong></td>
+                    </tr>
+                    <tr>
+                        <td>MATH</td>
+                        <td>Mathematics</td>
+                        <td contenteditable="true" class="editable">{{ grades.MATH.first_grading|default_if_none:'' }}</td>
+                        <td contenteditable="true" class="editable">{{ grades.MATH.second_grading|default_if_none:'' }}</td>
+                        <td contenteditable="true" class="editable">{{ grades.MATH.third_grading|default_if_none:'' }}</td>
+                        <td contenteditable="true" class="editable">{{ grades.MATH.fourth_grading|default_if_none:'' }}</td>
+                        <td><strong>{{ grades.MATH.final_grade|default_if_none:'' }}</strong></td>
+                    </tr>
+                    <tr>
+                        <td>SCI</td>
+                        <td>Science</td>
+                        <td contenteditable="true" class="editable">{{ grades.SCI.first_grading|default_if_none:'' }}</td>
+                        <td contenteditable="true" class="editable">{{ grades.SCI.second_grading|default_if_none:'' }}</td>
+                        <td contenteditable="true" class="editable">{{ grades.SCI.third_grading|default_if_none:'' }}</td>
+                        <td contenteditable="true" class="editable">{{ grades.SCI.fourth_grading|default_if_none:'' }}</td>
+                        <td><strong>{{ grades.SCI.final_grade|default_if_none:'' }}</strong></td>
+                    </tr>
+                    <tr>
+                        <td>PE</td>
+                        <td>Physical Education</td>
+                        <td contenteditable="true" class="editable">{{ grades.PE.first_grading|default_if_none:'' }}</td>
+                        <td contenteditable="true" class="editable">{{ grades.PE.second_grading|default_if_none:'' }}</td>
+                        <td contenteditable="true" class="editable">{{ grades.PE.third_grading|default_if_none:'' }}</td>
+                        <td contenteditable="true" class="editable">{{ grades.PE.fourth_grading|default_if_none:'' }}</td>
+                        <td><strong>{{ grades.PE.final_grade|default_if_none:'' }}</strong></td>
+                    </tr>
+                </tbody>
+                
+            </table>
+        </div>
+    </div>
+
+
+
 </div>
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function () {
+
+
+
+        var studentLRN = $("#inputLrn").val().trim();
+
+        // Fetch grades when the page loads
+        if (studentLRN) {
+            $.ajax({
+                url: "/get-grades/" + studentLRN + "/",
+                method: "GET",
+                success: function (response) {
+                    if (response.grades) {
+                        console.log(response.grades);
+                        // Loop through each row and update the table
+                        $("tbody tr").each(function () {
+                            let subjectCode = $(this).find("td:first").text().trim();
+                            let gradeData = response.grades[subjectCode];
+
+                            if (gradeData) {
+                                let first = parseFloat(gradeData.first_grading) || 0;
+                                let second = parseFloat(gradeData.second_grading) || 0;
+                                let third = parseFloat(gradeData.third_grading) || 0;
+                                let fourth = parseFloat(gradeData.fourth_grading) || 0;
+
+                                // Calculate the final grade as the average
+                                let finalGrade = (first + second + third + fourth) / 4;
+                                finalGrade = isNaN(finalGrade) ? '' : finalGrade.toFixed(2);
+
+                                // Update the table
+                                $(this).find("td:nth-child(3)").text(gradeData.first_grading ?? '');
+                                $(this).find("td:nth-child(4)").text(gradeData.second_grading ?? '');
+                                $(this).find("td:nth-child(5)").text(gradeData.third_grading ?? '');
+                                $(this).find("td:nth-child(6)").text(gradeData.fourth_grading ?? '');
+                                $(this).find("td:nth-child(7)").text(finalGrade);
+                            }
+                        });
+                    }
+                },
+                error: function () {
+                    console.log("Failed to fetch grades.");
+                }
+            });
+        }
+
+
+
+
+        console.log(studentLRN);
+
+        // Make table cells editable
+        $("td").not(":first-child, :nth-child(2), :last-child").attr("contenteditable", "true").addClass("editable");
+
+        // Handle changes in input
+        $(".editable").on("blur", function () {
+                let newValue = $(this).text().trim();
+                let subject = $(this).closest("tr").find("td:first").text().trim();
+                let column = $(this).index();
+                
+                console.log("Subject:", subject, "Column:", column, "New Value:", newValue);
+
+                $.ajax({
+                    url: "/save-grade/",
+                    method: "POST",
+                    contentType: "application/json",  // Specify JSON data
+                    data: JSON.stringify({
+                        lrn: studentLRN,
+                        subject: subject,
+                        column: column,
+                        grade: newValue
+                    }),
+                    headers: {
+                        "X-CSRFToken": '{{ csrf_token }}'  // Include CSRF token
+                    },
+                    success: function (response) {
+                        console.log(response);
+                        console.log("Grade saved successfully!");
+                        location.reload();
+                    },
+                    error: function () {
+                        alert("Error saving grade.");
+                    }
+                });
+            });
+
+
+    });
+</script>
+
 {% endblock content %}

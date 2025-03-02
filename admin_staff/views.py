@@ -1,19 +1,153 @@
 from django.shortcuts import render, redirect
 from .models import StudentProfile, FacultyStaff, Announcement
-from django.shortcuts import render
+from django.shortcuts import render , get_object_or_404
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .decorators import unauthenticated_user, allowed_user, admin_only
 from .form import announcementForm, studentForm, facultyForm
 # Create your views here.
+# JCODE
+from django.utils.timezone import now
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+import json
+from .models import StudentGrade,StudentAttendance
+
+
+
+
+
+
+
+@csrf_exempt  # Optional: Use only if CSRF token issues occur (not recommended for production)
+def mark_attendance(request):
+    if request.method == "POST":
+        student_lrn = request.POST.get("student_lrn")
+        status = request.POST.get("status")
+
+        try:
+            student = StudentProfile.objects.get(student_lrn=student_lrn)
+            attendance, created = StudentAttendance.objects.update_or_create(
+                student_lrn=student,
+                date=now().date(),  # Use today's date
+                defaults={"status": status}
+            )
+
+            return JsonResponse({"success": True, "message": f"Attendance marked as {status}"})
+        except StudentProfile.DoesNotExist:
+            return JsonResponse({"success": False, "message": "Student not found"}, status=404)
+    return JsonResponse({"success": False, "message": "Invalid request"}, status=400)
+
+
+
+@login_required(login_url='login')
+def fetch_students(request):
+    today = now().date()
+
+    # Ensure the logged-in user is a faculty staff
+    if hasattr(request.user, 'facultystaff'):
+        faculty_staff = request.user.facultystaff
+        section = faculty_staff.section  # Get assigned section
+
+        # Get adviser details
+        adviser = {
+            'surname': faculty_staff.surname,
+            'first_name': faculty_staff.first_name,
+            'section': section.section_name if section else "No Section"
+        }
+
+        # Fetch students in the adviser's section
+        if section:
+            students = StudentProfile.objects.filter(
+                section=section  # Filter by same section
+            ).exclude(
+                student_lrn__in=StudentAttendance.objects.filter(date=today).values_list('student_lrn', flat=True)
+            ).values('student_lrn', 'surname', 'first_name', 'middle_name')
+        else:
+            students = []
+    else:
+        students = []
+        adviser = None
+
+    return JsonResponse({
+        'students': list(students),
+        'adviser': adviser
+    })
+
+
+def get_student_grades(request, student_lrn):
+    if request.headers.get('x-requested-with') == 'XMLHttpRequest':  # AJAX request check
+        grades = StudentGrade.objects.filter(student_lrn=student_lrn)
+        
+        grades_dict = {
+            grade.subject: {
+                "first_grading": grade.first_grading,
+                "second_grading": grade.second_grading,
+                "third_grading": grade.third_grading,
+                "fourth_grading": grade.fourth_grading
+            }
+            for grade in grades
+        }
+        
+        return JsonResponse({"grades": grades_dict})
+    
+    return JsonResponse({"error": "Invalid request"}, status=400)
+
+
+
+
+
+
+
+
+
+
+@csrf_exempt
+@login_required(login_url='login')
+@allowed_user(allow_roles=['faculty', 'admin'])
+def save_grade(request):
+    if request.method == "POST":
+        try:
+            data = json.loads(request.body)
+            lrn = data.get("lrn")
+            subject = data.get("subject")
+            column = int(data.get("column"))  # Convert column index to integer
+            grade = float(data.get("grade"))
+
+            # Hanapin o gumawa ng bagong record
+            student_grade, created = StudentGrade.objects.get_or_create(
+                student_lrn=lrn, subject=subject
+            )
+
+            # I-update ang tamang grading period
+            if column == 2:
+                student_grade.first_grading = grade
+            elif column == 3:
+                student_grade.second_grading = grade
+            elif column == 4:
+                student_grade.third_grading = grade
+            elif column == 5:
+                student_grade.fourth_grading = grade
+            elif column == 6:
+                student_grade.final_grade = grade
+
+            student_grade.save()
+
+            return JsonResponse({"status": "success", "message": "Grade saved successfully!"})
+
+        except Exception as e:
+            return JsonResponse({"status": "error", "message": str(e)})
+    
+    return JsonResponse({"status": "error", "message": "Invalid request"})
+
 
 
 @unauthenticated_user
 def login_user(request):
     if request.method == "POST":
-        username = request.POST['username'];
-        password = request.POST['password'];
+        username = request.POST['username']
+        password = request.POST['password']
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
@@ -159,9 +293,18 @@ def student_profile(request):
 @login_required(login_url='login')
 @allowed_user(allow_roles=['student'])
 def student_grades(request):
-    grades = request.user.studentprofile
-    context = {'grades': grades}
-    return render(request, 'student/grades.html', context)
+    student = request.user.studentprofile
+    # return render(request, 'student/grades.html', context)
+    return render(request, 'student/grades.html', {'student': student})
+
+
+@login_required(login_url='login')
+@allowed_user(allow_roles=['student'])
+def student_attendance(request):
+    student = request.user.studentprofile
+    # return render(request, 'student/grades.html', context)
+    return render(request, 'student/view_attendance.html', {'student': student})
+
 
 
 #faculty end
@@ -181,12 +324,85 @@ def advisory(request):
     context = {'advisoryClass': advisoryClass, 'adviser':adviser}
     return render(request, 'faculty/student_list.html', context)
 
+
+
 @login_required(login_url='login')
 @allowed_user(allow_roles=['faculty'])
 def student_info(request, pk):
     student = StudentProfile.objects.get(student_lrn = pk)
     context = {'student': student}
     return render(request, 'faculty/student_profile.html', context)
+
+
+
+
+
+
+@login_required(login_url='login')
+@allowed_user(allow_roles=['faculty'])
+def get_attendance_records(request, pk):
+    student = get_object_or_404(StudentProfile, student_lrn=pk)
+    attendance_records = StudentAttendance.objects.filter(student_lrn=student).order_by('-date')
+
+    total_count = attendance_records.count()
+    present_count = attendance_records.filter(status="Present").count()
+    absent_count = attendance_records.filter(status="Absent").count()
+
+    data = [
+        {
+            'date': record.date.strftime('%Y-%m-%d'),
+            'status': record.status
+        } for record in attendance_records
+    ]
+
+    return JsonResponse({
+        'student_lrn': student.student_lrn,
+        'first_name': student.first_name,
+        'surname': student.surname,
+        'attendance_records': data,
+        'total_count': total_count,
+        'present_count': present_count,
+        'absent_count': absent_count
+    })
+
+
+
+
+
+@login_required(login_url='login')
+@allowed_user(allow_roles=['student'])
+def get_attendance_records_view_only(request, pk):
+    student = get_object_or_404(StudentProfile, student_lrn=pk)
+    attendance_records = StudentAttendance.objects.filter(student_lrn=student).order_by('-date')
+
+    total_count = attendance_records.count()
+    present_count = attendance_records.filter(status="Present").count()
+    absent_count = attendance_records.filter(status="Absent").count()
+
+    data = [
+        {
+            'date': record.date.strftime('%Y-%m-%d'),
+            'status': record.status
+        } for record in attendance_records
+    ]
+
+    return JsonResponse({
+        'student_lrn': student.student_lrn,
+        'first_name': student.first_name,
+        'surname': student.surname,
+        'attendance_records': data,
+        'total_count': total_count,
+        'present_count': present_count,
+        'absent_count': absent_count
+    })
+
+
+@login_required(login_url='login')
+@allowed_user(allow_roles=['faculty'])
+def view_attendance(request, pk):
+    student = StudentProfile.objects.get(student_lrn = pk)
+    context = {'student': student}
+    return render(request, 'faculty/view_attendance.html', context)
 
 
 @login_required(login_url='login')

@@ -1,0 +1,98 @@
+{% extends "faculty/faculty-dashboard.html" %}
+
+{% block content %}
+<!-- Title Page -->
+<div class="page-title mb-4" style="margin:15px;">
+  <h2 style="color: #615EFC; font-weight: bold; margin-right: 20px; padding-left: 50px;">Attendance Record</h2>
+  <hr style="margin-top: 0; color: black;">
+</div>
+<div class="container">
+    <h4><strong>Student Name:</strong> <span id="student-name"></span></h4>
+</div>
+
+<!-- Attendance Summary -->
+<div class="container">
+  <div class="row">
+    <div class="col-md-4">
+      <div class="alert alert-primary">
+        <strong>Total Attendance:</strong> <span id="total-count">0</span>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="alert alert-success">
+        <strong>Present:</strong> <span id="present-count">0</span>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="alert alert-danger">
+        <strong>Absent:</strong> <span id="absent-count">0</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Attendance Table -->
+<div class="container">
+  <table class="table table-bordered table-striped">
+    <thead class="thead-dark">
+      <tr>
+        <th>#</th>
+        <th>Date</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody id="attendance-table-body">
+      <!-- Data will be inserted here using jQuery -->
+    </tbody>
+  </table>
+</div>
+
+<!-- jQuery & AJAX -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+ $(document).ready(function () {
+    let studentLrn = "{{ student.student_lrn }}"; 
+
+    // AJAX request to fetch attendance data
+    $.ajax({
+        url: "/api/attendance/" + studentLrn + "/",
+        type: "GET",
+        dataType: "json",
+        success: function (response) {
+
+            console.log(response);
+
+            // Display Student Name
+            $("#student-name").text(response.first_name + " " + response.surname);
+
+            let tableBody = $("#attendance-table-body");
+            tableBody.empty(); // Clear previous data
+
+            // Update Count Summary
+            $("#total-count").text(response.total_count);
+            $("#present-count").text(response.present_count);
+            $("#absent-count").text(response.absent_count);
+
+            // Populate Attendance Table
+            if (response.attendance_records.length > 0) {
+                $.each(response.attendance_records, function (index, record) {
+                    let row = `<tr>
+                                  <td>${index + 1}</td>
+                                  <td>${record.date}</td>
+                                  <td>${record.status}</td>
+                               </tr>`;
+                    tableBody.append(row);
+                });
+            } else {
+                tableBody.append('<tr><td colspan="3">No attendance records found.</td></tr>');
+            }
+        },
+        error: function () {
+            alert("Failed to load attendance records. Please try again.");
+        }
+    });
+});
+
+</script>
+
+{% endblock content %}

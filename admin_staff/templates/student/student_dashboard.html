@@ -11,12 +11,12 @@
 
   <title>Dashboard</title>
 
-  <!-- Custom fonts for this template-->
-  <link href= "{% static "vendor/fontawesome-free/css/all.min.css" %}" rel="stylesheet" type="text/css">
-  <link href= "{% static "https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" %}" rel="stylesheet">
+    <!-- Custom fonts for this template -->
+    <link href="{% static 'vendor/fontawesome-free/css/all.min.css' %}" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
 
-  <!-- Custom styles for this template-->
-  <link href= "{% static "css/sb-admin-2.min.css" %}" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="{% static 'css/sb-admin-2.min.css' %}" rel="stylesheet">
 </head>
 
 <body id="page-top">
@@ -39,9 +39,10 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item active">
-                <a class="nav-link" href=" {% url "student" %}">
+                <a class="nav-link" href="{% url 'student' %}">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Dashboard</span></a>
+                    <span>Dashboard</span>
+                </a>
             </li>
 
             <!-- Divider -->
@@ -49,10 +50,22 @@
 
             <!-- Nav Item - Tables -->
             <li class="nav-item active">
-                <a class="nav-link" href="{% url "student-grades" %}">
+                <a class="nav-link" href="{% url 'student-grades' %}">
                     <i class="fas fa-fw fa-table"></i>
-                    <span>Grades</span></a>
+                    <span>Grades</span>
+                </a>
             </li>
+
+
+
+            <!-- Nav Item - Tables -->
+            <li class="nav-item active">
+                <a class="nav-link" href="{% url 'student-attendance' %}">
+                    <i class="fas fa-fw fa-table"></i>
+                    <span>Attendance</span>
+                </a>
+            </li>
+
 
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
@@ -131,14 +144,14 @@
                     <li class="nav-item dropdown no-arrow">
                         <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{student.surname}} {{student.first_name}}</span>
+                            <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ student.surname }} {{ student.first_name }}</span>
                             <img class="img-profile rounded-circle"
-                                src=" {% static "img/undraw_profile.svg" %}">
+                                src="{% static 'img/undraw_profile.svg' %}">
                         </a>
                         <!-- Dropdown - User Information -->
                         <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                             aria-labelledby="userDropdown">
-                            <a class="dropdown-item" href={% url "student-profile" %}>
+                            <a class="dropdown-item" href="{% url 'student-profile' %}">
                                 <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                 Profile
                             </a>
@@ -148,6 +161,7 @@
                             </a>
                         </div>
                     </li>
+                    
 
                 </ul>
 
@@ -215,28 +229,30 @@
             <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
             <div class="modal-footer">
                 <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                <a class="btn btn-primary" href="{% url "logout" %}">Logout</a>
+                <a class="btn btn-primary" href="{% url 'logout' %}">Logout</a>
             </div>
+            
         </div>
     </div>
 </div>
 
   <!-- Bootstrap core JavaScript-->
-  <script src=" {% static "vendor/jquery/jquery.min.js" %}"></script>
-  <script src=" {% static "vendor/bootstrap/js/bootstrap.bundle.min.js" %}"></script>
+<script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+<script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
 
-  <!-- Core plugin JavaScript-->
-  <script src=" {% static "vendor/jquery-easing/jquery.easing.min.js" %}"></script>
+<!-- Core plugin JavaScript-->
+<script src="{% static 'vendor/jquery-easing/jquery.easing.min.js' %}"></script>
 
-  <!-- Custom scripts for all pages-->
-  <script src=" {% static "js/sb-admin-2.min.js" %}"></script>
+<!-- Custom scripts for all pages-->
+<script src="{% static 'js/sb-admin-2.min.js' %}"></script>
 
-  <!-- Page level plugins -->
-  <script src=" {% static "vendor/chart.js/Chart.min.js" %}"></script>
+<!-- Page level plugins -->
+<script src="{% static 'vendor/chart.js/Chart.min.js' %}"></script>
 
-  <!-- Page level custom scripts -->
-  <script src=" {% static "js/demo/chart-area-demo.js" %}"></script>
-  <script src=" {% static "js/demo/chart-pie-demo.js" %}"></script>
+<!-- Page level custom scripts -->
+<script src="{% static 'js/demo/chart-area-demo.js' %}"></script>
+<script src="{% static 'js/demo/chart-pie-demo.js' %}"></script>
+
 </body>
 
 </html>
