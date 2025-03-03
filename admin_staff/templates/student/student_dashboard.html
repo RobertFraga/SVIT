@@ -17,16 +17,6 @@
 
   <!-- Custom styles for this template-->
   <link href= "{% static "css/sb-admin-2.min.css" %}" rel="stylesheet">
-
-  <!-- CSS-->
-  <style>
-    .logo img {
-        width: 8vw; /* Makes sure image scales properly */
-        height: auto;
-        border-radius: 100%;
-    }
-  </style>
-
 </head>
 
 <body id="page-top">
@@ -41,7 +31,7 @@
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-laugh-wink"></i>
                 </div>
-                <div class="sidebar-brand-text mx-3">SVIT SMS</div>
+                <div class="sidebar-brand-text mx-3">St. Vincent</div>
             </a>
 
             <!-- Divider -->
@@ -57,32 +47,11 @@
             <!-- Divider -->
             <hr class="sidebar-divider">
 
-            <!-- Heading -->
-            <div class="sidebar-heading">
-                Academic
-            </div>
-
             <!-- Nav Item - Tables -->
             <li class="nav-item active">
                 <a class="nav-link" href="{% url "student-grades" %}">
                     <i class="fas fa-fw fa-table"></i>
-                    <span>Classes</span></a>
-            </li>
-
-            <!-- Nav Item - Pages Collapse Menu -->
-            <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
-                    aria-expanded="true" aria-controls="collapseTwo">
-                    <i class="fas fa-fw fa-cog"></i>
-                    <span>Records</span>
-                </a>
-                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Components:</h6>
-                        <a class="collapse-item" href="buttons.html">Subject Grades</a>
-                        <a class="collapse-item" href="cards.html">Payment History</a>
-                    </div>
-                </div>
+                    <span>Grades</span></a>
             </li>
 
             <!-- Divider -->
@@ -95,6 +64,7 @@
 
             <!-- Sidebar Message -->
         </ul>
+
         <!-- End of Sidebar -->
 
         
@@ -125,8 +95,8 @@
                     </div>
                 </form>
 
-                 <!-- Topbar Navbar -->
-                 <ul class="navbar-nav ml-auto">
+                <!-- Topbar Navbar -->
+                <ul class="navbar-nav ml-auto">
 
                     <!-- Nav Item - Search Dropdown (Visible Only XS) -->
                     <li class="nav-item dropdown no-arrow d-sm-none">
@@ -151,6 +121,7 @@
                             </form>
                         </div>
                     </li>
+
                     <!-- Nav Item - Alerts -->
                     
 
@@ -182,55 +153,30 @@
 
             </nav>
             <!-- End of Topbar -->
-
             {% block content %}
             <!-- Begin Page Content -->
-            <div class="container-fluid bg-gradient-primary" style="height: 12vh; margin-bottom: 5vh;">
-                <div class="logo">
-                    <img src="{% static "img/logo.png" %}" alt="Logo">
-                </div>
-            </div>
+            <div class="container-fluid">
 
-
-            <div class="container-fluid" style=" display: flex; margin-top: 7vh;">
-                
-                <!-- 1st column-->
-                <div class="box1 p-2" style="height: 70vh; background-color: yellow; flex: 2;">
-                    <!-- Page Heading -->
-                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Announcement</h1>
-                    </div>
-
-
-                    <div class="card shadow mb-4">
-                        <!-- Card Header - Accordion -->
-                        <a href="#collapseCardExample" class="d-block card-header py-3" data-toggle="collapse"
-                            role="button" aria-expanded="true" aria-controls="collapseCardExample">
-                            <h6 class="m-0 font-weight-bold text-primary">{{announcement.title}}</h6>
-                        </a>
-                        <!-- Card Content - Collapse -->
-                        <div class="collapse show" id="collapseCardExample">
-                            <div class="card-body">
-                                {{announcement.body}}
-                            </div>
-                        </div>
-                    </div>
-    
+                <!-- Page Heading -->
+                <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                    <h1 class="h3 mb-0 text-gray-800">Announcement</h1>
                 </div>
 
-                <!-- 2nd column-->
-                <div class="box2 p-2" style="height: 70vh; background-color: purple; flex: 1;">
-                    <div class="card my-3 shadow p-3 bg-body rounded">
+
+                <div class="card shadow mb-4">
+                    <!-- Card Header - Accordion -->
+                    <a href="#collapseCardExample" class="d-block card-header py-3" data-toggle="collapse"
+                        role="button" aria-expanded="true" aria-controls="collapseCardExample">
+                        <h6 class="m-0 font-weight-bold text-primary">{{announcement.title}}</h6>
+                    </a>
+                    <!-- Card Content - Collapse -->
+                    <div class="collapse show" id="collapseCardExample">
                         <div class="card-body">
-                            This is for Brief Student Profile
-                        </div>
-                    </div>
-                    <div class="card my-3 shadow p-3 bg-body rounded">
-                        <div class="card-body">
-                            This is for Class Schedule
+                            {{announcement.body}}
                         </div>
                     </div>
                 </div>
+
             </div>
             <!-- /.container-fluid -->
 
@@ -239,9 +185,7 @@
         {% endblock content %}
 
         <!-- Footer -->
-        <footer class="bg-gradient-warning text-white text-center py-4" style="margin-top: 13.5vh;">
-            &copy; 2025 Connext SMS. All rights reserved.
-        </footer>
+        
         <!-- End of Footer -->
 
         </div>
