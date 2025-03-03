@@ -23,58 +23,58 @@
 
   <!-- Page Wrapper -->
     <div id="wrapper">
-        <!-- Sidebar -->
-        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
-
-            <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{% url "home" %}">
-                <div class="sidebar-brand-icon rotate-n-15">
-                    <i class="fas fa-laugh-wink"></i>
-                </div>
-                <div class="sidebar-brand-text mx-3">St. Vincent</div>
-            </a>
-
-            <!-- Divider -->
-            <hr class="sidebar-divider my-0">
-
-            <!-- Nav Item - Dashboard -->
-            <li class="nav-item active">
-                <a class="nav-link" href=" {% url "student" %}">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Dashboard</span></a>
-            </li>
-
-            <!-- Divider -->
-            <hr class="sidebar-divider">
-
-            <!-- Nav Item - Pages Collapse Menu -->
-            <li class="nav-item">
-              <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
-                aria-expanded="true" aria-controls="collapseTwo">
-                <i class="fas fa-fw fa-cog"></i>
-                <span>Advisory</span>
-              </a>
-              <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                <div class="bg-white py-2 collapse-inner rounded">
-                  <h6 class="collapse-header">Student Records:</h6>
-                  <a class="collapse-item" href="">Attendance Record</a>
-                  <a class="collapse-item" href="cards.html">Academic Grades</a>
-                </div>
-              </div>
-            </li>
-
-            <!-- Divider -->
-            <hr class="sidebar-divider d-none d-md-block">
-
-            <!-- Sidebar Toggler (Sidebar) -->
-            <div class="text-center d-none d-md-inline">
-              <button class="rounded-circle border-0" id="sidebarToggle"></button>
+      <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+          <!-- Sidebar - Brand -->
+        <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{% url "home" %}">
+            <div class="sidebar-brand-icon rotate-n-15">
+                <i class="fas fa-laugh-wink"></i>
             </div>
+            <div class="sidebar-brand-text mx-3">St. Vincent</div>
+        </a>
 
-            <!-- Sidebar Message -->
-        </ul>
+        <!-- Divider -->
+        <hr class="sidebar-divider my-0">
 
-        <!-- End of Sidebar -->
+        <!-- Nav Item - Dashboard -->
+        <li class="nav-item active">
+            <a class="nav-link" href=" {% url "faculty" %}">
+                <i class="fas fa-fw fa-tachometer-alt"></i>
+                <span>Dashboard</span></a>
+        </li>
+
+        <hr class="sidebar-divider my-0">
+
+        <!-- Nav Item - Tables -->
+        <li class="nav-item active">
+            <a class="nav-link" href="{% url "advisory" %}">
+              <i class="fas fa-fw fa-table"></i>
+              <span>Masters list</span></a>
+        </li>
+
+        <hr class="sidebar-divider my-0">
+        
+        <li class="nav-item active">
+          <a class="nav-link" href="{% url "advisory_grades" %}">
+            <i class="fas fa-fw fa-table"></i>
+            <span>Grades</span></a>
+        </li>
+
+        <hr class="sidebar-divider my-0">
+        
+        <li class="nav-item active">
+          <a class="nav-link" href="{% url "attendance" %}">
+            <i class="fas fa-fw fa-table"></i>
+            <span>Attendance</span></a>
+        </li>
+
+        <hr class="sidebar-divider my-0">
+
+        <!-- Sidebar Toggler (Sidebar) -->
+        <div class="text-center d-none d-md-inline">
+            <button class="rounded-circle border-0" id="sidebarToggle"></button>
+        </div>
+      </ul>
+
 
         
         <!-- Content Wrapper -->
@@ -131,23 +131,19 @@
                         </div>
                     </li>
 
-                    <!-- Nav Item - Alerts -->
-                    
-
-                    <div class="topbar-divider d-none d-sm-block"></div>
 
                     <!-- Nav Item - User Information -->
                     <li class="nav-item dropdown no-arrow">
                         <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{student.surname}} {{student.first_name}}</span>
+                            <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{adviser.surname}} {{adviser.first_name}}</span>
                             <img class="img-profile rounded-circle"
                                 src=" {% static "img/undraw_profile.svg" %}">
                         </a>
                         <!-- Dropdown - User Information -->
                         <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                             aria-labelledby="userDropdown">
-                            <a class="dropdown-item" href={% url "student-profile" %}>
+                            <a class="dropdown-item" href={% url "faculty_info" %}>
                                 <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                 Profile
                             </a>
@@ -172,11 +168,20 @@
                 </div>
 
 
-                <div class="card mb-4 py-3 border-left-primary">
-                    <div class="card-body">
-                        start of class may 10
+                <div class="card shadow mb-4">
+                    <!-- Card Header - Accordion -->
+                    <a href="#collapseCardExample" class="d-block card-header py-3" data-toggle="collapse"
+                        role="button" aria-expanded="true" aria-controls="collapseCardExample">
+                        <h6 class="m-0 font-weight-bold text-primary">{{announcement.title}}</h6>
+                    </a>
+                    <!-- Card Content - Collapse -->
+                    <div class="collapse show" id="collapseCardExample">
+                        <div class="card-body">
+                            {{announcement.body}}
+                        </div>
                     </div>
                 </div>
+
             </div>
             <!-- /.container-fluid -->
 
