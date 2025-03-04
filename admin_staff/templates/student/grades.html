@@ -16,7 +16,7 @@
   </div>
 </div>
 
-<div class="container-fluid min-vh-100">
+<div class="container-fluid">
 
 
   <nav class="navbar navbar-expand navbar-light bg-light mb-2">
@@ -38,7 +38,7 @@
             </div>
         </li>
     </ul>
-  </nav>  
+  </nav>
 
   <table class="table" style="margin-top: 1vh;">
       {% csrf_token %}
@@ -66,8 +66,9 @@
           {% endfor %}
       </tbody>
   </table>  
-</div>
 
+  
+</div>
 
 
 {% endblock content %}
