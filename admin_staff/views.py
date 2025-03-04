@@ -202,5 +202,14 @@ def faculty_info(request):
     context = {'adviser': adviser}
     return render(request, 'faculty/faculty_profile.html', context)
 
+@login_required(login_url='login')
+@allowed_user(allow_roles=['faculty'])
 def attendance_record(request):
     return render(request, 'faculty/attendance_record.html')
+
+@login_required(login_url='login')
+@allowed_user(allow_roles=['faculty'])
+def advisory_grades(request):
+    adviser = request.user.facultystaff
+    context = {'adviser': adviser}
+    return render(request, 'faculty/advisory_grades.html', context)

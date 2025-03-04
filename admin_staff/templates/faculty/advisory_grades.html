@@ -1,0 +1,56 @@
+{% extends "faculty/faculty-dashboard.html" %}
+
+{% block content %}
+
+<div class="container-fluid">
+  <nav class="navbar navbar-expand navbar-light bg-light mb-4">
+    <a class="navbar-brand" href="#">Accademic Grades</a>
+    <ul class="navbar-nav ml-auto">
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+                role="button" data-toggle="dropdown" aria-haspopup="true"
+                aria-expanded="false">
+                Grade level
+            </a>
+            <div class="dropdown-menu dropdown-menu-right animated--fade-in"
+                aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="#">Grade 7</a>
+                <a class="dropdown-item" href="#">Grade 8</a>
+                <a class="dropdown-item" href="#">Grade 9</a>
+                <a class="dropdown-item" href="#">Grade 10</a>
+            </div>
+        </li>
+    </ul>
+  </nav>
+</div>
+
+<div class="container-fluid">
+  <div class="card shadow mb-4">
+    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+        {% csrf_token %}
+        <thead>
+          <tr>
+            <th scope="col">Subjects</th>
+            <th scope="col">First Quarter</th>
+            <th scope="col">Second Quarter</th>
+            <th scope="col">Fourth Quarter</th>
+            <th scope="col">Fifth Quarter</th>
+            <th scope="col">Average</th>
+          </tr>
+        </thead>
+        <tbody>
+            {% for subject in subject %}
+              <tr>
+                <td>{{subject.subject}}</td>
+                <td>{{subject.subject_grade_firstQ}}</td>
+                <td>{{subject.subject_grade_secondQ}}</td>
+                <td>{{subject.subject_grade_thirdQ}}</td>
+                <td>{{subject.subject_grade_fourthQ}}</td>
+                <td>{{subject.average}}</td>
+              </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+  </div>
+</div>
+{% endblock content %}

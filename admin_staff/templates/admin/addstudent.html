@@ -3,58 +3,59 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
-<form action='' method='POST'>
-    <div class="row g-3">
-        {% csrf_token %}
-        <div class="col-12">
-            {{student.user|as_crispy_field }}
+<div class="container-fluid">
+    <form action='' method='POST'>
+        <div class="row g-3">
+            {% csrf_token %}
+            <div class="col-12">
+                {{student.user|as_crispy_field }}
+            </div>
+            <div class="col-md-4">
+                {{student.student_lrn|as_crispy_field }}
+            </div>
+            <div class="col-md-4">
+                {{student.surname|as_crispy_field }}
+            </div>
+            <div class="col-md-4">
+                {{student.first_name|as_crispy_field }}
+            </div>
+            <div class="col-md-4">
+                {{student.middle_name|as_crispy_field }}
+            </div>
+            <div class="col-md-4">
+                {{student.gender|as_crispy_field }}
+            </div>
+            <div class="col-md-4">
+                {{student.birth_date|as_crispy_field }}
+            </div>
+            <div class="col-md-4">
+                {{student.birth_place|as_crispy_field }}
+            </div>
+            <div class="col-md-4">
+                {{student.religion|as_crispy_field }}
+            </div>
+            <div class="col-md-4">
+                {{student.civil_status|as_crispy_field }}
+            </div>
+            <div class="col-md-4">
+                {{student.contact|as_crispy_field }}
+            </div>
+            <div class="col-md-4">
+                {{student.email|as_crispy_field }}
+            </div>
+            <div class="col-md-4">
+                {{student.section|as_crispy_field }}
+            </div>
+            <div class="col-md-6">
+                {{student.adviser|as_crispy_field }}
+            </div>
+            <div class="col-md-6">
+                {{student.level|as_crispy_field }}
+            </div>
+            <div class="col-md-12">
+                <button class="btn btn-primary" type="submit">Confirm</button>
+            </div>
         </div>
-        <div class="col-md-4">
-            {{student.student_lrn|as_crispy_field }}
-        </div>
-        <div class="col-md-4">
-            {{student.surname|as_crispy_field }}
-        </div>
-        <div class="col-md-4">
-            {{student.first_name|as_crispy_field }}
-        </div>
-        <div class="col-md-4">
-            {{student.middle_name|as_crispy_field }}
-        </div>
-        <div class="col-md-4">
-            {{student.gender|as_crispy_field }}
-        </div>
-        <div class="col-md-4">
-            {{student.birth_date|as_crispy_field }}
-        </div>
-        <div class="col-md-4">
-            {{student.birth_place|as_crispy_field }}
-        </div>
-        <div class="col-md-4">
-            {{student.religion|as_crispy_field }}
-        </div>
-        <div class="col-md-4">
-            {{student.civil_status|as_crispy_field }}
-        </div>
-        <div class="col-md-4">
-            {{student.contact|as_crispy_field }}
-        </div>
-        <div class="col-md-4">
-            {{student.email|as_crispy_field }}
-        </div>
-        <div class="col-md-4">
-            {{student.section|as_crispy_field }}
-        </div>
-        <div class="col-md-6">
-            {{student.adviser|as_crispy_field }}
-        </div>
-        <div class="col-md-6">
-            {{student.level|as_crispy_field }}
-        </div>
-        <div class="d-grid gap-2">
-            <button class="btn btn-primary" type="submit">Confirm</button>
-        </div>
-    </div>
-</form>
-
+    </form>
+</div>
 {% endblock content %}
