@@ -18,6 +18,9 @@
   <!-- Custom styles for this template-->
   <link href= "{% static "css/sb-admin-2.min.css" %}" rel="stylesheet">
 
+  <!-- jQuery -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
   <!-- CSS-->
   <style>
     .logo img {
@@ -189,20 +192,55 @@
             {% block content %}
 
             <!-- Begin Page Content -->
-            <div class="container-fluid bg-gradient-primary" style="height: 12vh; margin-bottom: 5vh;">
+            <div class="container-fluid d-flex align-items-center justify-content-between bg-gradient-primary" style="height: 12vh; margin-bottom: 5vh;">
                 <div class="logo">
                     <img src="{% static "img/logo.png" %}" alt="Logo">
                 </div>
+                
+                <div class="Title text-white"><h1>Dashboard</h1></div>
+
+                <div class="text-white" id="school year"><h3>2024-2025</h3></div>
+
+                <div class="d-flex align-items-center gap-3">
+                    <div class="text-white">
+                        <div id="current-date"></div>
+                        <div id="current-time"></div>
+                    </div>
+                </div>
+
+                <!-- jQuery Script for Live Date & Time -->
+                <script>
+                    function updateDateTime() {
+                        let now = new Date();
+
+                        // Format Date
+                        let options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+                        let dateStr = now.toLocaleDateString('en-US', options);
+
+                        // Format Time
+                        let timeStr = now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true });
+
+                        // Update elements
+                        $("#current-date").text(dateStr);
+                        $("#current-time").text(timeStr);
+                    }
+
+                    // Update time every second
+                    $(document).ready(function () {
+                        updateDateTime();
+                        setInterval(updateDateTime, 1000);
+                    });
+                </script>
             </div>
 
-            <div class="container-fluid" style=" display: flex; margin-top: 7vh;">
+            <div class="container-fluid" style=" display: flex; margin-top: 7vh; margin-bottom: 5vh;">
 
                 <!-- 1st column-->
-                <div class="box1 p-2" style="height: 70vh; background-color: yellow; flex: 2;">
+                <div class="box1 p-2" style="height: 115vh; flex: 2;">
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Announcement</h1>
-                    </div>
+                        <h1 class="h3 mb-0 text-gray-800">Announcement <i class="bi bi-megaphone"></i></h1>
+                    </div><hr>
 
 
                     <div class="card shadow mb-4">
@@ -222,17 +260,72 @@
                 </div>
 
                 <!-- 2nd column-->
-                <div class="box2 p-2" style="height: 70vh; background-color: purple; flex: 1;">
-                    <div class="card my-3 shadow p-3 bg-body rounded">
+                <div class="box2 p-2" style="height: 115vh; flex: 1;">
+
+                    <div class="card my-3 border-left-primary shadow py-2">
                         <div class="card-body">
-                            This is for Brief Student Profile
+                            <div class="row no-gutters align-items-center">
+                                <div class="col mr-2">
+                                    <div class="text-s font-weight-bold text-primary text-uppercase mb-1">
+                                            Student 0001</div>
+                                    <div class="text-xs mb-0 font-weigh-normal text-gray-800">Information Summary</div><hr>
+                                        
+                                    <p class="text-s">Name: </p><hr>
+                                    <p class="text-s">Section: </p><hr>
+                                    <p class="text-s">Grade Level: </p><hr>
+                                    <p class="text-s">Adviser: </p>
+                                </div>
+                                <div class="col-auto">
+                                    
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="card my-3 shadow p-3 bg-body rounded">
+
+                        
+                    <div class="card my-3 border-left-primary shadow py-2">
                         <div class="card-body">
-                            This is for Class Schedule
+                            <div class="row no-gutters align-items-center">
+                                <div class="col mr-2">
+                                    <div class="text-s font-weight-bold text-primary text-uppercase mb-1">
+                                            Class Schedule</div>
+
+                                    <table class="table table-hover">
+                                        <thead>
+                                            <th scope="col">Day</th>
+                                            <th scope="col">Action</th>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Monday</td>
+                                                <td><button class="btn btn-primary btn-sm">See Details</button></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Tuesday</td>
+                                                <td><button class="btn btn-primary btn-sm">See Details</button></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Wednesday</td>
+                                                <td><button class="btn btn-primary btn-sm">See Details</button></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Thursday</td>
+                                                <td><button class="btn btn-primary btn-sm">See Details</button></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Friday</td>
+                                                <td><button class="btn btn-primary btn-sm">See Details</button></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="col-auto">
+                                    
+                                </div>
+                            </div>
                         </div>
                     </div>
+
                 </div>
 
             </div>
