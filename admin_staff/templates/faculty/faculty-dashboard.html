@@ -17,6 +17,15 @@
 
   <!-- Custom styles for this template-->
   <link href= "{% static "css/sb-admin-2.min.css" %}" rel="stylesheet">
+
+  <!-- CSS-->
+  <style>
+    .logo img {
+        width: 8vw; /* Makes sure image scales properly */
+        height: auto;
+        border-radius: 100%;
+    }
+  </style>
 </head>
 
 <body id="page-top">
@@ -48,23 +57,31 @@
         <li class="nav-item active">
             <a class="nav-link" href="{% url "advisory" %}">
               <i class="fas fa-fw fa-table"></i>
-              <span>Masters list</span></a>
+              <span>Classes</span></a>
         </li>
 
         <hr class="sidebar-divider my-0">
-        
-        <li class="nav-item active">
-          <a class="nav-link" href="{% url "advisory_grades" %}">
-            <i class="fas fa-fw fa-table"></i>
-            <span>Grades</span></a>
+
+        <div class="sidebar-heading">
+            Records
+        </div>
+
+        <li class="nav-item">
+            <a class="nav-link" href="#">
+              <i class="fas fa-fw fa-table"></i>
+              <span>SF 1 - Student Profile</span></a>
         </li>
 
-        <hr class="sidebar-divider my-0">
-        
-        <li class="nav-item active">
-          <a class="nav-link" href="{% url "attendance" %}">
-            <i class="fas fa-fw fa-table"></i>
-            <span>Attendance</span></a>
+        <li class="nav-item">
+            <a class="nav-link" href="{% url "attendance" %}">
+              <i class="fas fa-fw fa-table"></i>
+              <span>SF 2 - Attendance</span></a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link" href="{% url "advisory_grades" %}">
+              <i class="fas fa-fw fa-table"></i>
+              <span>SF 10 - Card</span></a>
         </li>
 
         <hr class="sidebar-divider my-0">
@@ -158,26 +175,54 @@
 
             </nav>
             <!-- End of Topbar -->
-            {% block content %}
-            <!-- Begin Page Content -->
-            <div class="container-fluid">
 
-                <!-- Page Heading -->
-                <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                    <h1 class="h3 mb-0 text-gray-800">Announcement</h1>
+
+            {% block content %}
+
+            <!-- Begin Page Content -->
+
+            <div class="container-fluid bg-gradient-primary" style="height: 12vh; margin-bottom: 5vh;">
+                <div class="logo">
+                    <img src="{% static "img/logo.png" %}" alt="Logo">
+                </div>
+            </div>
+
+            <div class="container-fluid" style=" display: flex; margin-top: 7vh;">
+
+                <!-- 1st column-->
+                <div class="box1 p-2" style="height: 70vh; background-color: yellow; flex: 2;">
+                    <!-- Page Heading -->
+                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                        <h1 class="h3 mb-0 text-gray-800">Announcement</h1>
+                    </div>
+
+
+                    <div class="card shadow mb-4">
+                        <!-- Card Header - Accordion -->
+                        <a href="#collapseCardExample" class="d-block card-header py-3" data-toggle="collapse"
+                            role="button" aria-expanded="true" aria-controls="collapseCardExample">
+                            <h6 class="m-0 font-weight-bold text-primary">{{announcement.title}}</h6>
+                        </a>
+                        <!-- Card Content - Collapse -->
+                        <div class="collapse show" id="collapseCardExample">
+                            <div class="card-body">
+                                {{announcement.body}}
+                            </div>
+                        </div>
+                    </div>
+    
                 </div>
 
-
-                <div class="card shadow mb-4">
-                    <!-- Card Header - Accordion -->
-                    <a href="#collapseCardExample" class="d-block card-header py-3" data-toggle="collapse"
-                        role="button" aria-expanded="true" aria-controls="collapseCardExample">
-                        <h6 class="m-0 font-weight-bold text-primary">{{announcement.title}}</h6>
-                    </a>
-                    <!-- Card Content - Collapse -->
-                    <div class="collapse show" id="collapseCardExample">
+                <!-- 2nd column-->
+                <div class="box2 p-2" style="height: 70vh; background-color: purple; flex: 1;">
+                    <div class="card my-3 shadow p-3 bg-body rounded">
                         <div class="card-body">
-                            {{announcement.body}}
+                            This is for Brief Student Profile
+                        </div>
+                    </div>
+                    <div class="card my-3 shadow p-3 bg-body rounded">
+                        <div class="card-body">
+                            This is for Class Schedule
                         </div>
                     </div>
                 </div>
@@ -190,7 +235,9 @@
         {% endblock content %}
 
         <!-- Footer -->
-        
+        <footer class="bg-gradient-warning text-white text-center py-4">
+            &copy; 2025 Connext SMS. All rights reserved.
+        </footer>
         <!-- End of Footer -->
 
         </div>
