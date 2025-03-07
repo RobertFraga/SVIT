@@ -70,21 +70,22 @@
                     <i class="fas fa-fw fa-table"></i>
                     <span>Class Schedule</span></a>
             </li>
-
-            <!-- Nav Item - Pages Collapse Menu -->
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
-                    aria-expanded="true" aria-controls="collapseTwo">
-                    <i class="fas fa-fw fa-cog"></i>
-                    <span>Records</span>
-                </a>
-                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-                    <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Components:</h6>
-                        <a class="collapse-item" href="{% url "student-grades" %}">Subject Grades</a>
-                        <a class="collapse-item" href="cards.html">Payment History</a>
-                    </div>
-                </div>
+                <a class="nav-link" href="{% url "student-grades" %}">
+                    <i class="fas fa-fw fa-table"></i>
+                    <span>Subject Grades</span></a>
+            </li>
+
+            <hr class="sidebar-divider d-none d-md-block">
+            
+            <div class="sidebar-heading">
+                Billings
+            </div>
+
+            <li class="nav-item">
+                <a class="nav-link" href="{% url "student-grades" %}">
+                    <i class="fas fa-fw fa-table"></i>
+                    <span>School Payments</span></a>
             </li>
 
             <!-- Divider -->
@@ -192,7 +193,7 @@
             {% block content %}
 
             <!-- Begin Page Content -->
-            <div class="container-fluid d-flex align-items-center justify-content-between bg-gradient-primary" style="height: 12vh; margin-bottom: 5vh;">
+            <div class="container-fluid d-flex align-items-center justify-content-between bg-gradient-primary" style="height: 12vh; margin-bottom: 2vh;">
                 <div class="logo">
                     <img src="{% static "img/logo.png" %}" alt="Logo">
                 </div>
@@ -233,7 +234,7 @@
                 </script>
             </div>
 
-            <div class="container-fluid" style=" display: flex; margin-top: 7vh; margin-bottom: 5vh;">
+            <div class="container-fluid" style=" display: flex; margin-top: 3vh; margin-bottom: 5vh;">
 
                 <!-- 1st column-->
                 <div class="box1 p-2" style="height: 115vh; flex: 2;">
