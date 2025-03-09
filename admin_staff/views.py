@@ -163,6 +163,17 @@ def student_grades(request):
     context = {'grades': grades}
     return render(request, 'student/grades.html', context)
 
+@login_required(login_url='login')
+@allowed_user(allow_roles=['student'])
+def student_schedule(request):
+    return render(request, 'student/class_schedule.html')
+
+@login_required(login_url='login')
+@allowed_user(allow_roles=['student'])
+def student_billings(request):
+    return render(request, 'student/payhistory.html')
+
+
 
 #faculty end
 @login_required(login_url='login')

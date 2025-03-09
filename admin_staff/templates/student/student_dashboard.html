@@ -43,7 +43,7 @@
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-laugh-wink"></i>
                 </div>
-                <div class="sidebar-brand-text mx-3">St. Vincent</div>
+                <div class="sidebar-brand-text mx-3">SVIT SMS</div>
             </a>
 
             <!-- Divider -->
@@ -66,7 +66,7 @@
 
             <!-- Nav Item - Tables -->
             <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="{% url "student-schedule" %}">
                     <i class="fas fa-fw fa-table"></i>
                     <span>Class Schedule</span></a>
             </li>
@@ -83,9 +83,9 @@
             </div>
 
             <li class="nav-item">
-                <a class="nav-link" href="{% url "student-grades" %}">
+                <a class="nav-link" href="{% url "student-payment-history" %}">
                     <i class="fas fa-fw fa-table"></i>
-                    <span>School Payments</span></a>
+                    <span>Payment History</span></a>
             </li>
 
             <!-- Divider -->
@@ -240,7 +240,7 @@
                 <div class="box1 p-2" style="height: 115vh; flex: 2;">
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Announcement <i class="bi bi-megaphone"></i></h1>
+                        <h1 class="h2 mb-0 font-weight-bold text-gray-600">Announcement <i class="bi bi-megaphone"></i></h1>
                     </div><hr>
 
 
@@ -334,13 +334,15 @@
 
         </div>
         <!-- End of Main Content -->
-        {% endblock content %}
 
         <!-- Footer -->
         <footer class="bg-gradient-warning text-white text-center py-4">
-            &copy; 2025 Connext SMS. All rights reserved.
+            &copy; 2025 Connext SVIT SMS. All rights reserved.
         </footer>
         <!-- End of Footer -->
+
+
+        {% endblock content %}
 
         </div>
         <!-- End of Content Wrapper --> 
