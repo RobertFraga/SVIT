@@ -52,57 +52,66 @@
   </script>
 </div>
 
-<div class="container-fluid shadow p-2 mb-5 mt-4" style="background-color: white; height: 100vh;">
 
-  <nav class="navbar navbar-expand navbar-light bg-light mb-2">
-    <a class="navbar-brand" href="#"><h1 class="h3 mb-0 text-gray-800">Academic Grades</h1></a>
-    <p class="my-2">School Year: 2025-2026</p>
-    <ul class="navbar-nav ml-auto">
-        <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
-                role="button" data-toggle="dropdown" aria-haspopup="true"
-                aria-expanded="false">
-                Grade level
-            </a>
-            <div class="dropdown-menu dropdown-menu-right animated--fade-in"
-                aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="#">Grade 7</a>
-                <a class="dropdown-item" href="#">Grade 8</a>
-                <a class="dropdown-item" href="#">Grade 9</a>
-                <a class="dropdown-item" href="#">Grade 10</a>
-            </div>
-        </li>
-    </ul>
-  </nav>
+<div class="container-fluid p-3" style="height: 100vh;">
 
-  <table class="table" style="margin-top: 1vh;">
-      {% csrf_token %}
-      <thead>
-        <tr>
-          <th scope="col">Subjects</th>
-          <th scope="col">1st Quarter</th>
-          <th scope="col">2nd Quarter</th>
-          <th scope="col">3rd Quarter</th>
-          <th scope="col">4th Quarter</th>
-          <th scope="col">Average</th>
-          <th scope="col">Remarks</th>
-        </tr>
-      </thead>
-      <tbody>
-          {% for subject in subject %}
-            <tr>
-              <td>{{subject.subject}}</td>
-              <td>{{subject.subject_grade_firstQ}}</td>
-              <td>{{subject.subject_grade_secondQ}}</td>
-              <td>{{subject.subject_grade_thirdQ}}</td>
-              <td>{{subject.subject_grade_fourthQ}}</td>
-              <td>{{subject.average}}</td>
-            </tr>
-          {% endfor %}
-      </tbody>
-  </table>  
+  <div class="card shadow mb-4">
 
-  
+    <div class="card-header py-3">
+      <h6 class="m-0 font-weight-bold text-primary">List of Subjects and Quarterly Grades</h6>
+    </div>
+
+    <div class="card-body">
+      <nav class="navbar navbar-expand navbar-light bg-light mb-2">
+        <a class="navbar-brand" href="#"><h1 class="h5 mb-0 text-gray-800">School Year: 2025-2026</h1></a>
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+                    role="button" data-toggle="dropdown" aria-haspopup="true"
+                    aria-expanded="false">
+                    Grade Level
+                </a>
+                <div class="dropdown-menu dropdown-menu-right animated--fade-in"
+                    aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="#">Grade 7</a>
+                    <a class="dropdown-item" href="#">Grade 8</a>
+                    <a class="dropdown-item" href="#">Grade 9</a>
+                    <a class="dropdown-item" href="#">Grade 10</a>
+                </div>
+            </li>
+        </ul>
+      </nav>
+
+      <table class="table" style="margin-top: 1vh;">
+        {% csrf_token %}
+        <thead>
+          <tr>
+            <th scope="col">Subjects</th>
+            <th scope="col">1st Quarter</th>
+            <th scope="col">2nd Quarter</th>
+            <th scope="col">3rd Quarter</th>
+            <th scope="col">4th Quarter</th>
+            <th scope="col">Average</th>
+            <th scope="col">Remarks</th>
+          </tr>
+        </thead>
+        <tbody>
+            {% for subject in subject %}
+              <tr>
+                <td>{{subject.subject}}</td>
+                <td>{{subject.subject_grade_firstQ}}</td>
+                <td>{{subject.subject_grade_secondQ}}</td>
+                <td>{{subject.subject_grade_thirdQ}}</td>
+                <td>{{subject.subject_grade_fourthQ}}</td>
+                <td>{{subject.average}}</td>
+              </tr>
+            {% endfor %}
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+
 </div>
 
 
