@@ -136,8 +136,15 @@ def financial_record(request):
 @allowed_user(allow_roles=['accounting'])
 def accounting_dashboard(request):
     announcement = Announcement.objects.get
-    context = {'announcment': announcement}
-    return render(request, "accounting/financial_record.html", context)
+    context = {'announcement': announcement}
+    return render(request, "accounting/accounting_dashboard.html", context)
+
+@login_required(login_url='login')
+@allowed_user(allow_roles=['accounting'])
+def accounting_profile(request):
+    return render(request, "accounting/financial_record.html")
+
+
 
 
 #student end
