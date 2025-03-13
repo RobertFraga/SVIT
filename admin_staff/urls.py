@@ -19,30 +19,17 @@ urlpatterns = [
     path('addflt', views.addstfaculty, name='addflt'),
     path('chart', views.chart, name='chart'),
 
-
-
-
     path('record', views.accademic_record, name='record'),
     path('finance', views.financial_record, name='financ'),
     path("anecdotal", views.anecdotal_record, name="anecdotal"),
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
     #accounting board
     path("financial", views.financial_record, name="financialrecord"),
 
+
+    
     #student board
     path('student', views.student_dashboard, name='student'),
     path('profile', views.student_profile, name='student-profile'),
@@ -60,5 +47,13 @@ urlpatterns = [
 
     #accounting
     path('accounting', views.accounting_dashboard, name='accounting' ),
+
+    #registrar end
+    path('registrar-dashboard', views.registrar_dashboard, name='registrar'),
+
+
+    #cashier end
+    path('cashier-dashboard', views.cashier_dashboard, name='cashier'),
+    
     
 ]
