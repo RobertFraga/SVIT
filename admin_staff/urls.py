@@ -51,9 +51,10 @@ urlpatterns = [
     #registrar end
     path('registrar-dashboard', views.registrar_dashboard, name='registrar'),
 
-
     #cashier end
     path('cashier-dashboard', views.cashier_dashboard, name='cashier'),
     
+    #admission
+    path('admission-dashboard', views.admission_dashboard, name='admission'),
     
 ]

@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import StudentProfile, FacultyStaff, Announcement, registrarStaff, cashierStaff
+from .models import StudentProfile, FacultyStaff, Announcement, registrarStaff, cashierStaff, admissionStaff
 from django.shortcuts import render
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
@@ -238,3 +238,12 @@ def cashier_dashboard(request):
     cashier = request.user.cashierstaff
     context = {'cashier': cashier}
     return render(request, "cashier/cashier_dashboard.html", context)
+
+
+#admission end
+@login_required(login_url='login')
+@allowed_user(allow_roles=['admission'])
+def admission_dashboard(request):
+    admission = request.user.admissionstaff
+    context = {'admission': admission}
+    return render(request, 'admission/admission-dashboard.html', context)
