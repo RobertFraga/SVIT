@@ -1,101 +1,209 @@
 {% extends "admin/admin_dashboard.html" %}
 
-
+{% load static %}
 {% block content %}
-<!-- Title Page -->
-<div class="page-title mb-4" style="margin:15px;">
-  <h2 style="color: #615EFC; font-weight: bold; margin-right: 20px; padding-left: 50px;">Classes</h2>
-  <hr style="margin-top: 0; color: black;">
+<!-- Begin Page Content -->
+
+<div class="container-fluid mb-4 d-flex align-items-center justify-content-between bg-gradient-primary" style="height: 12vh; margin-bottom: 2vh;">
+  <div class="logo">
+      <img src="{% static "img/logo.png" %}" alt="Logo">
+  </div>
+  
+  <div class="Title text-white"><h1>Classes</h1></div>
+
+  <div class="text-white" id="school year"><h3>2024-2025</h3></div>
+
+  <div class="d-flex align-items-center gap-3">
+      <div class="text-white">
+          <div id="current-date"></div>
+          <div id="current-time"></div>
+      </div>
+  </div>
+
+  <!-- jQuery Script for Live Date & Time -->
+  <script>
+      function updateDateTime() {
+          let now = new Date();
+
+          // Format Date
+          let options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+          let dateStr = now.toLocaleDateString('en-US', options);
+
+          // Format Time
+          let timeStr = now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true });
+
+          // Update elements
+          $("#current-date").text(dateStr);
+          $("#current-time").text(timeStr);
+      }
+
+      // Update time every second
+      $(document).ready(function () {
+          updateDateTime();
+          setInterval(updateDateTime, 1000);
+      });
+  </script>
 </div>
 
-<div class="container">
-  <ul class="nav nav-tabs" id="myTab" role="tablist">
-    <li class="nav-item" role="presentation">
-      <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">Genesis</button>
-    </li>
-    <li class="nav-item" role="presentation">
-      <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">Judges</button>
-    </li>
-  </ul>
 
-  {% comment %} content tab {% endcomment %}
-  {% csrf_token %}
-  <div class="tab-content" id="myTabContent">
-    <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
-      <div class="container-fluid border rounded" style="padding: 20px">
-        <div class="row g-3">
-          <div class="col-md-4">
-              <label for="">Adviser:</label>
-              <h3>{{adviser.username}}</h3>
-          </div>
-          <div class="col-md-4">
-              <label for="">Section:</label>
-              <h3>{{adviser.section}}</h3>
-          </div>
-          <div class="col-md-4">
-              <label for="">Student Count:</label>
-              <h3><!-- palagay kung ilan yung total ng students sa section --></h3>
-          </div>
-        </div>
-      
-        <label for="">Student List</label>
-        <table class="table table-hover" >
-            <thead>
-              <tr>
-                <th scope="col">LRN</th>
-                <th scope="col">Surname</th>
-                <th scope="col">Name</th>
-                <th scope="col">Action</th>
-              </tr>
-            </thead>
-            <tbody>
-                {% for adviser in adviser %}
-                      
-                {% endfor %}
-            </tbody>
-        </table>
-      </div>    
+<div class="container-fluid mt-4" style="margin-top: 3vh; margin-bottom: 5vh;">
+
+  <div class="row">
+    <div class="col-3">
+      <div class="list-group" id="list-tab" role="tablist">
+
+        <a class="list-group-item list-group-item-action border-left-warning py-4 mb-4" id="list-home-list" data-bs-toggle="list" href="#list-home" role="tab" aria-controls="list-home">
+          <div class="h5 font-weight-bold text-gray-800">Junior High Grade Levels</div></a>
+
+        <a class="list-group-item list-group-item-action border-left-warning py-4 mb-4" id="list-profile-list" data-bs-toggle="list" href="#list-profile" role="tab" aria-controls="list-profile">
+          <div class="h5 font-weight-bold text-gray-800">Student List</div></a>
+
+        <a class="list-group-item list-group-item-action border-left-warning py-4 mb-4" id="list-messages-list" data-bs-toggle="list" href="#list-messages" role="tab" aria-controls="list-messages">
+          <div class="h5 font-weight-bold text-gray-800">Adviser List</div></a>
+
+        <a class="list-group-item list-group-item-action border-left-warning py-4 mb-4" id="list-settings-list" data-bs-toggle="list" href="#list-settings" role="tab" aria-controls="list-settings">
+          <div class="h5 font-weight-bold text-gray-800">Subject Teacher List</div></a>
+
+      </div>
     </div>
 
+    <div class="col-9 border-left-secondary">
+      <div class="tab-content m-2" id="nav-tabContent">
+        <div class="tab-pane bg-light fade show active" id="list-home" role="tabpanel" aria-labelledby="list-home-list">
+          
+          <div class="card shadow-sm mb-4">
+            <div class="card-header py-3">
+              <h6 class="m-0 font-weight-bold text-primary">Junior High Grade Levels and Sections</h6>
+            </div>
 
-    <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
-      <div class="container-fluid border rounded" style="padding: 20px">
-        <div class="row g-3">
-          <div class="col-md-4">
-            <label for="">Adviser:</label>
-            <h3>{{adviser.username}}</h3>
+            <div class="card-body">
+              <div class="container">
+                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                  <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">Genesis</button>
+                  </li>
+                  <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">Judges</button>
+                  </li>
+                </ul>
+              
+                {% comment %} content tab {% endcomment %}
+                {% csrf_token %}
+                <div class="tab-content" id="myTabContent">
+                  <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
+                    <div class="container-fluid border rounded" style="padding: 20px">
+                      <div class="row g-3">
+                        <div class="col-md-4">
+                            <label for="">Adviser:</label>
+                            <h3>{{adviser.username}}</h3>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="">Section:</label>
+                            <h3>{{adviser.section}}</h3>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="">Student Count:</label>
+                            <h3><!-- palagay kung ilan yung total ng students sa section --></h3>
+                        </div>
+                      </div>
+                    
+                      <label for="">Student List</label>
+                      <table class="table table-hover" >
+                          <thead>
+                            <tr>
+                              <th scope="col">LRN</th>
+                              <th scope="col">Surname</th>
+                              <th scope="col">Name</th>
+                              <th scope="col">Action</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                              {% for adviser in adviser %}
+                                    
+                              {% endfor %}
+                          </tbody>
+                      </table>
+                    </div>    
+                  </div>
+              
+              
+                  <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
+                    <div class="container-fluid border rounded" style="padding: 20px">
+                      <div class="row g-3">
+                        <div class="col-md-4">
+                          <label for="">Adviser:</label>
+                          <h3>{{adviser.username}}</h3>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="">Section:</label>
+                            <h3>{{adviser.section}}</h3>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="">Student Count:</label>
+                            <h3><!-- palagay kung ilan yung total ng students sa section --></h3>
+                        </div>
+                      </div>
+                    
+                      <label for="">Student List</label>
+                      <table class="table table-hover" >
+                          <thead>
+                            <tr>
+                              <th scope="col">LRN</th>
+                              <th scope="col">Surname</th>
+                              <th scope="col">Name</th>
+                              <th scope="col">Action</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                              {% for adviser in adviser %}
+                                    
+                              {% endfor %}
+                          </tbody>
+                      </table>
+                    </div>
+                    
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
-          <div class="col-md-4">
-              <label for="">Section:</label>
-              <h3>{{adviser.section}}</h3>
-          </div>
-          <div class="col-md-4">
-              <label for="">Student Count:</label>
-              <h3><!-- palagay kung ilan yung total ng students sa section --></h3>
-          </div>
+
         </div>
-      
-        <label for="">Student List</label>
-        <table class="table table-hover" >
-            <thead>
-              <tr>
-                <th scope="col">LRN</th>
-                <th scope="col">Surname</th>
-                <th scope="col">Name</th>
-                <th scope="col">Action</th>
-              </tr>
-            </thead>
-            <tbody>
-                {% for adviser in adviser %}
-                      
-                {% endfor %}
-            </tbody>
-        </table>
+
+        <div class="tab-pane fade" id="list-profile" role="tabpanel" aria-labelledby="list-profile-list">
+          
+          <div class="card shadow-sm mb-4">
+            <div class="card-header py-3">
+              <h6 class="m-0 font-weight-bold text-primary">Junior High Grade Levels and Sections</h6>
+            </div>
+
+            <div class="card-body">
+              ito muna hahaha
+            </div>
+          </div>
+
+        </div>
+
+        <div class="tab-pane fade" id="list-messages" role="tabpanel" aria-labelledby="list-messages-list">...</div>
+        <div class="tab-pane fade" id="list-settings" role="tabpanel" aria-labelledby="list-settings-list">...</div>
       </div>
-      
     </div>
   </div>
+
+
 </div>
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 {% endblock content %}
