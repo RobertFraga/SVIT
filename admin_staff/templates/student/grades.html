@@ -1,109 +1,136 @@
 {% extends "student/student_dashboard.html" %}
 
-{% load static %}
 {% block content %}
-<style>
-  .logo img {
-      width: 8vw; /* Makes sure image scales properly */
-      height: auto;
-      border-radius: 100%;
-  }
-</style>
 
-<!-- Begin Page Content -->
-<div class="container-fluid d-flex align-items-center justify-content-between bg-gradient-primary" style="height: 12vh; margin-bottom: 2vh;">
-  <div class="logo">
-      <img src="{% static "img/logo.png" %}" alt="Logo">
+{% csrf_token %}
+
+
+<div class="card shadow mb-4">
+  <div class="card-header py-3">
+    <h3 class="m-0 font-weight-bold text-primary">Grades</h3>
   </div>
   
-  <div class="Title text-white"><h1>Subject Grades</h1></div>
-
-  <div class="text-white" id="school year"><h3>2024-2025</h3></div>
-
-  <div class="d-flex align-items-center gap-3">
-      <div class="text-white">
-          <div id="current-date"></div>
-          <div id="current-time"></div>
-      </div>
-  </div>
-
-  <!-- jQuery Script for Live Date & Time -->
-  <script>
-      function updateDateTime() {
-          let now = new Date();
-
-          // Format Date
-          let options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-          let dateStr = now.toLocaleDateString('en-US', options);
-
-          // Format Time
-          let timeStr = now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true });
-
-          // Update elements
-          $("#current-date").text(dateStr);
-          $("#current-time").text(timeStr);
-      }
-
-      // Update time every second
-      $(document).ready(function () {
-          updateDateTime();
-          setInterval(updateDateTime, 1000);
-      });
-  </script>
-</div>
-
-<div class="container-fluid">
-
-  <nav class="navbar navbar-expand navbar-light bg-light mb-2">
-    <a class="navbar-brand" href="#"><h1 class="h3 mb-0 text-gray-800">Academic Grades</h1></a>
-    <p class="my-2">School Year: 2025-2026</p>
-    <ul class="navbar-nav ml-auto">
-        <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
-                role="button" data-toggle="dropdown" aria-haspopup="true"
-                aria-expanded="false">
-                Grade level
-            </a>
-            <div class="dropdown-menu dropdown-menu-right animated--fade-in"
-                aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="#">Grade 7</a>
-                <a class="dropdown-item" href="#">Grade 8</a>
-                <a class="dropdown-item" href="#">Grade 9</a>
-                <a class="dropdown-item" href="#">Grade 10</a>
-            </div>
-        </li>
-    </ul>
-  </nav>
-
-  <table class="table" style="margin-top: 1vh;">
-      {% csrf_token %}
-      <thead>
-        <tr>
-          <th scope="col">Subjects</th>
-          <th scope="col">First Quarter</th>
-          <th scope="col">Second Quarter</th>
-          <th scope="col">Fourth Quarter</th>
-          <th scope="col">Fifth Quarter</th>
-          <th scope="col">Average</th>
-          <th scope="col">Remarks</th>
-        </tr>
-      </thead>
-      <tbody>
-          {% for subject in subject %}
+  <div class="card-body">
+    <div class="table-responsive">
+      <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+        <thead>
             <tr>
-              <td>{{subject.subject}}</td>
-              <td>{{subject.subject_grade_firstQ}}</td>
-              <td>{{subject.subject_grade_secondQ}}</td>
-              <td>{{subject.subject_grade_thirdQ}}</td>
-              <td>{{subject.subject_grade_fourthQ}}</td>
-              <td>{{subject.average}}</td>
+              <th>Subject Name</th>
+              <th>1st Grading</th>
+              <th>2nd Grading</th>
+              <th>3rd Grading</th>
+              <th>4th Grading</th>
+              <th>Final Grade</th>
             </tr>
-          {% endfor %}
-      </tbody>
-  </table>  
+        </thead>
 
+        <tbody>
+            <tr>
+              <td>English</td>
+              <td class="editable">{{ grades.ENG.first_grading|default_if_none:'' }}</td>
+              <td class="editable">{{ grades.ENG.second_grading|default_if_none:'' }}</td>
+              <td class="editable">{{ grades.ENG.third_grading|default_if_none:'' }}</td>
+              <td class="editable">{{ grades.ENG.fourth_grading|default_if_none:'' }}</td>
+              <td><strong>{{ grades.ENG.final_grade|default_if_none:'' }}</strong></td>
+            </tr>
+            <tr>
+              <td>Filipino</td>
+              <td >{{ grades.FIL.first_grading|default_if_none:'' }}</td>
+              <td >{{ grades.FIL.second_grading|default_if_none:'' }}</td>
+              <td >{{ grades.FIL.third_grading|default_if_none:'' }}</td>
+              <td >{{ grades.FIL.fourth_grading|default_if_none:'' }}</td>
+              <td><strong>{{ grades.FIL.final_grade|default_if_none:'' }}</strong></td>
+            </tr>
+            <tr>
+              <td>Mathematics</td>
+              <td >{{ grades.MATH.first_grading|default_if_none:'' }}</td>
+              <td >{{ grades.MATH.second_grading|default_if_none:'' }}</td>
+              <td >{{ grades.MATH.third_grading|default_if_none:'' }}</td>
+              <td >{{ grades.MATH.fourth_grading|default_if_none:'' }}</td>
+              <td><strong>{{ grades.MATH.final_grade|default_if_none:'' }}</strong></td>
+            </tr>
+            <tr>
+              <td>Science</td>
+              <td >{{ grades.SCI.first_grading|default_if_none:'' }}</td>
+              <td >{{ grades.SCI.second_grading|default_if_none:'' }}</td>
+              <td >{{ grades.SCI.third_grading|default_if_none:'' }}</td>
+              <td >{{ grades.SCI.fourth_grading|default_if_none:'' }}</td>
+              <td><strong>{{ grades.SCI.final_grade|default_if_none:'' }}</strong></td>
+            </tr>
+            <tr>
+              <td>Physical Education</td>
+              <td >{{ grades.PE.first_grading|default_if_none:'' }}</td>
+              <td >{{ grades.PE.second_grading|default_if_none:'' }}</td>
+              <td >{{ grades.PE.third_grading|default_if_none:'' }}</td>
+              <td >{{ grades.PE.fourth_grading|default_if_none:'' }}</td>
+              <td><strong>{{ grades.PE.final_grade|default_if_none:'' }}</strong></td>
+            </tr>
+        </tbody>
+          
+      </table>
+    </div>
+  </div>
   
 </div>
 
 
+
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function () {
+
+
+
+        var studentLRN = $("#inputLrn").val().trim();
+
+        // Fetch grades when the page loads
+        if (studentLRN) {
+            $.ajax({
+                url: "/get-grades/" + studentLRN + "/",
+                method: "GET",
+                success: function (response) {
+                    if (response.grades) {
+                        console.log(response.grades);
+                        // Loop through each row and update the table
+                        $("tbody tr").each(function () {
+                            let subjectCode = $(this).find("td:first").text().trim();
+                            let gradeData = response.grades[subjectCode];
+
+                            if (gradeData) {
+                                let first = parseFloat(gradeData.first_grading) || 0;
+                                let second = parseFloat(gradeData.second_grading) || 0;
+                                let third = parseFloat(gradeData.third_grading) || 0;
+                                let fourth = parseFloat(gradeData.fourth_grading) || 0;
+
+                                // Calculate the final grade as the average
+                                let finalGrade = (first + second + third + fourth) / 4;
+                                finalGrade = isNaN(finalGrade) ? '' : finalGrade.toFixed(2);
+
+                                // Update the table
+                                $(this).find("td:nth-child(3)").text(gradeData.first_grading ?? '');
+                                $(this).find("td:nth-child(4)").text(gradeData.second_grading ?? '');
+                                $(this).find("td:nth-child(5)").text(gradeData.third_grading ?? '');
+                                $(this).find("td:nth-child(6)").text(gradeData.fourth_grading ?? '');
+                                $(this).find("td:nth-child(7)").text(finalGrade);
+                            }
+                        });
+                    }
+                },
+                error: function () {
+                    console.log("Failed to fetch grades.");
+                }
+            });
+        }
+
+
+
+
+        console.log(studentLRN);
+
+       
+
+
+    });
+</script>
 {% endblock content %}

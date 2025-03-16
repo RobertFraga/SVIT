@@ -40,9 +40,7 @@
 
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{% url "home" %}">
-                <div class="sidebar-brand-icon rotate-n-15">
-                    <i class="fas fa-laugh-wink"></i>
-                </div>
+                    <img width="50px" src="{% static "img/svit.png" %}" alt="Logo">
                 <div class="sidebar-brand-text mx-3">St. Vincent</div>
             </a>
 
@@ -109,25 +107,57 @@
         <div id="content">
 
             <!-- Topbar -->
-            <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+            <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow ">
 
-                <!-- Sidebar Toggle (Topbar) -->
-                <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
-                    <i class="fa fa-bars"></i>
-                </button>
-
-                <!-- Topbar Search -->
-                <form
-                    class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-                    <div class="input-group">
-                        <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2">
-                        <div class="input-group-append">
-                            <button class="btn btn-primary" type="button">
-                                <i class="fas fa-search fa-sm"></i>
-                            </button>
+                <div class="container-fluid">
+                    <div class="Title text-primary">
+                        <h1><strong>Dashboard</strong></h1>
+                    </div>
+    
+                    <div class="text-primary" id="school year">
+                        <h3>2024-2025</h3>
+                    </div>
+    
+                    <div class="d-flex align-items-center gap-3">
+                        <div class="text-primary">
+                            <div id="current-date"></div>
+                            <div id="current-time"></div>
                         </div>
                     </div>
-                </form>
+
+
+                    <!-- jQuery Script for Live Date & Time -->
+                    <script>
+                        function updateDateTime() {
+                            let now = new Date();
+
+                            // Format Date
+                            let options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+                            let dateStr = now.toLocaleDateString('en-US', options);
+
+                            // Format Time
+                            let timeStr = now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true });
+
+                            // Update elements
+                            $("#current-date").text(dateStr);
+                            $("#current-time").text(timeStr);
+                        }
+
+                        // Update time every second
+                        $(document).ready(function () {
+                            updateDateTime();
+                            setInterval(updateDateTime, 1000);
+                        });
+                    </script>
+                </div>
+
+                
+
+
+
+
+                <!-- Sidebar Toggle (Topbar) -->
+                
 
                 <!-- Topbar Navbar -->
                 <ul class="navbar-nav ml-auto">
@@ -192,47 +222,6 @@
 
             {% block content %}
 
-            <!-- Begin Page Content -->
-            <div class="container-fluid d-flex align-items-center justify-content-between bg-gradient-primary" style="height: 12vh; margin-bottom: 2vh;">
-                <div class="logo">
-                    <img src="{% static "img/logo.png" %}" alt="Logo">
-                </div>
-                
-                <div class="Title text-white"><h1>Dashboard</h1></div>
-
-                <div class="text-white" id="school year"><h3>2024-2025</h3></div>
-
-                <div class="d-flex align-items-center gap-3">
-                    <div class="text-white">
-                        <div id="current-date"></div>
-                        <div id="current-time"></div>
-                    </div>
-                </div>
-
-                <!-- jQuery Script for Live Date & Time -->
-                <script>
-                    function updateDateTime() {
-                        let now = new Date();
-
-                        // Format Date
-                        let options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-                        let dateStr = now.toLocaleDateString('en-US', options);
-
-                        // Format Time
-                        let timeStr = now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true });
-
-                        // Update elements
-                        $("#current-date").text(dateStr);
-                        $("#current-time").text(timeStr);
-                    }
-
-                    // Update time every second
-                    $(document).ready(function () {
-                        updateDateTime();
-                        setInterval(updateDateTime, 1000);
-                    });
-                </script>
-            </div>
 
             <div class="container-fluid" style=" display: flex; margin-top: 3vh; margin-bottom: 5vh;">
 
@@ -271,10 +260,10 @@
                                             Student 0001</div>
                                     <div class="text-xs mb-0 font-weigh-normal text-gray-800">Information Summary</div><hr>
                                         
-                                    <p class="text-s">Name: </p><hr>
-                                    <p class="text-s">Section: </p><hr>
-                                    <p class="text-s">Grade Level: </p><hr>
-                                    <p class="text-s">Adviser: </p>
+                                    <p class="text-s">Name: {{student.first_name}} {{student.surname}}</p><hr>
+                                    <p class="text-s">Section: {{student.section}}</p><hr>
+                                    <p class="text-s">Grade Level: {{student.level}}</p><hr>
+                                    <p class="text-s">Adviser: {{student.adviser}}</p>
                                 </div>
                                 <div class="col-auto">
                                     
@@ -332,12 +321,12 @@
             </div>
             <!-- /.container-fluid -->
 
+            {% endblock content %}
         </div>
         <!-- End of Main Content -->
-        {% endblock content %}
 
         <!-- Footer -->
-        <footer class="bg-gradient-warning text-white text-center py-4">
+        <footer class="bg-gradient-warning text-white text-center py-4 footer fix-bottom">
             &copy; 2025 Connext SMS. All rights reserved.
         </footer>
         <!-- End of Footer -->
