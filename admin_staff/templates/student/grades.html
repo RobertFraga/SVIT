@@ -4,73 +4,72 @@
 
 {% csrf_token %}
 
-
-<div class="card shadow mb-4">
-  <div class="card-header py-3">
-    <h3 class="m-0 font-weight-bold text-primary">Grades</h3>
-  </div>
-  
-  <div class="card-body">
-    <div class="table-responsive">
-      <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-        <thead>
-            <tr>
-              <th>Subject Name</th>
-              <th>1st Grading</th>
-              <th>2nd Grading</th>
-              <th>3rd Grading</th>
-              <th>4th Grading</th>
-              <th>Final Grade</th>
-            </tr>
-        </thead>
-
-        <tbody>
-            <tr>
-              <td>English</td>
-              <td class="editable">{{ grades.ENG.first_grading|default_if_none:'' }}</td>
-              <td class="editable">{{ grades.ENG.second_grading|default_if_none:'' }}</td>
-              <td class="editable">{{ grades.ENG.third_grading|default_if_none:'' }}</td>
-              <td class="editable">{{ grades.ENG.fourth_grading|default_if_none:'' }}</td>
-              <td><strong>{{ grades.ENG.final_grade|default_if_none:'' }}</strong></td>
-            </tr>
-            <tr>
-              <td>Filipino</td>
-              <td >{{ grades.FIL.first_grading|default_if_none:'' }}</td>
-              <td >{{ grades.FIL.second_grading|default_if_none:'' }}</td>
-              <td >{{ grades.FIL.third_grading|default_if_none:'' }}</td>
-              <td >{{ grades.FIL.fourth_grading|default_if_none:'' }}</td>
-              <td><strong>{{ grades.FIL.final_grade|default_if_none:'' }}</strong></td>
-            </tr>
-            <tr>
-              <td>Mathematics</td>
-              <td >{{ grades.MATH.first_grading|default_if_none:'' }}</td>
-              <td >{{ grades.MATH.second_grading|default_if_none:'' }}</td>
-              <td >{{ grades.MATH.third_grading|default_if_none:'' }}</td>
-              <td >{{ grades.MATH.fourth_grading|default_if_none:'' }}</td>
-              <td><strong>{{ grades.MATH.final_grade|default_if_none:'' }}</strong></td>
-            </tr>
-            <tr>
-              <td>Science</td>
-              <td >{{ grades.SCI.first_grading|default_if_none:'' }}</td>
-              <td >{{ grades.SCI.second_grading|default_if_none:'' }}</td>
-              <td >{{ grades.SCI.third_grading|default_if_none:'' }}</td>
-              <td >{{ grades.SCI.fourth_grading|default_if_none:'' }}</td>
-              <td><strong>{{ grades.SCI.final_grade|default_if_none:'' }}</strong></td>
-            </tr>
-            <tr>
-              <td>Physical Education</td>
-              <td >{{ grades.PE.first_grading|default_if_none:'' }}</td>
-              <td >{{ grades.PE.second_grading|default_if_none:'' }}</td>
-              <td >{{ grades.PE.third_grading|default_if_none:'' }}</td>
-              <td >{{ grades.PE.fourth_grading|default_if_none:'' }}</td>
-              <td><strong>{{ grades.PE.final_grade|default_if_none:'' }}</strong></td>
-            </tr>
-        </tbody>
+<input type="hidden" class="form-control" id="inputLrn" placeholder='student LRN' value="{{student.student_lrn}}">
+<div class="mt-4">
+  <h3 class="text-center">Grading Table</h3>
+  <div class="table-responsive">
+      <table class="table table-bordered table-hover text-center">
+          <thead class="table-primary">
+              <tr>
+                  <th>Subject Code</th>
+                  <th>Subject Name</th>
+                  <th>1st Grading</th>
+                  <th>2nd Grading</th>
+                  <th>3rd Grading</th>
+                  <th>4th Grading</th>
+                  <th>Final Grade</th>
+              </tr>
+          </thead>
+          <tbody>
+              <tr>
+                  <td>ENG</td>
+                  <td>English</td>
+                  <td contenteditable="true" class="editable">{{ grades.ENG.first_grading|default_if_none:'' }}</td>
+                  <td contenteditable="true" class="editable">{{ grades.ENG.second_grading|default_if_none:'' }}</td>
+                  <td contenteditable="true" class="editable">{{ grades.ENG.third_grading|default_if_none:'' }}</td>
+                  <td contenteditable="true" class="editable">{{ grades.ENG.fourth_grading|default_if_none:'' }}</td>
+                  <td><strong>{{ grades.ENG.final_grade|default_if_none:'' }}</strong></td>
+              </tr>
+              <tr>
+                  <td>FIL</td>
+                  <td>Filipino</td>
+                  <td >{{ grades.FIL.first_grading|default_if_none:'' }}</td>
+                  <td >{{ grades.FIL.second_grading|default_if_none:'' }}</td>
+                  <td >{{ grades.FIL.third_grading|default_if_none:'' }}</td>
+                  <td >{{ grades.FIL.fourth_grading|default_if_none:'' }}</td>
+                  <td><strong>{{ grades.FIL.final_grade|default_if_none:'' }}</strong></td>
+              </tr>
+              <tr>
+                  <td>MATH</td>
+                  <td>Mathematics</td>
+                  <td >{{ grades.MATH.first_grading|default_if_none:'' }}</td>
+                  <td >{{ grades.MATH.second_grading|default_if_none:'' }}</td>
+                  <td >{{ grades.MATH.third_grading|default_if_none:'' }}</td>
+                  <td >{{ grades.MATH.fourth_grading|default_if_none:'' }}</td>
+                  <td><strong>{{ grades.MATH.final_grade|default_if_none:'' }}</strong></td>
+              </tr>
+              <tr>
+                  <td>SCI</td>
+                  <td>Science</td>
+                  <td >{{ grades.SCI.first_grading|default_if_none:'' }}</td>
+                  <td >{{ grades.SCI.second_grading|default_if_none:'' }}</td>
+                  <td >{{ grades.SCI.third_grading|default_if_none:'' }}</td>
+                  <td >{{ grades.SCI.fourth_grading|default_if_none:'' }}</td>
+                  <td><strong>{{ grades.SCI.final_grade|default_if_none:'' }}</strong></td>
+              </tr>
+              <tr>
+                  <td>PE</td>
+                  <td>Physical Education</td>
+                  <td >{{ grades.PE.first_grading|default_if_none:'' }}</td>
+                  <td >{{ grades.PE.second_grading|default_if_none:'' }}</td>
+                  <td >{{ grades.PE.third_grading|default_if_none:'' }}</td>
+                  <td >{{ grades.PE.fourth_grading|default_if_none:'' }}</td>
+                  <td><strong>{{ grades.PE.final_grade|default_if_none:'' }}</strong></td>
+              </tr>
+          </tbody>
           
       </table>
-    </div>
   </div>
-  
 </div>
 
 
@@ -124,9 +123,6 @@
         }
 
 
-
-
-        console.log(studentLRN);
 
        
 

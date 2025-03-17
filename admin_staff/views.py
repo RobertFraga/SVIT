@@ -173,9 +173,9 @@ def student_profile(request):
 @login_required(login_url='login')
 @allowed_user(allow_roles=['student'])
 def student_grades(request):
-    grades = request.user.studentprofile
-    context = {'grades': grades}
-    return render(request, 'student/grades.html', context)
+    student = request.user.studentprofile
+    # return render(request, 'student/grades.html', context)
+    return render(request, 'student/grades.html', {'student': student})
 
 
 #faculty end
@@ -290,7 +290,60 @@ def save_grade(request):
 
 
 
+@csrf_exempt  # Optional: Use only if CSRF token issues occur (not recommended for production)
+def mark_attendance(request):
+    if request.method == "POST":
+        student_lrn = request.POST.get("student_lrn")
+        status = request.POST.get("status")
 
+        try:
+            student = StudentProfile.objects.get(student_lrn=student_lrn)
+            attendance, created = StudentAttendance.objects.update_or_create(
+                student_lrn=student,
+                date=now().date(),  # Use today's date
+                defaults={"status": status}
+            )
+
+            return JsonResponse({"success": True, "message": f"Attendance marked as {status}"})
+        except StudentProfile.DoesNotExist:
+            return JsonResponse({"success": False, "message": "Student not found"}, status=404)
+    return JsonResponse({"success": False, "message": "Invalid request"}, status=400)
+
+
+
+@login_required(login_url='login')
+def fetch_students(request):
+    today = now().date()
+
+    # Ensure the logged-in user is a faculty staff
+    if hasattr(request.user, 'facultystaff'):
+        faculty_staff = request.user.facultystaff
+        section = faculty_staff.section  # Get assigned section
+
+        # Get adviser details
+        adviser = {
+            'surname': faculty_staff.surname,
+            'first_name': faculty_staff.first_name,
+            'section': section.section_name if section else "No Section"
+        }
+
+        # Fetch students in the adviser's section
+        if section:
+            students = StudentProfile.objects.filter(
+                section=section  # Filter by same section
+            ).exclude(
+                student_lrn__in=StudentAttendance.objects.filter(date=today).values_list('student_lrn', flat=True)
+            ).values('student_lrn', 'surname', 'first_name', 'middle_name')
+        else:
+            students = []
+    else:
+        students = []
+        adviser = None
+
+    return JsonResponse({
+        'students': list(students),
+        'adviser': adviser
+    })
 
 
 
