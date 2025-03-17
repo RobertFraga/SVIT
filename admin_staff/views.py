@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import StudentProfile, FacultyStaff, Announcement, registrarStaff, cashierStaff, admissionStaff
+from .models import StudentProfile, FacultyStaff, Announcement, registrarStaff, cashierStaff, admissionStaff, StudentGrade,StudentAttendance
 from django.shortcuts import render
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
@@ -7,6 +7,13 @@ from django.contrib.auth.decorators import login_required
 from .decorators import unauthenticated_user, allowed_user, admin_only
 from .form import announcementForm, studentForm, facultyForm
 # Create your views here.
+from django.utils.timezone import now
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+import json
+
+
+
 
 
 @unauthenticated_user
@@ -196,11 +203,6 @@ def student_info(request, pk):
     return render(request, 'faculty/student_profile.html', context)
 
 
-@login_required(login_url='login')
-@allowed_user(allow_roles=['faculty'])
-def student_records(request):
-    return render(request, 'faculty/record.html')
-
 
 @login_required(login_url='login')
 @allowed_user(allow_roles=['faculty'])
@@ -214,12 +216,100 @@ def faculty_info(request):
 def attendance_record(request):
     return render(request, 'faculty/attendance_record.html')
 
+
 @login_required(login_url='login')
 @allowed_user(allow_roles=['faculty'])
-def advisory_grades(request):
+def advisory_grades(request, pk):
     adviser = request.user.facultystaff
-    context = {'adviser': adviser}
-    return render(request, 'faculty/advisory_grades.html', context)
+    student = StudentProfile.objects.get(student_lrn = pk)
+    context = {'adviser': adviser, 'student': student}
+    return render(request, 'faculty/faculty-student-grade.html', context)
+
+
+
+def get_student_grades(request, student_lrn):
+    if request.headers.get('x-requested-with') == 'XMLHttpRequest':  # AJAX request check
+        grades = StudentGrade.objects.filter(student_lrn=student_lrn)
+        
+        grades_dict = {
+            grade.subject: {
+                "first_grading": grade.first_grading,
+                "second_grading": grade.second_grading,
+                "third_grading": grade.third_grading,
+                "fourth_grading": grade.fourth_grading
+            }
+            for grade in grades
+        }
+        
+        return JsonResponse({"grades": grades_dict})
+    
+    return JsonResponse({"error": "Invalid request"}, status=400)
+
+
+
+@csrf_exempt
+@login_required(login_url='login')
+@allowed_user(allow_roles=['faculty', 'admin'])
+def save_grade(request):
+    if request.method == "POST":
+        try:
+            data = json.loads(request.body)
+            lrn = data.get("lrn")
+            subject = data.get("subject")
+            column = int(data.get("column"))  # Convert column index to integer
+            grade = float(data.get("grade"))
+
+            # Hanapin o gumawa ng bagong record
+            student_grade, created = StudentGrade.objects.get_or_create(
+                student_lrn=lrn, subject=subject
+            )
+
+            # I-update ang tamang grading period
+            if column == 2:
+                student_grade.first_grading = grade
+            elif column == 3:
+                student_grade.second_grading = grade
+            elif column == 4:
+                student_grade.third_grading = grade
+            elif column == 5:
+                student_grade.fourth_grading = grade
+            elif column == 6:
+                student_grade.final_grade = grade
+
+            student_grade.save()
+
+            return JsonResponse({"status": "success", "message": "Grade saved successfully!"})
+
+        except Exception as e:
+            return JsonResponse({"status": "error", "message": str(e)})
+    
+    return JsonResponse({"status": "error", "message": "Invalid request"})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 #registrar end
