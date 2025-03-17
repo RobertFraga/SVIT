@@ -15,7 +15,7 @@
           <th scope="col">LRN</th>
           <th scope="col">Surname</th>
           <th scope="col">Name</th>
-          <th scope="col">Grade Level</th>
+          <th scope="col">Section</th>
           <th scope="col">Action</th>
         </tr>
       </thead>
@@ -29,7 +29,7 @@
                   <td>{{advisoryClass.student_lrn}}</td>
                   <td>{{advisoryClass.surname}}</td>
                   <td>{{advisoryClass.first_name}}</td>
-                  <td>{{advisoryClass.level}}</td>
+                  <td>{{advisoryClass.section}}</td>
                   <td>
                     <button class="btn btn-primary" type="submit" title="Edit"><a href="{% url "info" advisoryClass.student_lrn %}" style="text-decoration: none; color: inherit" >
                       View

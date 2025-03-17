@@ -184,7 +184,8 @@ def student_grades(request):
 def faculty_dashboard(request):
     announcement = Announcement.objects.get
     adviser = request.user.facultystaff
-    context = {'adviser': adviser, 'announcement': announcement}
+    advisoryClass = request.user.facultystaff.studentprofile_set.all()
+    context = {'adviser': adviser, 'announcement': announcement, 'advisoryClass': advisoryClass}
     return render(request, 'faculty/faculty-dashboard.html', context)
 
 @login_required(login_url='login')
