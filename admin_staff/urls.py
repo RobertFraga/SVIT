@@ -46,6 +46,14 @@ urlpatterns = [
     path('advisory-grades/<int:pk>', views.advisory_grades, name="advisor-grades"),
 
 
+    path("mark_attendance/", views.mark_attendance, name="mark_attendance"),
+
+    path('fetch-students/', views.fetch_students, name='fetch_students'),
+    path('get-grades/<str:student_lrn>/', views.get_student_grades, name='get_student_grades'),
+
+    path('save-grade/', views.save_grade, name='save-grade'),
+
+
 
 
 
