@@ -213,8 +213,10 @@ def faculty_info(request):
 
 @login_required(login_url='login')
 @allowed_user(allow_roles=['faculty'])
-def attendance_record(request):
-    return render(request, 'faculty/attendance_record.html')
+def attendance_record(request, pk):
+    student = StudentProfile.objects.get(student_lrn = pk)
+    context = {'student': student}
+    return render(request, 'faculty/attendance_record.html', context)
 
 
 @login_required(login_url='login')

@@ -37,6 +37,9 @@
                     <button class="btn btn-primary" type="submit" title="Edit"><a href="{% url "advisor-grades" advisoryClass.student_lrn %}" style="text-decoration: none; color: inherit" >
                       grades
                     </a></button>
+                    <button class="btn btn-primary" type="submit" title="Edit"><a href="{% url "attendance" advisoryClass.student_lrn  %}" style="text-decoration: none; color: inherit" >
+                      Attendance
+                    </a></button>
                   </td>
                 </tr>
           {% endfor %}
