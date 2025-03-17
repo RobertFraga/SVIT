@@ -2,8 +2,12 @@
 
 {% load static %}
 {% block content %}
-<!-- Begin Page Content -->
+<!-- Custom fonts for this template-->
+<link href= "{% static "vendor/fontawesome-free/css/all.min.css" %}" rel="stylesheet" type="text/css">
+<link href= "{% static "https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" %}" rel="stylesheet">
 
+
+<!-- Begin Page Content -->
 <div class="container-fluid mb-4 d-flex align-items-center justify-content-between bg-gradient-primary" style="height: 12vh; margin-bottom: 2vh;">
   <div class="logo">
       <img src="{% static "img/logo.png" %}" alt="Logo">
@@ -45,7 +49,6 @@
   </script>
 </div>
 
-
 <div class="container-fluid mt-4" style="margin-top: 3vh; margin-bottom: 5vh;">
 
   <div class="row">
@@ -53,16 +56,16 @@
       <div class="list-group" id="list-tab" role="tablist">
 
         <a class="list-group-item list-group-item-action border-left-warning py-4 mb-4" id="list-home-list" data-bs-toggle="list" href="#list-home" role="tab" aria-controls="list-home">
-          <div class="h5 font-weight-bold text-gray-800">Junior High Grade Levels</div></a>
+          <div class="h5 font-weight-bold">Junior High Grade Levels</div></a>
 
         <a class="list-group-item list-group-item-action border-left-warning py-4 mb-4" id="list-profile-list" data-bs-toggle="list" href="#list-profile" role="tab" aria-controls="list-profile">
-          <div class="h5 font-weight-bold text-gray-800">Student List</div></a>
+          <div class="h5 font-weight-bold">Student List</div></a>
 
         <a class="list-group-item list-group-item-action border-left-warning py-4 mb-4" id="list-messages-list" data-bs-toggle="list" href="#list-messages" role="tab" aria-controls="list-messages">
-          <div class="h5 font-weight-bold text-gray-800">Adviser List</div></a>
+          <div class="h5 font-weight-bold">Adviser List</div></a>
 
         <a class="list-group-item list-group-item-action border-left-warning py-4 mb-4" id="list-settings-list" data-bs-toggle="list" href="#list-settings" role="tab" aria-controls="list-settings">
-          <div class="h5 font-weight-bold text-gray-800">Subject Teacher List</div></a>
+          <div class="h5 font-weight-bold">Subject Teacher List</div></a>
 
       </div>
     </div>
@@ -77,94 +80,104 @@
             </div>
 
             <div class="card-body">
-              <div class="container">
-                <ul class="nav nav-tabs" id="myTab" role="tablist">
-                  <li class="nav-item" role="presentation">
-                    <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home-tab-pane" type="button" role="tab" aria-controls="home-tab-pane" aria-selected="true">Genesis</button>
-                  </li>
-                  <li class="nav-item" role="presentation">
-                    <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile-tab-pane" type="button" role="tab" aria-controls="profile-tab-pane" aria-selected="false">Judges</button>
-                  </li>
-                </ul>
-              
-                {% comment %} content tab {% endcomment %}
-                {% csrf_token %}
-                <div class="tab-content" id="myTabContent">
-                  <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
-                    <div class="container-fluid border rounded" style="padding: 20px">
-                      <div class="row g-3">
-                        <div class="col-md-4">
-                            <label for="">Adviser:</label>
-                            <h3>{{adviser.username}}</h3>
+
+              <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
+                <div class="row">
+                    <div class="col-sm-12 col-md-6 d-flex align-items-center">
+                        <div class="dataTables_length d-flex align-items-center gap-2" id="dataTable_length">
+                            <label class="d-flex align-items-center mb-2">
+                                <button class="btn btn-light border" data-bs-toggle="modal" data-bs-target="#newSection">+ New Section</button>
+                            </label>
                         </div>
-                        <div class="col-md-4">
-                            <label for="">Section:</label>
-                            <h3>{{adviser.section}}</h3>
-                        </div>
-                        <div class="col-md-4">
-                            <label for="">Student Count:</label>
-                            <h3><!-- palagay kung ilan yung total ng students sa section --></h3>
-                        </div>
-                      </div>
-                    
-                      <label for="">Student List</label>
-                      <table class="table table-hover" >
-                          <thead>
-                            <tr>
-                              <th scope="col">LRN</th>
-                              <th scope="col">Surname</th>
-                              <th scope="col">Name</th>
-                              <th scope="col">Action</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                              {% for adviser in adviser %}
-                                    
-                              {% endfor %}
-                          </tbody>
-                      </table>
-                    </div>    
-                  </div>
-              
-              
-                  <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
-                    <div class="container-fluid border rounded" style="padding: 20px">
-                      <div class="row g-3">
-                        <div class="col-md-4">
-                          <label for="">Adviser:</label>
-                          <h3>{{adviser.username}}</h3>
-                        </div>
-                        <div class="col-md-4">
-                            <label for="">Section:</label>
-                            <h3>{{adviser.section}}</h3>
-                        </div>
-                        <div class="col-md-4">
-                            <label for="">Student Count:</label>
-                            <h3><!-- palagay kung ilan yung total ng students sa section --></h3>
-                        </div>
-                      </div>
-                    
-                      <label for="">Student List</label>
-                      <table class="table table-hover" >
-                          <thead>
-                            <tr>
-                              <th scope="col">LRN</th>
-                              <th scope="col">Surname</th>
-                              <th scope="col">Name</th>
-                              <th scope="col">Action</th>
-                            </tr>
-                          </thead>
-                          <tbody>
-                              {% for adviser in adviser %}
-                                    
-                              {% endfor %}
-                          </tbody>
-                      </table>
                     </div>
                     
-                  </div>
+                    <div class="col-sm-12 col-md-6">
+                        <div class="dataTables_length d-flex align-items-center justify-content-end gap-2" id="dataTable_length">
+                            <label class="d-flex align-items-center justify-content-end mb-2">
+                                Search: 
+                                <input type="search" class="form-control form-control-sm ms-2" placeholder aria-controls="dataTable">
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="modal fade" id="newSection" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                      <div class="modal-dialog">
+                        <div class="modal-content">
+
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Add New Section</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                          </div>
+
+                          <div class="modal-body">
+                            <form class="row g-2">
+                              <div class="col-12 mb-2">
+                                <label for="inputEmail4" class="form-label">Adviser:</label>
+                                <input type="email" class="form-control" id="inputEmail4" placeholder="Given Name, Middle Name, Surname">
+                              </div>
+                              <div class="col-md-4 mb-2">
+                                <label for="inputPassword4" class="form-label">Section Name:</label>
+                                <input type="password" class="form-control" id="inputPassword4" placeholder="e.g. Genesis">
+                              </div>
+                              <div class="col-md-4 mb-2">
+                                <label for="inputAddress" class="form-label">Grade Level:</label>
+                                <select id="inputState" class="form-control" placeholder="Select...">
+                                  <option>Grade 7</option>
+                                  <option>Grade 8</option>
+                                  <option>Grade 9</option>
+                                  <option>Grade 10</option>
+                                </select>
+                              </div>
+                              <div class="col-md-4 mb-2">
+                                <label for="inputAddress" class="form-label">School Year:</label>
+                                <select id="inputState" class="form-control" placeholder="Select...">
+                                  <option>2024-2025</option>
+                                </select>
+                              </div>
+                              <div class="col-md-4">
+                                <label for="inputCity" class="form-label">Student Population:</label>
+                                <input type="text" class="form-control" id="Number of Students">
+                              </div>
+                            </form>
+                          </div>
+
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary">Save changes</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
                 </div>
               </div>
+
+              <table class="table table-hover my-1">
+                <div class="row">
+                    <div class="col-sm-12">
+                          <thead>
+                              <tr>
+                                  <th scope="col">Section Name</th>
+                                  <th scope="col">Grade Level</th>
+                                  <th scope="col">Adviser</th>
+                                  <th scope="col">Action</th>
+                              </tr>
+                          </thead>
+                          <tbody>
+                              <tr>
+                                  <td>Genesis</td>
+                                  <td>Grade 7</td>
+                                  <td>Ms. Teacher</td>
+                                  <td>
+                                      <button class="btn shadow-sm border btn-sm btn-light">Delete</button>
+                                      <button class="btn shadow-sm btn-sm btn-primary">Edit</button>
+                                  </td>
+                              </tr>
+                          </tbody>
+                    </div>
+                </div>
+              </table>
+
             </div>
           </div>
 
@@ -174,36 +187,327 @@
           
           <div class="card shadow-sm mb-4">
             <div class="card-header py-3">
-              <h6 class="m-0 font-weight-bold text-primary">Junior High Grade Levels and Sections</h6>
+              <h6 class="m-0 font-weight-bold text-primary">List of Junior High School Students</h6>
             </div>
 
             <div class="card-body">
-              ito muna hahaha
+              {% comment %} content tab {% endcomment %}
+              {% csrf_token %}
+              <div class="tab-content" id="myTabContent">
+                <div class="tab-pane fade show active" id="home-tab-pane" role="tabpanel" aria-labelledby="home-tab" tabindex="0">
+                  <div class="container-fluid border rounded" style="padding: 20px">
+                    <div class="row g-3">
+                      <div class="col-md-4">
+                          <label for="">Adviser:</label>
+                          <h3>{{adviser.username}}</h3>
+                      </div>
+                      <div class="col-md-4">
+                          <label for="">Section:</label>
+                          <h3>{{adviser.section}}</h3>
+                      </div>
+                      <div class="col-md-4">
+                          <label for="">Student Count:</label>
+                          <h3><!-- palagay kung ilan yung total ng students sa section --></h3>
+                      </div>
+                    </div>
+                  
+                    <label for="">Student List</label>
+                    <table class="table table-hover" >
+                        <thead>
+                          <tr>
+                            <th scope="col">LRN</th>
+                            <th scope="col">Surname</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Action</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                            {% for adviser in adviser %}
+                                  
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                  </div>    
+                </div>
+            
+            
+                <div class="tab-pane fade" id="profile-tab-pane" role="tabpanel" aria-labelledby="profile-tab" tabindex="0">
+                  <div class="container-fluid border rounded" style="padding: 20px">
+                    <div class="row g-3">
+                      <div class="col-md-4">
+                        <label for="">Adviser:</label>
+                        <h3>{{adviser.username}}</h3>
+                      </div>
+                      <div class="col-md-4">
+                          <label for="">Section:</label>
+                          <h3>{{adviser.section}}</h3>
+                      </div>
+                      <div class="col-md-4">
+                          <label for="">Student Count:</label>
+                          <h3><!-- palagay kung ilan yung total ng students sa section --></h3>
+                      </div>
+                    </div>
+                  
+                    <label for="">Student List</label>
+                    <table class="table table-hover" >
+                        <thead>
+                          <tr>
+                            <th scope="col">LRN</th>
+                            <th scope="col">Surname</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Action</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                            {% for adviser in adviser %}
+                                  
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                  </div>
+                  
+                </div>
+              </div>
             </div>
           </div>
 
         </div>
 
-        <div class="tab-pane fade" id="list-messages" role="tabpanel" aria-labelledby="list-messages-list">...</div>
-        <div class="tab-pane fade" id="list-settings" role="tabpanel" aria-labelledby="list-settings-list">...</div>
+        <div class="tab-pane fade" id="list-messages" role="tabpanel" aria-labelledby="list-messages-list">
+          
+          <div class="card shadow-sm mb-4">
+            <div class="card-header py-3">
+              <h6 class="m-0 font-weight-bold text-primary">List of Junior High School Advisers</h6>
+            </div>
+
+            <div class="card-body">
+              <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
+                <div class="row">
+                    <div class="col-sm-12 col-md-6 d-flex align-items-center">
+                        <div class="dataTables_length d-flex align-items-center gap-2" id="dataTable_length">
+                            <label class="d-flex align-items-center mb-2">
+                                <button class="btn btn-light border" data-bs-toggle="modal" data-bs-target="#newSection">+ New Adviser</button>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="col-sm-12 col-md-6">
+                        <div class="dataTables_length d-flex align-items-center justify-content-end gap-2" id="dataTable_length">
+                            <label class="d-flex align-items-center justify-content-end mb-2">
+                                Search: 
+                                <input type="search" class="form-control form-control-sm ms-2" placeholder aria-controls="dataTable">
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="modal fade" id="newSection" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                      <div class="modal-dialog">
+                        <div class="modal-content">
+
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Add New Section</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                          </div>
+
+                          <div class="modal-body">
+                            <form class="row g-2">
+                              <div class="col-12 mb-2">
+                                <label for="inputEmail4" class="form-label">Adviser:</label>
+                                <input type="email" class="form-control" id="inputEmail4" placeholder="Given Name, Middle Name, Surname">
+                              </div>
+                              <div class="col-md-4 mb-2">
+                                <label for="inputPassword4" class="form-label">Section Name:</label>
+                                <input type="password" class="form-control" id="inputPassword4" placeholder="e.g. Genesis">
+                              </div>
+                              <div class="col-md-4 mb-2">
+                                <label for="inputAddress" class="form-label">Grade Level:</label>
+                                <select id="inputState" class="form-control" placeholder="Select...">
+                                  <option>Grade 7</option>
+                                  <option>Grade 8</option>
+                                  <option>Grade 9</option>
+                                  <option>Grade 10</option>
+                                </select>
+                              </div>
+                              <div class="col-md-4 mb-2">
+                                <label for="inputAddress" class="form-label">School Year:</label>
+                                <select id="inputState" class="form-control" placeholder="Select...">
+                                  <option>2024-2025</option>
+                                </select>
+                              </div>
+                              <div class="col-md-4">
+                                <label for="inputCity" class="form-label">Student Population:</label>
+                                <input type="text" class="form-control" id="Number of Students">
+                              </div>
+                            </form>
+                          </div>
+
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary">Save changes</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                </div>
+              </div>
+
+              <table class="table table-hover my-1">
+                <div class="row">
+                    <div class="col-sm-12">
+                          <thead>
+                              <tr>
+                                  <th scope="col">Adviser Name:</th>
+                                  <th scope="col">Section</th>
+                                  <th scope="col">Grade Level</th>
+                                  <th scope="col"></th>
+                                  <th scope="col">Action</th>
+                              </tr>
+                          </thead>
+                          <tbody>
+                              <tr>
+                                  <td>Dela Cruz, Juan M.</td>
+                                  <td>Genesis</td>
+                                  <td>Grade 7</td>
+                                  <td>Ms. Teacher</td>
+                                  <td>
+                                      <button class="btn shadow-sm border btn-sm btn-light">Delete</button>
+                                      <button class="btn shadow-sm btn-sm btn-primary">Edit</button>
+                                  </td>
+                              </tr>
+                          </tbody>
+                    </div>
+                </div>
+              </table>
+            </div>
+
+          </div>
+
+        </div>
+
+        <div class="tab-pane fade" id="list-settings" role="tabpanel" aria-labelledby="list-settings-list">
+
+          <div class="card shadow-sm mb-4">
+            <div class="card-header py-3">
+              <h6 class="m-0 font-weight-bold text-primary">List of Junior High School Subject Teachers</h6>
+            </div>
+
+            <div class="card-body">
+              <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
+                <div class="row">
+                    <div class="col-sm-12 col-md-6 d-flex align-items-center">
+                        <div class="dataTables_length d-flex align-items-center gap-2" id="dataTable_length">
+                            <label class="d-flex align-items-center mb-2">
+                                <button class="btn btn-light border" data-bs-toggle="modal" data-bs-target="#newSection">+ New Teacher</button>
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="col-sm-12 col-md-6">
+                        <div class="dataTables_length d-flex align-items-center justify-content-end gap-2" id="dataTable_length">
+                            <label class="d-flex align-items-center justify-content-end mb-2">
+                                Search: 
+                                <input type="search" class="form-control form-control-sm ms-2" placeholder aria-controls="dataTable">
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="modal fade" id="newSection" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                      <div class="modal-dialog">
+                        <div class="modal-content">
+
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Add New Section</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                          </div>
+
+                          <div class="modal-body">
+                            <form class="row g-2">
+                              <div class="col-12 mb-2">
+                                <label for="inputEmail4" class="form-label">Adviser:</label>
+                                <input type="email" class="form-control" id="inputEmail4" placeholder="Given Name, Middle Name, Surname">
+                              </div>
+                              <div class="col-md-4 mb-2">
+                                <label for="inputPassword4" class="form-label">Section Name:</label>
+                                <input type="password" class="form-control" id="inputPassword4" placeholder="e.g. Genesis">
+                              </div>
+                              <div class="col-md-4 mb-2">
+                                <label for="inputAddress" class="form-label">Grade Level:</label>
+                                <select id="inputState" class="form-control" placeholder="Select...">
+                                  <option>Grade 7</option>
+                                  <option>Grade 8</option>
+                                  <option>Grade 9</option>
+                                  <option>Grade 10</option>
+                                </select>
+                              </div>
+                              <div class="col-md-4 mb-2">
+                                <label for="inputAddress" class="form-label">School Year:</label>
+                                <select id="inputState" class="form-control" placeholder="Select...">
+                                  <option>2024-2025</option>
+                                </select>
+                              </div>
+                              <div class="col-md-4">
+                                <label for="inputCity" class="form-label">Student Population:</label>
+                                <input type="text" class="form-control" id="Number of Students">
+                              </div>
+                            </form>
+                          </div>
+
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary">Save changes</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                </div>
+              </div>
+
+              <table class="table table-hover my-1">
+                <div class="row">
+                    <div class="col-sm-12">
+                          <thead>
+                              <tr>
+                                  <th scope="col">Name:</th>
+                                  <th scope="col">Subject</th>
+                                  <th scope="col"></th>
+                                  <th scope="col">Action</th>
+                              </tr>
+                          </thead>
+                          <tbody>
+                              <tr>
+                                  <td>Dela Cruz, Juan M.</td>
+                                  <td>Mathematics, English</td>
+                                  <td><a href=""><i>See Details</i></a></td>
+                                  <td>
+                                      <button class="btn shadow-sm border btn-sm btn-light">Delete</button>
+                                      <button class="btn shadow-sm btn-sm btn-primary">Edit</button>
+                                  </td>
+                              </tr>
+                          </tbody>
+                    </div>
+                </div>
+              </table>
+            </div>
+
+        </div>
+
       </div>
+
     </div>
+
   </div>
 
 
+  <!-- Bootstrap core JavaScript-->
+  <script src=" {% static "vendor/jquery/jquery.min.js" %}"></script>
+  <script src=" {% static "vendor/bootstrap/js/bootstrap.bundle.min.js" %}"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  
+
+
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 {% endblock content %}
