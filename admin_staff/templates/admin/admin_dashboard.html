@@ -80,9 +80,20 @@
             </div>
 
             <li class="nav-item">
-                <a class="nav-link" href="{% url "classes" %}">
-                    <i class="fas fa-fw fa-table"></i>
-                    <span>Classes</span></a>
+                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
+                    aria-expanded="true" aria-controls="collapseTwo">
+                    <i class="fas fa-fw fa-cog"></i>
+                    <span>Classes</span>
+                </a>
+                <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Components:</h6>
+                        <a class="collapse-item" href="{% url "classes" %}">JHS Section List</a>
+                        <a class="collapse-item" href="#">Student List</a>
+                        <a class="collapse-item" href="#">Adviser List</a>
+                        <a class="collapse-item" href="#">Subject Teacher List</a>
+                    </div>
+                </div>
             </li>
 
             <li class="nav-item">
@@ -98,7 +109,7 @@
             </div>
 
             <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="payment-history">
                     <i class="fas fa-fw fa-table"></i>
                     <span>Payment History</span></a>
             </li>

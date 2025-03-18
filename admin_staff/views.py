@@ -131,6 +131,12 @@ def anecdotal_record(request):
 def financial_record(request):
     return render(request, "admin/financial_record.html")
 
+@login_required(login_url='login')
+@allowed_user(allow_roles=['admin'])
+def payment_history(request):
+    return render(request, 'admin/payment_history.html', )
+
+
 #accounting end
 @login_required(login_url='login')
 @allowed_user(allow_roles=['accounting'])
