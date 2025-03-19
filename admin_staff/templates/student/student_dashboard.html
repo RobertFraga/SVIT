@@ -41,7 +41,7 @@
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{% url "home" %}">
                     <img width="50px" src="{% static "img/svit.png" %}" alt="Logo">
-                <div class="sidebar-brand-text mx-3">St. Vincent</div>
+                <div class="sidebar-brand-text mx-3">SVIT SMS</div>
             </a>
 
             <!-- Divider -->
@@ -64,7 +64,7 @@
 
             <!-- Nav Item - Tables -->
             <li class="nav-item">
-                <a class="nav-link" href="#">
+                <a class="nav-link" href="{% url "student-schedule" %}">
                     <i class="fas fa-fw fa-table"></i>
                     <span>Class Schedule</span></a>
             </li>
@@ -81,9 +81,9 @@
             </div>
 
             <li class="nav-item">
-                <a class="nav-link" href="{% url "student-grades" %}">
+                <a class="nav-link" href="{% url "student-payment-history" %}">
                     <i class="fas fa-fw fa-table"></i>
-                    <span>School Payments</span></a>
+                    <span>Payment History</span></a>
             </li>
 
             <!-- Divider -->
@@ -222,18 +222,59 @@
 
             {% block content %}
 
+            <!-- Begin Page Content -->
+            <div class="container-fluid d-flex align-items-center justify-content-between bg-gradient-primary" style="height: 12vh; margin-bottom: 2vh; margin-bottom: 5vh;">
+                <div class="logo">
+                    <img src="{% static "img/logo.png" %}" alt="Logo">
+                </div>
+                
+                <div class="Title text-white"><h1>Dashboard</h1></div>
+
+                <div class="text-white" id="school year"><h3>2024-2025</h3></div>
+
+                <div class="d-flex align-items-center gap-3">
+                    <div class="text-white">
+                        <div id="current-date"></div>
+                        <div id="current-time"></div>
+                    </div>
+                </div>
+
+                <!-- jQuery Script for Live Date & Time -->
+                <script>
+                    function updateDateTime() {
+                        let now = new Date();
+
+                        // Format Date
+                        let options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+                        let dateStr = now.toLocaleDateString('en-US', options);
+
+                        // Format Time
+                        let timeStr = now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true });
+
+                        // Update elements
+                        $("#current-date").text(dateStr);
+                        $("#current-time").text(timeStr);
+                    }
+
+                    // Update time every second
+                    $(document).ready(function () {
+                        updateDateTime();
+                        setInterval(updateDateTime, 1000);
+                    });
+                </script>
+            </div>
 
             <div class="container-fluid" style=" display: flex; margin-top: 3vh; margin-bottom: 5vh;">
 
                 <!-- 1st column-->
-                <div class="box1 p-2" style="height: 115vh; flex: 2;">
+                <div class="box1 p-3 shadow" style="background-color: white; height: 115vh; flex: 2; border-radius: 13px;">
                     <!-- Page Heading -->
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Announcement <i class="bi bi-megaphone"></i></h1>
+                        <h1 class="h2 mb-0 font-weight-bold text-gray-600">Announcement <i class="bi bi-megaphone"></i></h1>
                     </div><hr>
 
 
-                    <div class="card shadow mb-4">
+                    <div class="card shadow-sm mb-4">
                         <!-- Card Header - Accordion -->
                         <a href="#collapseCardExample" class="d-block card-header py-3" data-toggle="collapse"
                             role="button" aria-expanded="true" aria-controls="collapseCardExample">
@@ -250,9 +291,9 @@
                 </div>
 
                 <!-- 2nd column-->
-                <div class="box2 p-2" style="height: 115vh; flex: 1;">
+                <div class="box2 px-3" style="height: 115vh; flex: 1;">
 
-                    <div class="card my-3 border-left-primary shadow py-2">
+                    <div class="card mb-4 border-left-primary shadow py-1">
                         <div class="card-body">
                             <div class="row no-gutters align-items-center">
                                 <div class="col mr-2">
@@ -273,7 +314,7 @@
                     </div>
 
                         
-                    <div class="card my-3 border-left-primary shadow py-2">
+                    <div class="card mb-1 border-left-primary shadow py-2">
                         <div class="card-body">
                             <div class="row no-gutters align-items-center">
                                 <div class="col mr-2">
@@ -324,12 +365,16 @@
             {% endblock content %}
         </div>
         <!-- End of Main Content -->
+        
+
+        {% endblock content %}
 
         <!-- Footer -->
-        <footer class="bg-gradient-warning text-white text-center py-4 footer fix-bottom">
-            &copy; 2025 Connext SMS. All rights reserved.
+        <footer class="bg-gradient-warning text-white text-center py-4">
+            &copy; 2025 Connext SVIT SMS. All rights reserved.
         </footer>
         <!-- End of Footer -->
+
 
         </div>
         <!-- End of Content Wrapper --> 

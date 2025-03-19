@@ -138,6 +138,12 @@ def anecdotal_record(request):
 def financial_record(request):
     return render(request, "admin/financial_record.html")
 
+@login_required(login_url='login')
+@allowed_user(allow_roles=['admin'])
+def payment_history(request):
+    return render(request, 'admin/payment_history.html', )
+
+
 #accounting end
 @login_required(login_url='login')
 @allowed_user(allow_roles=['accounting'])
@@ -176,6 +182,17 @@ def student_grades(request):
     student = request.user.studentprofile
     # return render(request, 'student/grades.html', context)
     return render(request, 'student/grades.html', {'student': student})
+
+@login_required(login_url='login')
+@allowed_user(allow_roles=['student'])
+def student_schedule(request):
+    return render(request, 'student/class_schedule.html')
+
+@login_required(login_url='login')
+@allowed_user(allow_roles=['student'])
+def student_billings(request):
+    return render(request, 'student/payhistory.html')
+
 
 
 #faculty end

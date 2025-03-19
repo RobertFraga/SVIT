@@ -18,6 +18,7 @@ urlpatterns = [
     path('profile/<int:pk>', views.faculty_profile, name='faculty_profile'),
     path('addflt', views.addstfaculty, name='addflt'),
     path('chart', views.chart, name='chart'),
+    path('payment-history', views.payment_history, name='payment-history'),
 
     path('record', views.accademic_record, name='record'),
     path('finance', views.financial_record, name='financ'),
@@ -34,6 +35,8 @@ urlpatterns = [
     path('student', views.student_dashboard, name='student'),
     path('profile', views.student_profile, name='student-profile'),
     path('grades', views.student_grades, name='student-grades'),
+    path('schedule', views.student_schedule, name='student-schedule'),
+    path('billings', views.student_billings, name='student-payment-history'),
 
 
 
