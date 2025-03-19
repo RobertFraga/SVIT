@@ -2,6 +2,31 @@ from django.db import models
 from django.contrib.auth.models import User
 
 # Create your models here.
+class StudentAttendance(models.Model):
+    student_lrn = models.ForeignKey('StudentProfile', on_delete=models.CASCADE, db_column='student_lrn')
+    date = models.DateField()
+    status = models.CharField(max_length=10, choices=[('Present', 'Present'), ('Absent', 'Absent')])
+
+    class Meta:
+        managed = True
+        db_table = 'student_attendance'
+
+    def __str__(self):
+        return f"Student {self.student_lrn.student_lrn} - {self.date} - {self.status}"
+    
+
+class StudentGrade(models.Model):
+    student_lrn = models.CharField(max_length=20)
+    subject = models.CharField(max_length=50)
+    first_grading = models.FloatField(null=True, blank=True)
+    second_grading = models.FloatField(null=True, blank=True)
+    third_grading = models.FloatField(null=True, blank=True)
+    fourth_grading = models.FloatField(null=True, blank=True)
+    final_grade = models.FloatField(null=True, blank=True)
+
+    def __str__(self):
+        return f"{self.student_lrn} - {self.subject}"
+    
 
 class accademicYear(models.Model):
     accademicYear = models.DateField(null=True, blank=True)

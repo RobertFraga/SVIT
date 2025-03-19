@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import StudentProfile, FacultyStaff, Announcement
+from .models import StudentProfile, FacultyStaff, Announcement, registrarStaff, cashierStaff, admissionStaff, StudentGrade,StudentAttendance
 from django.shortcuts import render
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
@@ -7,6 +7,13 @@ from django.contrib.auth.decorators import login_required
 from .decorators import unauthenticated_user, allowed_user, admin_only
 from .form import announcementForm, studentForm, facultyForm
 # Create your views here.
+from django.utils.timezone import now
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+import json
+
+
+
 
 
 @unauthenticated_user
@@ -142,8 +149,15 @@ def payment_history(request):
 @allowed_user(allow_roles=['accounting'])
 def accounting_dashboard(request):
     announcement = Announcement.objects.get
-    context = {'announcment': announcement}
-    return render(request, "accounting/financial_record.html", context)
+    context = {'announcement': announcement}
+    return render(request, "accounting/accounting_dashboard.html", context)
+
+@login_required(login_url='login')
+@allowed_user(allow_roles=['accounting'])
+def accounting_profile(request):
+    return render(request, "accounting/financial_record.html")
+
+
 
 
 #student end
@@ -165,9 +179,9 @@ def student_profile(request):
 @login_required(login_url='login')
 @allowed_user(allow_roles=['student'])
 def student_grades(request):
-    grades = request.user.studentprofile
-    context = {'grades': grades}
-    return render(request, 'student/grades.html', context)
+    student = request.user.studentprofile
+    # return render(request, 'student/grades.html', context)
+    return render(request, 'student/grades.html', {'student': student})
 
 @login_required(login_url='login')
 @allowed_user(allow_roles=['student'])
@@ -187,7 +201,8 @@ def student_billings(request):
 def faculty_dashboard(request):
     announcement = Announcement.objects.get
     adviser = request.user.facultystaff
-    context = {'adviser': adviser, 'announcement': announcement}
+    advisoryClass = request.user.facultystaff.studentprofile_set.all()
+    context = {'adviser': adviser, 'announcement': announcement, 'advisoryClass': advisoryClass}
     return render(request, 'faculty/faculty-dashboard.html', context)
 
 @login_required(login_url='login')
@@ -206,11 +221,6 @@ def student_info(request, pk):
     return render(request, 'faculty/student_profile.html', context)
 
 
-@login_required(login_url='login')
-@allowed_user(allow_roles=['faculty'])
-def student_records(request):
-    return render(request, 'faculty/record.html')
-
 
 @login_required(login_url='login')
 @allowed_user(allow_roles=['faculty'])
@@ -221,12 +231,182 @@ def faculty_info(request):
 
 @login_required(login_url='login')
 @allowed_user(allow_roles=['faculty'])
-def attendance_record(request):
-    return render(request, 'faculty/attendance_record.html')
+def attendance_record(request, pk):
+    student = StudentProfile.objects.get(student_lrn = pk)
+    context = {'student': student}
+    return render(request, 'faculty/attendance_record.html', context)
+
 
 @login_required(login_url='login')
 @allowed_user(allow_roles=['faculty'])
-def advisory_grades(request):
+def advisory_grades(request, pk):
     adviser = request.user.facultystaff
-    context = {'adviser': adviser}
-    return render(request, 'faculty/advisory_grades.html', context)
+    student = StudentProfile.objects.get(student_lrn = pk)
+    context = {'adviser': adviser, 'student': student}
+    return render(request, 'faculty/faculty-student-grade.html', context)
+
+
+
+def get_student_grades(request, student_lrn):
+    if request.headers.get('x-requested-with') == 'XMLHttpRequest':  # AJAX request check
+        grades = StudentGrade.objects.filter(student_lrn=student_lrn)
+        
+        grades_dict = {
+            grade.subject: {
+                "first_grading": grade.first_grading,
+                "second_grading": grade.second_grading,
+                "third_grading": grade.third_grading,
+                "fourth_grading": grade.fourth_grading
+            }
+            for grade in grades
+        }
+        
+        return JsonResponse({"grades": grades_dict})
+    
+    return JsonResponse({"error": "Invalid request"}, status=400)
+
+
+
+@csrf_exempt
+@login_required(login_url='login')
+@allowed_user(allow_roles=['faculty', 'admin'])
+def save_grade(request):
+    if request.method == "POST":
+        try:
+            data = json.loads(request.body)
+            lrn = data.get("lrn")
+            subject = data.get("subject")
+            column = int(data.get("column"))  # Convert column index to integer
+            grade = float(data.get("grade"))
+
+            # Hanapin o gumawa ng bagong record
+            student_grade, created = StudentGrade.objects.get_or_create(
+                student_lrn=lrn, subject=subject
+            )
+
+            # I-update ang tamang grading period
+            if column == 2:
+                student_grade.first_grading = grade
+            elif column == 3:
+                student_grade.second_grading = grade
+            elif column == 4:
+                student_grade.third_grading = grade
+            elif column == 5:
+                student_grade.fourth_grading = grade
+            elif column == 6:
+                student_grade.final_grade = grade
+
+            student_grade.save()
+
+            return JsonResponse({"status": "success", "message": "Grade saved successfully!"})
+
+        except Exception as e:
+            return JsonResponse({"status": "error", "message": str(e)})
+    
+    return JsonResponse({"status": "error", "message": "Invalid request"})
+
+
+
+@csrf_exempt  # Optional: Use only if CSRF token issues occur (not recommended for production)
+def mark_attendance(request):
+    if request.method == "POST":
+        student_lrn = request.POST.get("student_lrn")
+        status = request.POST.get("status")
+
+        try:
+            student = StudentProfile.objects.get(student_lrn=student_lrn)
+            attendance, created = StudentAttendance.objects.update_or_create(
+                student_lrn=student,
+                date=now().date(),  # Use today's date
+                defaults={"status": status}
+            )
+
+            return JsonResponse({"success": True, "message": f"Attendance marked as {status}"})
+        except StudentProfile.DoesNotExist:
+            return JsonResponse({"success": False, "message": "Student not found"}, status=404)
+    return JsonResponse({"success": False, "message": "Invalid request"}, status=400)
+
+
+
+@login_required(login_url='login')
+def fetch_students(request):
+    today = now().date()
+
+    # Ensure the logged-in user is a faculty staff
+    if hasattr(request.user, 'facultystaff'):
+        faculty_staff = request.user.facultystaff
+        section = faculty_staff.section  # Get assigned section
+
+        # Get adviser details
+        adviser = {
+            'surname': faculty_staff.surname,
+            'first_name': faculty_staff.first_name,
+            'section': section.section_name if section else "No Section"
+        }
+
+        # Fetch students in the adviser's section
+        if section:
+            students = StudentProfile.objects.filter(
+                section=section  # Filter by same section
+            ).exclude(
+                student_lrn__in=StudentAttendance.objects.filter(date=today).values_list('student_lrn', flat=True)
+            ).values('student_lrn', 'surname', 'first_name', 'middle_name')
+        else:
+            students = []
+    else:
+        students = []
+        adviser = None
+
+    return JsonResponse({
+        'students': list(students),
+        'adviser': adviser
+    })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#registrar end
+@login_required(login_url='login')
+@allowed_user(allow_roles=['registrar'])
+def registrar_dashboard(request):
+    registrar = request.user.registrarstaff
+    context = {'registrar': registrar}
+    return render(request, 'registrar/registrar-dashboard.html', context)
+
+
+#cashier end
+@login_required(login_url='login')
+@allowed_user(allow_roles=['cashier'])
+def cashier_dashboard(request):
+    cashier = request.user.cashierstaff
+    context = {'cashier': cashier}
+    return render(request, "cashier/cashier_dashboard.html", context)
+
+
+#admission end
+@login_required(login_url='login')
+@allowed_user(allow_roles=['admission'])
+def admission_dashboard(request):
+    admission = request.user.admissionstaff
+    context = {'admission': admission}
+    return render(request, 'admission/admission-dashboard.html', context)

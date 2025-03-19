@@ -20,30 +20,17 @@ urlpatterns = [
     path('chart', views.chart, name='chart'),
     path('payment-history', views.payment_history, name='payment-history'),
 
-
-
-
     path('record', views.accademic_record, name='record'),
     path('finance', views.financial_record, name='financ'),
     path("anecdotal", views.anecdotal_record, name="anecdotal"),
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
     #accounting board
     path("financial", views.financial_record, name="financialrecord"),
 
+
+    
     #student board
     path('student', views.student_dashboard, name='student'),
     path('profile', views.student_profile, name='student-profile'),
@@ -58,10 +45,34 @@ urlpatterns = [
     path('advisory', views.advisory, name='advisory'),
     path('info/<int:pk>', views.student_info, name='info'),
     path('adviser', views.faculty_info, name='faculty_info'),
-    path('attendance', views.attendance_record, name="attendance"),
-    path('advisory-grades', views.advisory_grades, name="advisory_grades"),
+    path('attendance/<int:pk>', views.attendance_record, name="attendance"),
+    path('advisory-grades/<int:pk>', views.advisory_grades, name="advisor-grades"),
+
+
+    path("mark_attendance/", views.mark_attendance, name="mark_attendance"),
+
+    path('fetch-students/', views.fetch_students, name='fetch_students'),
+    path('get-grades/<str:student_lrn>/', views.get_student_grades, name='get_student_grades'),
+
+    path('save-grade/', views.save_grade, name='save-grade'),
+
+
+
+
+
+
+
 
     #accounting
     path('accounting', views.accounting_dashboard, name='accounting' ),
+
+    #registrar end
+    path('registrar-dashboard', views.registrar_dashboard, name='registrar'),
+
+    #cashier end
+    path('cashier-dashboard', views.cashier_dashboard, name='cashier'),
+    
+    #admission
+    path('admission-dashboard', views.admission_dashboard, name='admission'),
     
 ]

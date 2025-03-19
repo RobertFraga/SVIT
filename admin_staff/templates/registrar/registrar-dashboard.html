@@ -17,18 +17,6 @@
 
   <!-- Custom styles for this template-->
   <link href= "{% static "css/sb-admin-2.min.css" %}" rel="stylesheet">
-
-  <!-- jQuery -->
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-  <!-- CSS-->
-  <style>
-    .logo img {
-        width: 8vw; /* Makes sure image scales properly */
-        height: auto;
-        border-radius: 100%;
-    }
-  </style>
 </head>
 
 <body id="page-top">
@@ -39,7 +27,7 @@
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{% url "home" %}">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{% url "registrar" %}">
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-laugh-wink"></i>
                 </div>
@@ -51,7 +39,7 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item active">
-                <a class="nav-link" href=" {% url "student" %}">
+                <a class="nav-link" href="{% url "registrar" %}">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
             </li>
@@ -61,32 +49,13 @@
 
             <!-- Heading -->
             <div class="sidebar-heading">
-                Academic
+                Entities
             </div>
+
 
             <!-- Nav Item - Tables -->
-            <li class="nav-item">
-                <a class="nav-link" href="#">
-                    <i class="fas fa-fw fa-table"></i>
-                    <span>Class Schedule</span></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{% url "student-grades" %}">
-                    <i class="fas fa-fw fa-table"></i>
-                    <span>Subject Grades</span></a>
-            </li>
 
-            <hr class="sidebar-divider d-none d-md-block">
-            
-            <div class="sidebar-heading">
-                Billings
-            </div>
 
-            <li class="nav-item">
-                <a class="nav-link" href="{% url "student-grades" %}">
-                    <i class="fas fa-fw fa-table"></i>
-                    <span>School Payments</span></a>
-            </li>
 
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
@@ -98,7 +67,6 @@
 
             <!-- Sidebar Message -->
         </ul>
-
         <!-- End of Sidebar -->
 
         
@@ -156,26 +124,30 @@
                         </div>
                     </li>
 
-                    <!-- Nav Item - Alerts -->
-                    
-
-                    <div class="topbar-divider d-none d-sm-block"></div>
-
                     <!-- Nav Item - User Information -->
                     <li class="nav-item dropdown no-arrow">
                         <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{student.surname}} {{student.first_name}}</span>
+                            <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{registrar.surname}}</span>
                             <img class="img-profile rounded-circle"
                                 src=" {% static "img/undraw_profile.svg" %}">
                         </a>
                         <!-- Dropdown - User Information -->
                         <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
                             aria-labelledby="userDropdown">
-                            <a class="dropdown-item" href={% url "student-profile" %}>
+                            <a class="dropdown-item" href="#">
                                 <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                 Profile
                             </a>
+                            <a class="dropdown-item" href="#">
+                                <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
+                                Settings
+                            </a>
+                            <a class="dropdown-item" href="#">
+                                <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
+                                Activity Log
+                            </a>
+                            <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
                                 <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
                                 Logout
@@ -186,93 +158,25 @@
                 </ul>
 
             </nav>
-
             <!-- End of Topbar -->
-
-
             {% block content %}
-
             <!-- Begin Page Content -->
-            <div class="container-fluid d-flex align-items-center justify-content-between bg-gradient-primary" style="height: 12vh; margin-bottom: 2vh;">
-                <div class="logo">
-                    <img src="{% static "img/logo.png" %}" alt="Logo">
-                </div>
+            
+
                 
-                <div class="Title text-white"><h1>Dashboard</h1></div>
-
-                <div class="text-white" id="school year"><h3>2024-2025</h3></div>
-
-                <div class="d-flex align-items-center gap-3">
-                    <div class="text-white">
-                        <div id="current-date"></div>
-                        <div id="current-time"></div>
-                    </div>
-                </div>
-
-                <!-- jQuery Script for Live Date & Time -->
-                <script>
-                    function updateDateTime() {
-                        let now = new Date();
-
-                        // Format Date
-                        let options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-                        let dateStr = now.toLocaleDateString('en-US', options);
-
-                        // Format Time
-                        let timeStr = now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true });
-
-                        // Update elements
-                        $("#current-date").text(dateStr);
-                        $("#current-time").text(timeStr);
-                    }
-
-                    // Update time every second
-                    $(document).ready(function () {
-                        updateDateTime();
-                        setInterval(updateDateTime, 1000);
-                    });
-                </script>
-            </div>
-
-            <div class="container-fluid" style=" display: flex; margin-top: 3vh; margin-bottom: 5vh;">
-
-                <!-- 1st column-->
-                <div class="box1 p-2" style="height: 115vh; flex: 2;">
-                    <!-- Page Heading -->
-                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Announcement <i class="bi bi-megaphone"></i></h1>
-                    </div><hr>
-
-
-                    <div class="card shadow mb-4">
-                        <!-- Card Header - Accordion -->
-                        <a href="#collapseCardExample" class="d-block card-header py-3" data-toggle="collapse"
-                            role="button" aria-expanded="true" aria-controls="collapseCardExample">
-                            <h6 class="m-0 font-weight-bold text-primary">{{announcement.title}}</h6>
-                        </a>
-                        <!-- Card Content - Collapse -->
-                        <div class="collapse show" id="collapseCardExample">
-                            <div class="card-body">
-                                {{announcement.body}}
-                            </div>
-                        </div>
-                    </div>
-    
-                </div>
-
-                <!-- 2nd column-->
-                
-
-            </div>
             <!-- /.container-fluid -->
 
         </div>
         <!-- End of Main Content -->
-        {% endblock content %}
+            {% endblock content %}
 
         <!-- Footer -->
-        <footer class="bg-gradient-warning text-white text-center py-4">
-            &copy; 2025 Connext SMS. All rights reserved.
+        <footer class="sticky-footer bg-white">
+            <div class="container my-auto">
+                <div class="copyright text-center my-auto">
+                    <span>Copyright &copy; Your Website 2021</span>
+                </div>
+            </div>
         </footer>
         <!-- End of Footer -->
 
