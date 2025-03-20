@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import StudentProfile, FacultyStaff, Announcement, registrarStaff, cashierStaff, admissionStaff, StudentGrade,StudentAttendance
+from .models import StudentProfile, FacultyStaff, Announcement, registrarStaff, cashierStaff, admissionStaff, StudentGrade,StudentAttendance, accademicYear
 from django.shortcuts import render
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
@@ -165,8 +165,9 @@ def accounting_profile(request):
 @allowed_user(allow_roles=['student'])
 def student_dashboard(request):
     announcement = Announcement.objects.get
+    accademic_year = accademicYear.objects.get
     student = request.user.studentprofile
-    context = { 'student': student, 'announcement': announcement}
+    context = { 'student': student, 'announcement': announcement, 'accademic_year': accademic_year}
     return render(request, 'student/student_dashboard.html', context)
 
 @login_required(login_url='login')
