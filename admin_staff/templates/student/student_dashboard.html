@@ -182,18 +182,18 @@
 
             </nav>
 
-            <!-- End of Topbar -->
-
-
-            {% block content %}
-
-            <!-- Begin Page Content -->
             <div class="container-fluid d-flex align-items-center justify-content-between bg-gradient-primary" style="height: 12vh; margin-bottom: 2vh; margin-bottom: 5vh;">
                 <div class="logo">
                     <img src="{% static "img/logo.png" %}" alt="Logo">
                 </div>
                 
-                <div class="Title text-white"><h1>Dashboard</h1></div>
+                <div class="Title text-white">
+                    <h1>
+                        {% block heading %}
+                            Dashboard
+                        {% endblock heading %}
+                    </h1>
+                </div>
 
                 <div class="text-white" id="school year"><h3>2024-2025</h3></div>
 
@@ -228,6 +228,9 @@
                     });
                 </script>
             </div>
+            {% block content %}
+
+            <!-- Begin Page Content -->
 
             <div class="container-fluid" style=" display: flex; margin-top: 3vh; margin-bottom: 5vh;">
 
@@ -255,7 +258,7 @@
                             </div>
                         </div>
                     </div>
-                    
+    
                 </div>
 
                 <!-- 2nd column-->
@@ -331,8 +334,6 @@
         </div>
         <!-- End of Main Content -->
         
-
-        {% endblock content %}
 
         <!-- Footer -->
         <footer class="sticky-footer bg-white">
