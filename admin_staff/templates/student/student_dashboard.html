@@ -267,27 +267,34 @@
             <div class="container-fluid" style=" display: flex; margin-top: 3vh; margin-bottom: 5vh;">
 
                 <!-- 1st column-->
-                <div class="box1 p-3 shadow" style="background-color: white; height: 115vh; flex: 2; border-radius: 13px;">
-                    <!-- Page Heading -->
-                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h2 mb-0 font-weight-bold text-gray-600">Announcement <i class="bi bi-megaphone"></i></h1>
-                    </div><hr>
+                <div class="box1 p-2" style="height: 115vh; flex: 2; border-radius: 13px;">
+                    
+                    <div class="card">
 
+                        <div class="card-header">
+                            <div class="card-header py-3">
+                                <h6 class="m-0 font-weight-bold text-primary">School Announcements</h6>
+                            </div>
+                        </div>    
 
-                    <div class="card shadow-sm mb-4">
-                        <!-- Card Header - Accordion -->
-                        <a href="#collapseCardExample" class="d-block card-header py-3" data-toggle="collapse"
-                            role="button" aria-expanded="true" aria-controls="collapseCardExample">
-                            <h6 class="m-0 font-weight-bold text-primary">{{announcement.title}}</h6>
-                        </a>
-                        <!-- Card Content - Collapse -->
-                        <div class="collapse show" id="collapseCardExample">
-                            <div class="card-body">
-                                {{announcement.body}}
+                        <div class="card-body">
+                            <div class="card shadow-sm mb-4">
+                                <!-- Card Header - Accordion -->
+                                <a href="#collapseCardExample" class="d-block card-header py-3" data-toggle="collapse"
+                                    role="button" aria-expanded="true" aria-controls="collapseCardExample">
+                                    <h6 class="m-0 font-weight-bold text-primary">{{announcement.title}}</h6>
+                                </a>
+                                <!-- Card Content - Collapse -->
+                                <div class="collapse show" id="collapseCardExample">
+                                    <div class="card-body">
+                                        {{announcement.body}}
+                                    </div>
+                                </div>
                             </div>
                         </div>
+
                     </div>
-    
+
                 </div>
 
                 <!-- 2nd column-->
