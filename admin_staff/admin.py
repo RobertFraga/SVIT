@@ -66,4 +66,6 @@ class faculty(admin.ModelAdmin):
 
 
 admin.site.register(accademicYear)
+
+
 admin.site.register(admissionStaff)

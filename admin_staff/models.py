@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
-
+from django.core.validators import MinValueValidator, MaxValueValidator
+import datetime
 # Create your models here.
 class StudentAttendance(models.Model):
     student_lrn = models.ForeignKey('StudentProfile', on_delete=models.CASCADE, db_column='student_lrn')
@@ -29,9 +30,11 @@ class StudentGrade(models.Model):
     
 
 class accademicYear(models.Model):
-    accademicYear = models.DateField(null=True, blank=True)
-
-    def __str__(self):
+    current_year = datetime.date.today().year
+    accademicYear = models.IntegerField(
+        validators=[MinValueValidator(2001), MaxValueValidator(current_year)], null=True, blank=True
+    )
+    def __int__(self):
         return self.accademicYear
 
 class level(models.Model):
