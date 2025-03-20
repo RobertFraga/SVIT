@@ -2,16 +2,74 @@
 
 {% load static %}
 
-{% block heading %}
-    Payment History
-{% endblock heading %}
-
-
 {% block content %}
 <!-- Begin Page Content -->
 
 
-<div class="container-fluid p-3" style="height: 100vh;">
+<div class="container-fluid p-3 mb-5" style="height: 100vh;">
+
+    <div class="card shadow mb-5">
+
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">List of Subjects and Quarterly Grades</h6>
+        </div>
+
+    <!-- jQuery Script for Live Date & Time -->
+    <script>
+        function updateDateTime() {
+            let now = new Date();
+
+            // Format Date
+            let options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            let dateStr = now.toLocaleDateString('en-US', options);
+
+            // Format Time
+            let timeStr = now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true });
+
+            // Update elements
+            $("#current-date").text(dateStr);
+            $("#current-time").text(timeStr);
+        }
+
+        // Update time every second
+        $(document).ready(function () {
+            updateDateTime();
+            setInterval(updateDateTime, 1000);
+        });
+    </script>
+</div>
+
+<div class="container-fluid p-3 mb-5" style="height: 100vh;">
+
+    <div class="card shadow mb-5">
+
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">List of Subjects and Quarterly Grades</h6>
+        </div>
+
+        <div class="card-body">
+            <table class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>Payment ID</th>
+                        <th>Payment Date</th>
+                        <th>Amount</th>
+                        <th>Payment Method</th>
+                        <th>Payment Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>2024-09-01</td>
+                        <td>₹ 5000</td>
+                        <td>Cash</td>
+                        <td>Paid</td>
+                    </tr>
+                </tbody>
+            </table>
+            </div>
+    
 
 </div>
 
