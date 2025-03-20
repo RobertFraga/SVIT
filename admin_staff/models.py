@@ -117,11 +117,20 @@ class StudentProfile(models.Model):
         ('Widowed', 'Widowed'),
     )
     civil_status = models.CharField(max_length=10, default="Status", choices=civil_choice, blank=True, null=True)
+
+    mother_tongue = models.CharField(max_length=24, blank=True, null=True)
+    ethnic_group = models.CharField(max_length=24, blank=True, null=True)
+
     
     contact = models.BigIntegerField(blank=True, null=True)
     email = models.CharField(max_length=100, blank=True, null=True)
 
-    
+    father_name = models.CharField(max_length=50, blank=True, null=True)
+    mother_maide_name = models.CharField(max_length=50, blank=True, null=True)
+    guardian_name = models.CharField(max_length=50, blank=True, null=True)
+    relationship = models.CharField(max_length=50, blank=True, null=True)
+    guardian_contact = models.BigIntegerField(blank=True, null=True)
+
     section = models.ForeignKey('section', null=True, on_delete=models.SET_NULL)
     adviser = models.ForeignKey('FacultyStaff', blank=True, null=True, on_delete=models.SET_NULL)
     level = models.ForeignKey('level', blank=True, null=True, on_delete=models.SET_NULL)
