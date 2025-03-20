@@ -1,6 +1,11 @@
 {% extends "student/student_dashboard.html" %}
 
-{% load static %}
+{% block heading %}
+    Subject Grades
+{% endblock heading %}
+
+
+
 {% block content %}
 
 {% csrf_token %}
