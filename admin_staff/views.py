@@ -141,7 +141,32 @@ def financial_record(request):
 @login_required(login_url='login')
 @allowed_user(allow_roles=['admin'])
 def payment_history(request):
-    return render(request, 'admin/payment_history.html', )
+    return render(request, 'admin/payment_history.html')
+
+@login_required(login_url='login')
+@allowed_user(allow_roles=['admin'])
+def jhslist_section(request):
+    return render(request, 'admin/jhslist_section.html')
+
+@login_required(login_url='login')
+@allowed_user(allow_roles=['admin'])
+def list_student(request):
+    return render(request, 'admin/list_student.html')
+
+@login_required(login_url='login')
+@allowed_user(allow_roles=['admin'])
+def adviser_list(request):
+    return render(request, 'admin/adviser_list.html')
+
+@login_required(login_url='login')
+@allowed_user(allow_roles=['admin'])
+def subject_teacher(request):
+    return render(request, 'admin/subject_teacher.html')
+
+@login_required(login_url='login')
+@allowed_user(allow_roles=['admin'])
+def schedules(request):
+    return render(request, 'admin/schedule.html')
 
 
 #accounting end

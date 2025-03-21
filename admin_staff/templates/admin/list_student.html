@@ -1,0 +1,379 @@
+{% extends "admin/admin_dashboard.html" %}
+
+{% block heading %}
+  <h1>Classes</h1>
+{% endblock heading %}
+
+{% load static %}
+{% block content %}
+
+<div class="container-fluid mb-4" style="height: 100vh;">
+
+    <div class="card shadow-sm mb-4">
+        <div class="card-header py-3">
+          <h6 class="m-0 font-weight-bold text-primary">List of Junior High School Students</h6>
+        </div>
+
+        <div class="card-body">
+          
+          <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item border-bottom-success" role="presentation">
+              <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Grade 7</button>
+            </li>
+            <li class="nav-item border-bottom-warning" role="presentation">
+              <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Grade 8</button>
+            </li>
+            <li class="nav-item border-bottom-danger" role="presentation">
+              <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">Grade 9</button>
+            </li>
+            <li class="nav-item border-bottom-primary" role="presentation">
+              <button class="nav-link" id="grade-tab" data-bs-toggle="tab" data-bs-target="#grade" type="button" role="tab" aria-controls="grade" aria-selected="false">Grade 10</button>
+            </li>
+          </ul>
+
+          <div class="tab-content" id="myTabContent">
+            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+              
+              <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4 m-3">
+                <div class="row">
+                    <div class="col-sm-12 col-md-6 d-flex align-items-center">
+                      <div class="dataTables_length d-flex align-items-center justify-content-end gap-2" id="dataTable_length">
+                        <label class="d-flex align-items-center justify-content-end mb-2">
+                            Search: 
+                            <input type="search" class="form-control form-control-sm ms-2" placeholder aria-controls="dataTable">
+                        </label>
+                      </div>
+                    </div>
+                </div>
+              </div>
+
+              <table class="table table-hover my-1">
+                  <div class="row">
+                      <div class="col-sm-12">
+                          <thead>
+                              <tr>
+                                  <th scope="col">LRN</th>
+                                  <th scope="col">Full Name</th>
+                                  <th scope="col">Section</th>
+                                  <th scope="col">Action</th>
+                              </tr>
+                          </thead>
+                          <tbody>
+                              <tr>
+                                  <td>136644080059</td>
+                                  <td>James Augustin Velloso</td>
+                                  <td>Genesis</td>
+                                  <td>
+                                    <a href="#" class="btn btn-warning btn-icon-split btn-sm">
+                                      <span class="icon text-white-50">
+                                          <i class="fas fa-exclamation-triangle"></i>
+                                      </span>
+                                      <span class="text">Archive</span>
+                                    </a>
+                                    <a href="#" class="btn btn-info btn-icon-split btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                        <span class="icon text-white-50">
+                                            <i class="fas fa-info-circle"></i>
+                                        </span>
+                                        <span class="text">View</span>
+                                    </a>
+                                  </td>
+                              </tr>
+                          </tbody>
+                      </div>
+                  </div>
+              </table>
+
+              <!-- MODAL FOR VIEW BUTTON-->
+              <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-xl">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">Student Demographic</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      <div class="container-fluid">
+                        <form action='' method='POST'>
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                  <label for="exampleInputPassword1" class="form-label">LRN:</label>
+                                  <input type="numberic" class="form-control" id="exampleInputPassword1">
+                                </div>
+                                <div class="col-md-6">
+                                  <label for="exampleInputPassword1" class="form-label">Username:</label>
+                                  <input type="text" class="form-control" id="exampleInputPassword1">
+                                </div>
+                                <div class="col-md-4">
+                                  <label for="exampleInputPassword1" class="form-label">Surname:</label>
+                                  <input type="text" class="form-control" id="exampleInputPassword1">
+                                </div>
+                                <div class="col-md-4">
+                                  <label for="exampleInputPassword1" class="form-label">First Name:</label>
+                                  <input type="text" class="form-control" id="exampleInputPassword1">
+                                </div>
+                                <div class="col-md-4">
+                                  <label for="exampleInputPassword1" class="form-label">Middle Name:</label>
+                                  <input type="text" class="form-control" id="exampleInputPassword1">
+                                </div>
+                                <div class="col-md-2">
+                                  <label for="exampleInputPassword1" class="form-label">Gender:</label>
+                                  <input type="text" class="form-control" id="exampleInputPassword1">
+                                </div>
+                                <div class="col-md-2">
+                                  <label for="exampleInputPassword1" class="form-label">Birth Date:</label>
+                                  <input type="text" class="form-control" id="exampleInputPassword1">
+                                </div>
+                                <div class="col-md-3">
+                                  <label for="exampleInputPassword1" class="form-label">Birth Place:</label>
+                                  <input type="text" class="form-control" id="exampleInputPassword1">
+                                </div>
+                                <div class="col-md-3">
+                                  <label for="exampleInputPassword1" class="form-label">Religion:</label>
+                                  <input type="text" class="form-control" id="exampleInputPassword1">
+                                </div>
+                                <div class="col-md-2">
+                                  <label for="exampleInputPassword1" class="form-label">Civil Status:</label>
+                                  <input type="text" class="form-control" id="exampleInputPassword1">
+                                </div>
+                                
+                                <!-- SINGIT KO LANG -->
+                                <div class="col-md-2">
+                                    <label for="inputEmail4" class="form-label">Mother Tongue:</label>
+                                    <input type="text" class="form-control" id="inputEmail4">
+                                </div>
+                                <div class="col-md-2">
+                                    <label for="inputEmail4" class="form-label">Ethnic Group:</label>
+                                    <input type="text" class="form-control" id="inputEmail4">
+                                </div>
+                                <!-- END OF SINGIT -->
+        
+                                <div class="col-md-3">
+                                  <label for="exampleInputPassword1" class="form-label">Contact:</label>
+                                  <input type="text" class="form-control" id="exampleInputPassword1">
+                                </div>
+                                <div class="col-md-4">
+                                  <label for="exampleInputPassword1" class="form-label">Email:</label>
+                                  <input type="text" class="form-control" id="exampleInputPassword1">
+                                </div>
+                                <div class="col-md-12"></div>
+        
+                                <!-- ADD KO LANG 'TO KASI NEED 'TO MAKITA NG PANELISTS!!-->
+                                 
+                                <div class="col-md-3">
+                                    <label for="inputEmail4" class="form-label">Father's Name:</label>
+                                    <input type="text" class="form-control" id="inputEmail4">
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="inputEmail4" class="form-label">Mother's Maiden Name:</label>
+                                    <input type="text" class="form-control" id="inputEmail4">
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="inputEmail4" class="form-label">Guardian Name:</label>
+                                    <input type="text" class="form-control" id="inputEmail4">
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="inputEmail4" class="form-label">Relationship:</label>
+                                    <input type="text" class="form-control" id="inputEmail4">
+                                </div>
+                                <div class="col-md-3">
+                                    <label for="inputEmail4" class="form-label">Contact No. of Parent or Guardian:</label>
+                                    <input type="numeric" class="form-control" id="inputEmail4">
+                                </div>
+                                <!-- END HERE!!-->
+                                <div class="col-md-12"></div>
+        
+                                <div class="col-md-3">
+                                  <label for="exampleInputPassword1" class="form-label">Grade Level:</label>
+                                  <input type="text" class="form-control" id="exampleInputPassword1">
+                                </div>
+                                <div class="col-md-3">
+                                  <label for="exampleInputPassword1" class="form-label">Section:</label>
+                                  <input type="text" class="form-control" id="exampleInputPassword1">
+                                </div>
+                                <div class="col-md-3">
+                                  <label for="exampleInputPassword1" class="form-label">Adviser:</label>
+                                  <input type="text" class="form-control" id="exampleInputPassword1">
+                                </div>
+                                <div class="col-md-12"></div>
+                                <div class="col-md-2">
+                                </div>
+                            </div>
+                        </form>
+                      </div>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                      <button type="button" class="btn btn-primary">Save changes</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+            <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+
+              <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4 m-3">
+                <div class="row">
+                    <div class="col-sm-12 col-md-6 d-flex align-items-center">
+                      <div class="dataTables_length d-flex align-items-center justify-content-end gap-2" id="dataTable_length">
+                        <label class="d-flex align-items-center justify-content-end mb-2">
+                            Search: 
+                            <input type="search" class="form-control form-control-sm ms-2" placeholder aria-controls="dataTable">
+                        </label>
+                      </div>
+                    </div>
+                </div>
+              </div>
+
+              <table class="table table-hover my-1">
+                  <div class="row">
+                      <div class="col-sm-12">
+                          <thead>
+                              <tr>
+                                  <th scope="col">LRN</th>
+                                  <th scope="col">Full Name</th>
+                                  <th scope="col">Section</th>
+                                  <th scope="col">Action</th>
+                              </tr>
+                          </thead>
+                          <tbody>
+                              <tr>
+                                  <td>136644080090</td>
+                                  <td>Nathaniel Solomon</td>
+                                  <td>Ezra</td>
+                                  <td>
+                                    <a href="#" class="btn btn-warning btn-icon-split btn-sm">
+                                      <span class="icon text-white-50">
+                                          <i class="fas fa-exclamation-triangle"></i>
+                                      </span>
+                                      <span class="text">Archive</span>
+                                    </a>
+                                    <a href="#" class="btn btn-info btn-icon-split btn-sm">
+                                        <span class="icon text-white-50">
+                                            <i class="fas fa-info-circle"></i>
+                                        </span>
+                                        <span class="text">View</span>
+                                    </a>
+                                  </td>
+                              </tr>
+                          </tbody>
+                      </div>
+                  </div>
+              </table>
+
+            </div>
+
+            <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+
+              <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4 m-3">
+                <div class="row">
+                    <div class="col-sm-12 col-md-6 d-flex align-items-center">
+                      <div class="dataTables_length d-flex align-items-center justify-content-end gap-2" id="dataTable_length">
+                        <label class="d-flex align-items-center justify-content-end mb-2">
+                            Search: 
+                            <input type="search" class="form-control form-control-sm ms-2" placeholder aria-controls="dataTable">
+                        </label>
+                      </div>
+                    </div>
+                </div>
+              </div>
+
+              <table class="table table-hover my-1">
+                  <div class="row">
+                      <div class="col-sm-12">
+                          <thead>
+                              <tr>
+                                  <th scope="col">LRN</th>
+                                  <th scope="col">Full Name</th>
+                                  <th scope="col">Section</th>
+                                  <th scope="col">Action</th>
+                              </tr>
+                          </thead>
+                          <tbody>
+                              <tr>
+                                  <td>136644080180</td>
+                                  <td>Francis Ismael Santiago</td>
+                                  <td>Exodus</td>
+                                  <td>
+                                    <a href="#" class="btn btn-warning btn-icon-split btn-sm">
+                                      <span class="icon text-white-50">
+                                          <i class="fas fa-exclamation-triangle"></i>
+                                      </span>
+                                      <span class="text">Archive</span>
+                                    </a>
+                                    <a href="#" class="btn btn-info btn-icon-split btn-sm">
+                                        <span class="icon text-white-50">
+                                            <i class="fas fa-info-circle"></i>
+                                        </span>
+                                        <span class="text">View</span>
+                                    </a>
+                                  </td>
+                              </tr>
+                          </tbody>
+                      </div>
+                  </div>
+              </table>
+
+            </div>
+
+            <div class="tab-pane fade" id="grade" role="tabpanel" aria-labelledby="grade-tab">
+
+              <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4 m-3">
+                <div class="row">
+                    <div class="col-sm-12 col-md-6 d-flex align-items-center">
+                      <div class="dataTables_length d-flex align-items-center justify-content-end gap-2" id="dataTable_length">
+                        <label class="d-flex align-items-center justify-content-end mb-2">
+                            Search: 
+                            <input type="search" class="form-control form-control-sm ms-2" placeholder aria-controls="dataTable">
+                        </label>
+                      </div>
+                    </div>
+                </div>
+              </div>
+
+              <table class="table table-hover my-1">
+                  <div class="row">
+                      <div class="col-sm-12">
+                          <thead>
+                              <tr>
+                                  <th scope="col">LRN</th>
+                                  <th scope="col">Full Name</th>
+                                  <th scope="col">Section</th>
+                                  <th scope="col">Action</th>
+                              </tr>
+                          </thead>
+                          <tbody>
+                              <tr>
+                                  <td>136644080150</td>
+                                  <td>Ashley Coleen Francisco</td>
+                                  <td>Proverbs</td>
+                                  <td>
+                                    <a href="#" class="btn btn-warning btn-icon-split btn-sm">
+                                      <span class="icon text-white-50">
+                                          <i class="fas fa-exclamation-triangle"></i>
+                                      </span>
+                                      <span class="text">Archive</span>
+                                    </a>
+                                    <a href="#" class="btn btn-info btn-icon-split btn-sm">
+                                        <span class="icon text-white-50">
+                                            <i class="fas fa-info-circle"></i>
+                                        </span>
+                                        <span class="text">View</span>
+                                    </a>
+                                  </td>
+                              </tr>
+                          </tbody>
+                      </div>
+                  </div>
+              </table>
+
+            </div>
+          </div>
+
+        </div>
+    </div>
+
+</div>
+
+{% endblock content %}
