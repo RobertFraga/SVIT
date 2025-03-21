@@ -39,16 +39,21 @@ class faculty(admin.ModelAdmin):
 
 
 
-@admin.register(section)
+""" @admin.register(section)
 class section(admin.ModelAdmin):
     list_display = ('section_name', 'level')
     ordering = ('level', )
+ """
 
 
-@admin.register(level)
+
+""" @admin.register(level)
 class level(admin.ModelAdmin):
     list_display = ('level',  )
-    ordering = ('level', )
+    ordering = ('level', ) """
+
+admin.site.register(level)
+admin.site.register(section)
 
 
 

@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import StudentProfile, FacultyStaff, Announcement, registrarStaff, cashierStaff, admissionStaff, StudentGrade,StudentAttendance, accademicYear
+from .models import StudentProfile, FacultyStaff, Announcement, registrarStaff, cashierStaff, admissionStaff, StudentGrade,StudentAttendance, accademicYear, level
 from django.shortcuts import render
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import Group
@@ -173,7 +173,9 @@ def jhslist_section(request):
 @login_required(login_url='login')
 @allowed_user(allow_roles=['admin'])
 def list_student(request):
-    return render(request, 'admin/list_student.html')
+    student = StudentProfile.objects.all()
+    context = {'student': student}
+    return render(request, 'admin/list_student.html', context)
 
 @login_required(login_url='login')
 @allowed_user(allow_roles=['admin'])
