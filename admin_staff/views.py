@@ -181,18 +181,21 @@ def student_profile(request):
 @allowed_user(allow_roles=['student'])
 def student_grades(request):
     student = request.user.studentprofile
-    # return render(request, 'student/grades.html', context)
     return render(request, 'student/grades.html', {'student': student})
 
 @login_required(login_url='login')
 @allowed_user(allow_roles=['student'])
 def student_schedule(request):
-    return render(request, 'student/class_schedule.html')
+    student = request.user.studentprofile
+    context = {'student': student}
+    return render(request, 'student/class_schedule.html', context)
 
 @login_required(login_url='login')
 @allowed_user(allow_roles=['student'])
 def student_billings(request):
-    return render(request, 'student/payhistory.html')
+    student = request.user.studentprofile
+    context = {'student': student}
+    return render(request, 'student/payhistory.html', context)
 
 
 
