@@ -173,28 +173,34 @@ def student_dashboard(request):
 @login_required(login_url='login')
 @allowed_user(allow_roles=['student'])
 def student_profile(request):
+    accademic_year = accademicYear.objects.get
     student = request.user.studentprofile
-    return render(request, 'student/student_profile.html', {'student': student})
+    context = {'student': student, 'accademic_year': accademic_year}
+    return render(request, 'student/student_profile.html', context)
 
 
 @login_required(login_url='login')
 @allowed_user(allow_roles=['student'])
 def student_grades(request):
     student = request.user.studentprofile
-    return render(request, 'student/grades.html', {'student': student})
+    accademic_year = accademicYear.objects.get
+    context = {'student': student, 'accademic_year': accademic_year}
+    return render(request, 'student/grades.html', context)
 
 @login_required(login_url='login')
 @allowed_user(allow_roles=['student'])
 def student_schedule(request):
     student = request.user.studentprofile
-    context = {'student': student}
+    accademic_year = accademicYear.objects.get
+    context = {'student': student, 'accademic_year': accademic_year}
     return render(request, 'student/class_schedule.html', context)
 
 @login_required(login_url='login')
 @allowed_user(allow_roles=['student'])
 def student_billings(request):
     student = request.user.studentprofile
-    context = {'student': student}
+    accademic_year = accademicYear.objects.get
+    context = {'student': student, 'accademic_year': accademic_year}
     return render(request, 'student/payhistory.html', context)
 
 
