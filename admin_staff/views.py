@@ -210,24 +210,27 @@ def student_billings(request):
 @allowed_user(allow_roles=['faculty'])
 def faculty_dashboard(request):
     announcement = Announcement.objects.get
+    accademic_year = accademicYear.objects.get
     adviser = request.user.facultystaff
     advisoryClass = request.user.facultystaff.studentprofile_set.all()
-    context = {'adviser': adviser, 'announcement': announcement, 'advisoryClass': advisoryClass}
+    context = {'adviser': adviser, 'announcement': announcement, 'advisoryClass': advisoryClass, 'accademic_year': accademic_year}
     return render(request, 'faculty/faculty-dashboard.html', context)
 
 @login_required(login_url='login')
 @allowed_user(allow_roles=['faculty'])
 def advisory(request):
     advisoryClass = request.user.facultystaff.studentprofile_set.all()
+    accademic_year = accademicYear.objects.get
     adviser = request.user.facultystaff
-    context = {'advisoryClass': advisoryClass, 'adviser':adviser}
+    context = {'advisoryClass': advisoryClass, 'adviser':adviser, 'accademic_year': accademic_year}
     return render(request, 'faculty/student_list.html', context)
 
 @login_required(login_url='login')
 @allowed_user(allow_roles=['faculty'])
 def student_info(request, pk):
+    accademic_year = accademicYear.objects.get
     student = StudentProfile.objects.get(student_lrn = pk)
-    context = {'student': student}
+    context = {'student': student, 'accademic_year': accademic_year}
     return render(request, 'faculty/student_profile.html', context)
 
 
@@ -236,14 +239,16 @@ def student_info(request, pk):
 @allowed_user(allow_roles=['faculty'])
 def faculty_info(request):
     adviser = request.user.facultystaff
-    context = {'adviser': adviser}
+    accademic_year = accademicYear.objects.get
+    context = {'adviser': adviser, 'accedemic_year': accademic_year}
     return render(request, 'faculty/faculty_profile.html', context)
 
 @login_required(login_url='login')
 @allowed_user(allow_roles=['faculty'])
 def attendance_record(request, pk):
     student = StudentProfile.objects.get(student_lrn = pk)
-    context = {'student': student}
+    accademic_year = accademicYear.objects.get
+    context = {'student': student, 'accedmic_year': accademic_year}
     return render(request, 'faculty/attendance_record.html', context)
 
 
@@ -252,7 +257,8 @@ def attendance_record(request, pk):
 def advisory_grades(request, pk):
     adviser = request.user.facultystaff
     student = StudentProfile.objects.get(student_lrn = pk)
-    context = {'adviser': adviser, 'student': student}
+    accademic_year = accademicYear.objects.get
+    context = {'adviser': adviser, 'student': student, 'accademic_year': accademic_year}
     return render(request, 'faculty/faculty-student-grade.html', context)
 
 
