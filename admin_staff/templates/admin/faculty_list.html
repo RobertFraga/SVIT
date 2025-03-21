@@ -1,42 +1,86 @@
 {% extends "admin/admin_dashboard.html" %}
 
 {% block content %}
-<div class="page-title mb-4" style="margin:15px;">
-  <h2 style="color: #615EFC; font-weight: bold; margin-right: 20px; padding-left: 50px;">Faculty List</h2>
-</div>
 
-<div class="container border rounded-4">
-  <div class="d-grid gap-2 d-md-flex p-2 justify-content-md-end" style='margin: 10px'>
-    <a href="{% url "addflt" %}" role='btn' class='btn btn-primary'>
-      <i class="bi bi-plus-circle"></i> add teacher
-    </a>
+<div class="card-body">
+  <div class="tab-content" id="myTabContent">
+    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+
+
+      <div class="container-fluid" style="height: 100vh;">
+
+        <div class="card shadow-sm mb-4">
+            <div class="card-header py-3">
+              <h6 class="m-0 font-weight-bold text-primary">List of Junior High School Advisers</h6>
+            </div>
+    
+            <div class="card-body">
+              <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
+                <div class="row">
+                  <div class="col-sm-12 col-md-6 d-flex align-items-center">
+                      <div class="dataTables_length d-flex align-items-center gap-2" id="dataTable_length">
+                        <a href="{% url "addfaculty" %}" role='btn' class='btn btn-light border'>
+                          <i class="bi bi-plus-circle"></i> New Adviser
+                        </a>
+                      </div>
+                  </div>
+                    
+                  <div class="col-sm-12 col-md-6 d-flex align-items-center">
+                    <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+                      <div class="input-group dataTables_length d-flex align-items-center gap-2">
+                          <input type="text" name="search" class="form-control bg-light border-0 small" placeholder="Search here" aria-label="Search" aria-describedby="basic-addon2">
+                          <div class="input-group-append">
+                              <button class="btn btn-primary" type="submit">
+                                  <i class="fas fa-search fa-sm"></i>
+                              </button>
+                          </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+    
+              <table class="table table-hover my-1">
+                <div class="row">
+                    <div class="col-sm-12">
+                      <thead>
+                          <tr>
+                              <th scope="col">Employee Id:</th>
+                              <th scope="col">Surname</th>
+                              <th scope="col">Section</th>
+                              <th scope="col">Action</th>
+                          </tr>
+                      </thead>
+                      <tbody>
+                        {% for i in faculty %}
+                              <tr>
+                                <td>{{i.faculty_staff_id}}</td>
+                                <td>{{i.surname}}</td>
+                                <td>{{i.section}}</td>
+                                <td>
+                                  <a href="#" class="btn btn-warning btn-icon-split btn-sm">
+                                    <span class="icon text-white-50">
+                                        <i class="fas fa-exclamation-triangle"></i>
+                                    </span>
+                                    <span class="text">Archive</span>
+                                  </a>
+                                  <a href="{% url "faculty_profile" i.faculty_staff_id  %}" class="btn btn-info btn-icon-split btn-sm">
+                                    <span class="icon text-white-50">
+                                        <i class="fas fa-info-circle"></i>
+                                    </span>
+                                    <span class="text">View</span>
+                                  </a>  
+                                </td>
+                              </tr>
+                        {% endfor %}
+                      </tbody>
+                    </div>
+                </div>
+              </table>
+            </div>
+    
+        </div>
   </div>
 
-  <div class="card shadow mb-4">
-    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0" >
-        <thead>
-          <tr>
-            <th scope="col">Employee ID</th>
-            <th scope="col">Surname</th>
-            <th scope="col">Name</th>
-            <th scope="col">Section</th>
-            <th scope="col">Action</th>
-          </tr>
-        </thead>
-        <tbody>
-            {% for i in faculty %}
-                  <tr>
-                    <td>{{i.faculty_staff_id}}</td>
-                    <td>{{i.surname}}</td>
-                    <td>{{i.first_name}}</td>
-                    <td>{{i.section}}</td>
-                    <td>
-                      <button class="btn btn-primary" type="submit" title="Edit"><a href="{% url "faculty_profile" i.faculty_staff_id %}" style="text-decoration: none; color: inherit" >View</a></button>
-                    </td>
-                  </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-  </div>
 </div>
 {% endblock content %}

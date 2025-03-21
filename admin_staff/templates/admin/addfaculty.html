@@ -3,56 +3,32 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
-<form action='' method='POST'>
-    <div class="row g-3">
-        {% csrf_token %}
-        <div class="col-12">
-            {{faculty.user|as_crispy_field }}
+
+<div class="container-fluid">
+    
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Add New Student User</h6>
         </div>
-        <div class="col-md-4">
-            {{faculty.faculty_staff_id|as_crispy_field }}
-        </div>
-        <div class="col-md-4">
-            {{faculty.surname|as_crispy_field }}
-        </div>
-        <div class="col-md-4">
-            {{faculty.first_name|as_crispy_field }}
-        </div>
-        <div class="col-md-4">
-            {{faculty.middle_name|as_crispy_field }}
-        </div>
-        <div class="col-md-4">
-            {{faculty.gender|as_crispy_field }}
-        </div>
-        <div class="col-md-4">
-            {{faculty.birth_date|as_crispy_field }}
-        </div>
-        <div class="col-md-4">
-            {{faculty.birth_place|as_crispy_field }}
-        </div>
-        <div class="col-md-4">
-            {{faculty.religion|as_crispy_field }}
-        </div>
-        <div class="col-md-4">
-            {{faculty.civil_status|as_crispy_field }}
-        </div>
-        <div class="col-md-4">
-            {{faculty.contact|as_crispy_field }}
-        </div>
-        <div class="col-md-4">
-            {{faculty.email|as_crispy_field }}
-        </div>
-        <div class="col-md-4">
-            {{faculty.section|as_crispy_field }}
-        </div>
-        <div class="col-md-12">
-            {{faculty.subject|as_crispy_field }}
-        </div>
-        
-        <div class="d-grid gap-2">
-            <button class="btn btn-primary" type="submit">Confirm</button>
+    
+        <div class="card-body">
+            <div class="container-fluid">
+                <form action='' method='POST'>
+                    <div class="row g-3">
+                        {% csrf_token %}
+                        <div class="col-md-6">
+                            {{ faculty | crispy }}
+                        </div>
+                    </div>
+                    
+                    <button value="Cancel" class="btn btn-danger">Cancel</button>
+                    <input type="submit" value="Next" class="btn btn-primary">
+                </form>
+            </div>
         </div>
     </div>
-</form>
+
+</div>
+
 
 {% endblock content %}

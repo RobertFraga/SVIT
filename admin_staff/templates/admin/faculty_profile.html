@@ -4,38 +4,38 @@
 <div class="container-fluid">
     <form class="row g-3" >
         {% csrf_token %}
-        <div class="col-12">
+        <fieldset class="col-md-6" disabled>
             <label for="inputEmail4" class="form-label">Employee ID</label>
             <input type="text" class="form-control" id="inputEmail4" placeholder='student LRN' value="{{faculty.faculty_staff_id}}">
-        </div>
-        <div class="col-md-4">
+        </fieldset>
+        <fieldset class="col-md-6" disabled>
             <label for="inputsurname" class="form-label">Surname</label>
-            <input type="text" class="form-control" id="inputsurname" value="{{faculty.surname}}">
-        </div>
-        <div class="col-md-4">
+            <input  type="text" class="form-control" id="inputsurname" value="{{faculty.surname}}">
+        </fieldset>
+        <fieldset class="col-md-6" disabled>
             <label for="inputname" class="form-label">Name</label>
-            <input type="text" class="form-control" id="inputname" value="{{faculty.first_name}}">
-        </div>
-        <div class="col-md-4">
+            <input  type="text" class="form-control" id="inputname" value="{{faculty.first_name}}">
+        </fieldset>
+        <fieldset class="col-md-6" disabled>
             <label for="inputmiddle" class="form-label">Middle Name</label>
-            <input type="text" class="form-control" id="inputmiddle" value="{{faculty.middle_name}}">
-        </div>
-        <div class="col-md-4">
+            <input  type="text" class="form-control" id="inputmiddle" value="{{faculty.middle_name}}">
+        </fieldset>
+        <fieldset class="col-md-6" disabled>
             <label for="inputsection" class="form-label">Section</label>
-            <input type="text" class="form-control" id="inputsection" value="{{faculty.section}}">
-        </div>
-        <div class="col-md-4">
+            <input  type="text" class="form-control" id="inputsection" value="{{faculty.section}}">
+        </fieldset>
+        <fieldset class="col-md-6" disabled>
             <label for="inputgender" class="form-label">Gender</label>
-            <input type="text" class="form-control" id="inputgender" value="{{faculty.gender}}">
-        </div>
-        <div class="col-md-4">
+            <input  type="text" class="form-control" id="inputgender" value="{{faculty.gender}}">
+        </fieldset>
+        <fieldset class="col-md-6" disabled>
             <label for="inputcontact" class="form-label">Contact Number</label>
-            <input type="text" class="form-control" id="inputcontact" value="{{faculty.contact}}">
-        </div>
-        <div class="col-12">
+            <input  type="text" class="form-control" id="inputcontact" value="{{faculty.contact}}">
+        </fieldset>
+        <fieldset class="col-md-6" disabled>
             <label for="inputemail" class="form-label">Email</label>
-            <input type="email" class="form-control" id="inputemail" value="{{faculty.email}}">
-        </div>
+            <input  type="email" class="form-control" id="inputemail" value="{{faculty.email}}">
+        </fieldset>
     </form>
 </div>
 {% endblock content %}

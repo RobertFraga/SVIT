@@ -24,72 +24,26 @@
                 <div class="card-body">
                   <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
                     <div class="row">
-                        <div class="col-sm-12 col-md-6 d-flex align-items-center">
-                            <div class="dataTables_length d-flex align-items-center gap-2" id="dataTable_length">
-                              <a href="{% url "addstd" %}" role='btn' class='btn btn-light border'>
-                                <i class="bi bi-plus-circle"></i> + New Student
-                              </a>
-                            </div>
-                        </div>
-                        
-                        <div class="col-sm-12 col-md-6">
-                            <div class="dataTables_length d-flex align-items-center justify-content-end gap-2" id="dataTable_length">
-                                <label class="d-flex align-items-center justify-content-end mb-2">
-                                    Search: 
-                                    <input type="search" class="form-control form-control-sm ms-2" placeholder aria-controls="dataTable">
-                                </label>
-                            </div>
-                        </div>
-        
-                        <div class="modal fade" id="newAdviser" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                          <div class="modal-dialog">
-                            <div class="modal-content">
-        
-                              <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Add New Adviser</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                              </div>
-        
-                              <div class="modal-body">
-                                <form class="row g-2">
-                                  <div class="col-12 mb-2">
-                                    <label for="inputEmail4" class="form-label">Adviser:</label>
-                                    <input type="email" class="form-control" id="inputEmail4" placeholder="Given Name, Middle Name, Surname">
-                                  </div>
-                                  <div class="col-md-4 mb-2">
-                                    <label for="inputPassword4" class="form-label">Section Name:</label>
-                                    <input type="password" class="form-control" id="inputPassword4" placeholder="e.g. Genesis">
-                                  </div>
-                                  <div class="col-md-4 mb-2">
-                                    <label for="inputAddress" class="form-label">Grade Level:</label>
-                                    <select id="inputState" class="form-control" placeholder="Select...">
-                                      <option>Grade 7</option>
-                                      <option>Grade 8</option>
-                                      <option>Grade 9</option>
-                                      <option>Grade 10</option>
-                                    </select>
-                                  </div>
-                                  <div class="col-md-4 mb-2">
-                                    <label for="inputAddress" class="form-label">School Year:</label>
-                                    <select id="inputState" class="form-control" placeholder="Select...">
-                                      <option>2024-2025</option>
-                                    </select>
-                                  </div>
-                                  <div class="col-md-4">
-                                    <label for="inputCity" class="form-label">Student Population:</label>
-                                    <input type="text" class="form-control" id="Number of Students">
-                                  </div>
-                                </form>
-                              </div>
-        
-                              <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                <button type="button" class="btn btn-primary">Save changes</button>
-                              </div>
-                            </div>
+                      <div class="col-sm-12 col-md-6 d-flex align-items-center">
+                          <div class="dataTables_length d-flex align-items-center gap-2" id="dataTable_length">
+                            <a href="{% url "addstd" %}" role='btn' class='btn btn-light border'>
+                              <i class="bi bi-plus-circle"></i> New Student
+                            </a>
                           </div>
-                        </div>
-        
+                      </div>
+                        
+                      <div class="col-sm-12 col-md-6 d-flex align-items-center">
+                        <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+                          <div class="input-group dataTables_length d-flex align-items-center gap-2">
+                              <input type="text" name="search" class="form-control bg-light border-0 small" placeholder="Search here" aria-label="Search" aria-describedby="basic-addon2">
+                              <div class="input-group-append">
+                                  <button class="btn btn-primary" type="submit">
+                                      <i class="fas fa-search fa-sm"></i>
+                                  </button>
+                              </div>
+                          </div>
+                        </form>
+                      </div>
                     </div>
                   </div>
         
@@ -117,12 +71,12 @@
                                         </span>
                                         <span class="text">Archive</span>
                                       </a>
-                                      <a href="#" class="btn btn-info btn-icon-split btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                          <span class="icon text-white-50">
-                                              <i class="fas fa-info-circle"></i>
-                                          </span>
-                                          <span class="text">View</span>
-                                      </a>
+                                      <a href="{% url "studentinfo" i.student_lrn %}" class="btn btn-info btn-icon-split btn-sm">
+                                        <span class="icon text-white-50">
+                                            <i class="fas fa-info-circle"></i>
+                                        </span>
+                                        <span class="text">View</span>
+                                      </a>  
                                     </td>
                                   </tr>
                             {% endfor %}

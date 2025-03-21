@@ -8,6 +8,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from .decorators import unauthenticated_user, allowed_user, admin_only
 from .form import announcementForm, studentForm, facultyForm
+from django.db.models import Q
 # Create your views here.
 from django.utils.timezone import now
 from django.http import JsonResponse
@@ -43,13 +44,22 @@ def logout_user(request):
 #admin dashboard
 @login_required(login_url='login')
 @admin_only
-def admin_dashboard(request):
-    announcement = Announcement.objects.get
-    context = {'announcement': announcement}
-    return render(request, 'admin/admin_dashboard.html', context)
+def admin_dashboard(request): 
+    form = announcementForm()
+    if request.method == 'POST':
+        form = announcementForm()
+        if form.is_valid():
+            form.save()
+            return JsonResponse({'success': True})
+            
+        return JsonResponse({'success': False, 'errors': form.errors})
+            
+        
 
-def chart(request):
-    return render(request, 'admin/charts.html')
+    announcement = Announcement.objects.all()
+
+    context = {'announcement': announcement, 'form': form}
+    return render(request, 'admin/admin_dashboard.html', context)
 
 def announcement(request, pk):
     annouce = Announcement.objects.get(announcement_id=pk)
@@ -68,12 +78,6 @@ def announcement(request, pk):
 @allowed_user(allow_roles=['admin'])
 def classes(request):
     return render(request, 'admin/classes.html', )
-
-@login_required(login_url='login')
-@allowed_user(allow_roles=['admin'])
-def student_list(request):
-    students = StudentProfile.objects.all()
-    return render(request, 'admin/student_list.html', { 'student': students})
 
 @login_required(login_url='login')
 @allowed_user(allow_roles=['admin'])
@@ -110,13 +114,43 @@ def student_form(request):
 
     context = {'student': student}
     return render(request, 'admin/student_form.html', context)
-
+    
 
 
 
 @login_required(login_url='login')
 @allowed_user(allow_roles=['admin'])
-def addstfaculty(request):
+def faculty_list(request):
+    if 'search' in request.GET:
+        search = request.GET['search']
+        faculty = FacultyStaff.objects.filter(Q(surname__icontains=search) | Q(first_name__icontains=search))
+    else:
+        faculty = FacultyStaff.objects.all()
+
+    context = {'faculty': faculty}
+    return render(request, 'admin/faculty_list.html', context)
+
+
+@login_required(login_url='login')
+@allowed_user(allow_roles=['admin'])
+def add_faculty(request):
+    faculty = UserCreationForm()
+    if request.method == "POST":
+        faculty = UserCreationForm(request.POST)
+        if faculty.is_valid():
+            user = faculty.save()
+            group = Group.objects.get(name='faculty')
+            user.groups.add(group)
+            return redirect('/faculty_form')
+
+    context = {'faculty': faculty}
+    return render(request, 'admin/addfaculty.html', context)
+
+
+
+@login_required(login_url='login')
+@allowed_user(allow_roles=['admin'])
+def faculty_form(request):
     faculty = facultyForm()
     if request.method == "POST":
         faculty = facultyForm(request.POST)
@@ -125,17 +159,7 @@ def addstfaculty(request):
             return redirect('/')
 
     context = {'faculty': faculty}
-    return render(request, 'admin/addfaculty.html', context)
-    
-
-
-
-@login_required(login_url='login')
-@allowed_user(allow_roles=['admin'])
-def faculty_list(request):
-    faculty = FacultyStaff.objects.all()
-    return render(request, 'admin/faculty_list.html', { 'faculty': faculty})
-
+    return render(request, 'admin/faculty_form.html', context)
 
 
 
@@ -144,6 +168,11 @@ def faculty_list(request):
 def faculty_profile(request, pk):
     faculty = FacultyStaff.objects.get(faculty_staff_id = pk)
     return render(request, 'admin/faculty_profile.html', {'faculty': faculty})
+
+
+
+
+
 
 @login_required(login_url='login')
 @allowed_user(allow_roles=['admin'])
@@ -173,7 +202,15 @@ def jhslist_section(request):
 @login_required(login_url='login')
 @allowed_user(allow_roles=['admin'])
 def list_student(request):
-    student = StudentProfile.objects.all()
+    if 'search' in request.GET:
+        search = request.GET['search']
+        #student = StudentProfile.objects.filter(surname__icontains=search)
+        student = StudentProfile.objects.filter(Q(surname__icontains=search) | Q(first_name__icontains=search) | Q(student_lrn__icontains=search))
+    else:
+        student = StudentProfile.objects.all()
+
+
+    
     context = {'student': student}
     return render(request, 'admin/list_student.html', context)
 
