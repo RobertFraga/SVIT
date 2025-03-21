@@ -1,4 +1,4 @@
-
+{% load crispy_forms_tags %}
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
@@ -20,18 +20,6 @@
 
   <!-- Custom styles for this template-->
   <link href= "{% static "css/sb-admin-2.min.css" %}" rel="stylesheet">
-
-  <!-- jQuery -->
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
-  <!-- CSS-->
-  <style>
-    .logo img {
-        width: 8vw; /* Makes sure image scales properly */
-        height: auto;
-        border-radius: 100%;
-    }
-  </style>
 
   <!-- jQuery -->
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -82,7 +70,7 @@
 
             <!-- Nav Item - Tables -->
             <li class="nav-item">
-                <a class="nav-link" href=" {% url "student_list" %} ">
+                <a class="nav-link" href=" ">
                     <i class="fas fa-fw fa-table"></i>
                     <span>Users List</span></a>
             </li>
@@ -105,7 +93,7 @@
                         <h6 class="collapse-header">Components:</h6>
                         <a class="collapse-item" href="{% url "jhslist_section" %}">JHS Section List</a>
                         <a class="collapse-item" href="{% url "list_student" %}">Student List</a>
-                        <a class="collapse-item" href="{% url "adviser_list" %}">Adviser List</a>
+                        <a class="collapse-item" href="{% url "faculty_list" %}">Adviser List</a>
                         <a class="collapse-item" href="{% url "subject_teacher" %}">Subject Teacher List</a>
                     </div>
                 </div>
@@ -384,7 +372,7 @@
 
                 </div>
 
-                <!-- 2nd column-->
+                
                 <div class="box2 p-1" style="height: auto; flex: 2; border-radius: 13px;">
 
                     <div class="card shadow mb-4">
@@ -421,11 +409,17 @@
                                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                 </div>
                                                 <div class="modal-body">
-                                                    ...
-                                                </div>
-                                                <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                <button type="button" class="btn btn-primary">Save changes</button>
+                                                    <form name='add'id='modalForm' method="post" action="">
+                                                        {% csrf_token %}
+                                                        <div class="col-12">
+                                                            {{form | crispy}}
+                                                        </div>
+                                                        
+                                                        <div class="d-grid gap-12">
+                                                            <button class="btn btn-primary" type="submit">Confirm</button>
+                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                        </div>
+                                                    </form>
                                                 </div>
                                             </div>
                                         </div>
@@ -444,18 +438,20 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td>Walang Pasok - March 11, 2025</td>
-                                                <td>03 / 21 / 2025</td>
-                                                <td>
-                                                    <a href="#" class="btn btn-danger btn-circle btn-sm">
-                                                        <i class="fas fa-trash"></i>
-                                                    </a>
-                                                    <a href="#" class="btn btn-info btn-circle btn-sm">
-                                                        <i class="fas fa-info-circle"></i>
-                                                    </a>
-                                                </td>
-                                            </tr>
+                                            {% for i in announcement %}
+                                                <tr>
+                                                    <td>{{i.title}}</td>
+                                                    <td>{{i.event}}</td>
+                                                    <td>
+                                                        <a href="#" class="btn btn-danger btn-circle btn-sm">
+                                                            <i class="fas fa-trash"></i>
+                                                        </a>
+                                                        <a href="#" class="btn btn-info btn-circle btn-sm">
+                                                            <i class="fas fa-info-circle"></i>
+                                                        </a>
+                                                    </td>
+                                                </tr>
+                                            {% endfor %}
                                         </tbody>
                                     </div>
                                 </div>
@@ -464,6 +460,27 @@
                         </div>
                     </div>
 
+                    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+                    <script>
+                    $(document).ready(function(){
+                        $("#modalForm").submit(function(e){
+                            e.preventDefault();
+                            $.ajax({
+                                type: "POST",
+                                url: "{% url 'home' %}",
+                                data: $(this).serialize(),
+                                success: function(response){
+                                    if(response.success){
+                                        alert("Item added successfully!");
+                                        location.reload();
+                                    } else {
+                                        alert("Error: " + JSON.stringify(response.errors));
+                                    }
+                                }
+                            });
+                        });
+                    });
+                    </script>
                 </div>
 
 
@@ -539,6 +556,7 @@
   <!-- Page level custom scripts -->
   <script src=" {% static "js/demo/chart-area-demo.js" %}"></script>
   <script src=" {% static "js/demo/chart-pie-demo.js" %}"></script>
+  
 </body>
 
 </html>

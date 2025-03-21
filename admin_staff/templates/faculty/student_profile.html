@@ -24,40 +24,79 @@
             <label for="inputmiddle" class="form-label">Middle Name</label>
             <input type="text" class="form-control" id="inputmiddle" value="{{student.middle_name}}">
         </fieldset>
-        <fieldset class="col-md-4" disabled>
+        <fieldset class="col-md-2" disabled>
             <label for="inputState" class="form-label">Gender</label>
             <input type="text" class="form-control" id="inputgender" value="{{student.gender}}">
         </fieldset>
-        <fieldset class="col-md-4" disabled>
+        <fieldset class="col-md-2" disabled>
             <label for="inputbirth" class="form-label">Birth Date</label>
             <input type="input" class="form-control" id="inputbirthdate" value="{{student.birth_date}}">
         </fieldset>
-        <fieldset class="col-md-4" disabled>
+        <fieldset class="col-md-3" disabled>
             <label for="inputbirth" class="form-label">Birth Place</label>
             <input type="text" class="form-control" id="inputbirthplace" value="{{student.birth_place}}">
         </fieldset>
-        <fieldset class="col-md-4" disabled>
+        <fieldset class="col-md-3" disabled>
             <label for="inputreligion" class="form-label">Religion</label>
             <input type="text" class="form-control" id="inputreligion" value="{{student.religion}}">
         </fieldset>
-        <fieldset class="col-md-4" disabled>
+        <fieldset class="col-md-2" disabled>
             <label for="inputState" class="form-label">Civil Status</label>
             <input type="text" class="form-control" id="inputcontact" value="{{student.civil_status}}">
         </fieldset>
+
+        <!-- SINGIT KO LANG -->
+        <fieldset class="col-md-2" disabled>
+            <label for="inputEmail4" class="form-label">Mother Tongue:</label>
+            <input type="text" class="form-control" id="inputEmail4" value="{{student.mother_tongue}}">
+        </fieldset>
+        <fieldset class="col-md-2" disabled>
+            <label for="inputEmail4" class="form-label">Ethnic Group:</label>
+            <input type="text" class="form-control" id="inputEmail4" value="{{student.ethnic_group}}">
+        </fieldset>
+        <!-- END OF SINGIT -->
+
         <fieldset class="col-md-4" disabled>
             <label for="inputcontact" class="form-label">Contact Number</label>
             <input type="text" class="form-control" id="inputcontact" value="{{student.contact}}">
         </fieldset>
 
+        <div class="col-md-12"></div>
+
+        <!-- ADD KO LANG 'TO KASI NEED 'TO MAKITA NG PANELISTS!!-->
+        <fieldset class="col-md-3" disabled>
+            <label for="inputEmail4" class="form-label">Father's Name:</label>
+            <input type="text" class="form-control" id="inputEmail4" value="{{student.father_name}}">
+        </fieldset>
+        <fieldset class="col-md-3" disabled>
+            <label for="inputEmail4" class="form-label">Mother's Maiden Name:</label>
+            <input type="text" class="form-control" id="inputEmail4" value="{{student.mother_maide_name}}">
+        </fieldset>
+        <fieldset class="col-md-3" disabled>
+            <label for="inputEmail4" class="form-label">Guardian Name:</label>
+            <input type="text" class="form-control" id="inputEmail4" value="{{student.guardian_name}}">
+        </fieldset>
+        <fieldset class="col-md-3" disabled>
+            <label for="inputEmail4" class="form-label">Relationship:</label>
+            <input type="text" class="form-control" id="inputEmail4" value="{{student.relationship}}">
+        </fieldset>
+        <fieldset class="col-md-4" disabled>
+            <label for="inputEmail4" class="form-label">Contact No. of Parent or Guardian:</label>
+            <input type="numeric" class="form-control" id="inputEmail4" value="{{student.guardian_contact}}">
+        </fieldset>
+        <!-- END HERE!!-->
+        <div class="col-md-12"></div>
+
         <fieldset class="col-md-6" disabled> 
-            <label for="disabledTextInput" class="form-label">section</label>
+            <label for="disabledTextInput" class="form-label">Section</label>
             <input type="text" id="disabledTextInput" class="form-control" value="{{student.section}}">
         </fieldset>
 
         <fieldset class="col-md-6" disabled>
             <label for="inputemail" class="form-label">Email</label>
             <input type="email" class="form-control" id="inputemail" value="{{student.email}}">
-        </fieldset> 
+        </fieldset>
+        
     </form>
 </div>
 {% endblock content %}

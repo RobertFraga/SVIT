@@ -4,7 +4,7 @@ from .models import Announcement, StudentProfile, FacultyStaff
 class announcementForm(ModelForm):
     class Meta:
         model = Announcement
-        fields = ['title', 'body']
+        fields = '__all__'
 
 class studentForm(ModelForm):
     class Meta:
