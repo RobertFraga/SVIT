@@ -167,7 +167,7 @@ def student_dashboard(request):
     announcement = Announcement.objects.get
     accademic_year = accademicYear.objects.get
     student = request.user.studentprofile
-    context = { 'student': student, 'announcement': announcement, 'accademic_year': accademic_year}
+    context = { 'student': student, 'announcement': announcement, 'accademic_year': accademic_year }
     return render(request, 'student/student_dashboard.html', context)
 
 @login_required(login_url='login')
