@@ -20,6 +20,11 @@ urlpatterns = [
     path('addflt', views.addstfaculty, name='addflt'),
     path('chart', views.chart, name='chart'),
     path('payment-history', views.payment_history, name='payment-history'),
+    path("list-sections", views.jhslist_section, name="jhslist_section"),
+    path('list-students', views.list_student, name="list_student"),
+    path('list-adviser', views.adviser_list, name="adviser_list"),
+    path('subject-teacher', views.subject_teacher, name="subject_teacher"),
+    path('student-schedules', views.schedules, name="scheduler"),
 
     path('record', views.accademic_record, name='record'),
     path('finance', views.financial_record, name='financ'),
