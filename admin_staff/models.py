@@ -32,15 +32,15 @@ class accademicYear(models.Model):
     ending_year = models.IntegerField(null=True, blank=True)
 
 class level(models.Model):
-    level = models.CharField(max_length=20);
-    
+    grade = models.CharField(max_length=20);
+    section_name = models.ManyToManyField("section", null=True)
     def __str__(self):
-        return self.level
+        return self.grade
 
 
 class section(models.Model):
     section_name = models.CharField(max_length=20)
-    level = models.ForeignKey("level", null=True, on_delete=models.SET_NULL)
+    
 
     def __str__(self):
         return self.section_name
