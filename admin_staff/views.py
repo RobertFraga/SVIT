@@ -2,8 +2,10 @@ from django.shortcuts import render, redirect
 from .models import StudentProfile, FacultyStaff, Announcement, registrarStaff, cashierStaff, admissionStaff, StudentGrade,StudentAttendance, accademicYear
 from django.shortcuts import render
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.models import Group
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import UserCreationForm
 from .decorators import unauthenticated_user, allowed_user, admin_only
 from .form import announcementForm, studentForm, facultyForm
 # Create your views here.
@@ -82,6 +84,23 @@ def student(request, pk):
 @login_required(login_url='login')
 @allowed_user(allow_roles=['admin'])
 def addstudent(request):
+    student = UserCreationForm()
+    if request.method == "POST":
+        student = UserCreationForm(request.POST)
+        if student.is_valid():
+            user = student.save()
+            group = Group.objects.get(name='student')
+            user.groups.add(group)
+            return redirect('/student_form')
+
+    context = {'student': student}
+    return render(request, 'admin/addstudent.html', context)
+
+
+
+@login_required(login_url='login')
+@allowed_user(allow_roles=['admin'])
+def student_form(request):
     student = studentForm()
     if request.method == "POST":
         student = studentForm(request.POST)
@@ -90,7 +109,10 @@ def addstudent(request):
             return redirect('/')
 
     context = {'student': student}
-    return render(request, 'admin/addstudent.html', context)
+    return render(request, 'admin/student_form.html', context)
+
+
+
 
 @login_required(login_url='login')
 @allowed_user(allow_roles=['admin'])

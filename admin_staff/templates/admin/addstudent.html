@@ -5,8 +5,11 @@
 {% endblock heading %}
 
 {% load crispy_forms_tags %}
-{% load static %}
+
 {% block content %}
+
+
+
 
 <div class="container-fluid">
     
@@ -21,96 +24,12 @@
                     <div class="row g-3">
                         {% csrf_token %}
                         <div class="col-md-6">
-                            {{student.user|as_crispy_field }}
-                        </div>
-                        <div class="col-md-6">
-                            {{student.student_lrn|as_crispy_field }}
-                        </div>
-                        <div class="col-md-4">
-                            {{student.surname|as_crispy_field }}
-                        </div>
-                        <div class="col-md-4">
-                            {{student.first_name|as_crispy_field }}
-                        </div>
-                        <div class="col-md-4">
-                            {{student.middle_name|as_crispy_field }}
-                        </div>
-                        <div class="col-md-2">
-                            {{student.gender|as_crispy_field }}
-                        </div>
-                        <div class="col-md-2">
-                            {{student.birth_date|as_crispy_field }}
-                        </div>
-                        <div class="col-md-3">
-                            {{student.birth_place|as_crispy_field }}
-                        </div>
-                        <div class="col-md-3">
-                            {{student.religion|as_crispy_field }}
-                        </div>
-                        <div class="col-md-2">
-                            {{student.civil_status|as_crispy_field }}
-                        </div>
-                        
-                        <!-- SINGIT KO LANG -->
-                        <div class="col-md-2">
-                            <label for="inputEmail4" class="form-label">Mother Tongue:</label>
-                            <input type="text" class="form-control" id="inputEmail4">
-                        </div>
-                        <div class="col-md-2">
-                            <label for="inputEmail4" class="form-label">Ethnic Group:</label>
-                            <input type="text" class="form-control" id="inputEmail4">
-                        </div>
-                        <!-- END OF SINGIT -->
-
-                        <div class="col-md-3">
-                            {{student.contact|as_crispy_field }}
-                        </div>
-                        <div class="col-md-4">
-                            {{student.email|as_crispy_field }}
-                        </div>
-                        <div class="col-md-12"></div>
-
-                        <!-- ADD KO LANG 'TO KASI NEED 'TO MAKITA NG PANELISTS!!-->
-                        <div class="col-md-3">
-                            <label for="inputEmail4" class="form-label">Father's Name:</label>
-                            <input type="text" class="form-control" id="inputEmail4">
-                        </div>
-                        <div class="col-md-3">
-                            <label for="inputEmail4" class="form-label">Mother's Maiden Name:</label>
-                            <input type="text" class="form-control" id="inputEmail4">
-                        </div>
-                        <div class="col-md-3">
-                            <label for="inputEmail4" class="form-label">Guardian Name:</label>
-                            <input type="text" class="form-control" id="inputEmail4">
-                        </div>
-                        <div class="col-md-3">
-                            <label for="inputEmail4" class="form-label">Relationship:</label>
-                            <input type="text" class="form-control" id="inputEmail4">
-                        </div>
-                        <div class="col-md-3">
-                            <label for="inputEmail4" class="form-label">Contact No. of Parent or Guardian:</label>
-                            <input type="numeric" class="form-control" id="inputEmail4">
-                        </div>
-                        <!-- END HERE!!-->
-                        <div class="col-md-12"></div>
-
-                        <div class="col-md-3">
-                            {{student.level|as_crispy_field }}
-                        </div>
-                        <div class="col-md-3">
-                            {{student.section|as_crispy_field }}
-                        </div>
-                        <div class="col-md-3">
-                            {{student.adviser|as_crispy_field }}
-                        </div>
-                        <div class="col-md-12"></div>
-                        <div class="col-md-3 d-flex justify-content-center align-items-center">
-                            <button class="btn btn-primary" type="submit">✓ Confirm</button>
-                            <button class="btn btn-danger" type="submit">Discard</button>
-                        </div>
-                        <div class="col-md-2">
+                            {{ student | crispy }}
                         </div>
                     </div>
+                    
+                    <button value="Cancel" class="btn btn-danger">Cancel</button>
+                    <input type="submit" value="Next" class="btn btn-primary">
                 </form>
             </div>
         </div>
