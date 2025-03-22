@@ -8,7 +8,8 @@ urlpatterns = [
     
     #admin board
     path('', views.admin_dashboard, name='home'),
-    path('update_annoucement<str:pk>', views.announcement, name='announcement'),
+    #path('update_annoucement<str:pk>', views.announcement, name='announcement'),
+    path('add_announcement', views.add_announcement, name='add_announcement'),
     path('class/', views.classes, name='classes'),
     path('student/<int:pk>', views.student, name='studentinfo'),   
     path('addstudent', views.addstudent, name='addstd'),
