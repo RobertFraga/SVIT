@@ -45,32 +45,20 @@ def logout_user(request):
 @login_required(login_url='login')
 @admin_only
 def admin_dashboard(request): 
-    form = announcementForm()
-    if request.method == 'POST':
-        form = announcementForm()
-        if form.is_valid():
-            form.save()
-            return JsonResponse({'success': True})
-            
-        return JsonResponse({'success': False, 'errors': form.errors})
-            
-        
-
     announcement = Announcement.objects.all()
 
-    context = {'announcement': announcement, 'form': form}
+    context = {'announcement': announcement}
     return render(request, 'admin/admin_dashboard.html', context)
 
-def announcement(request, pk):
-    annouce = Announcement.objects.get(announcement_id=pk)
-    form = announcementForm(instance=annouce)
-    if request.method == 'POST':
-        form = announcementForm(request.POST, instance=annouce)
-        if form.is_valid():
-            form.save()
+def add_announcement(request):
+    announce = announcementForm()
+    if request.method == "POST":
+        announce = announcementForm(request.POST)
+        if announce.is_valid():
+            announce.save()
             return redirect('/')
 
-    context = {'form': form}
+    context = {'announce': announce}
     return render(request, 'admin/announcement_form.html', context)
 
 
@@ -250,7 +238,7 @@ def accounting_profile(request):
 @login_required(login_url='login')
 @allowed_user(allow_roles=['student'])
 def student_dashboard(request):
-    announcement = Announcement.objects.get
+    announcement = Announcement.objects.all().order_by('-announcement_id')
     accademic_year = accademicYear.objects.get
     student = request.user.studentprofile
     context = { 'student': student, 'announcement': announcement, 'accademic_year': accademic_year }

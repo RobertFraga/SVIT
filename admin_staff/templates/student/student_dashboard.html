@@ -241,22 +241,23 @@
                         <div class="card-header">
                             <h6 class="m-0 font-weight-bold text-primary">School Announcement</h6>
                         </div>
-
-                        <div class="card-body">
-                            <div class="card shadow-sm mb-4">
-                                <!-- Card Header - Accordion -->
-                                <a href="#collapseCardExample" class="d-block card-header py-3" data-toggle="collapse"
-                                    role="button" aria-expanded="true" aria-controls="collapseCardExample">
-                                    <h6 class="m-0 font-weight-bold text-primary">{{announcement.title}}</h6>
-                                </a>
-                                <!-- Card Content - Collapse -->
-                                <div class="collapse show" id="collapseCardExample">
-                                    <div class="card-body">
-                                        {{announcement.body}}
+                        {% for i in announcement %}
+                            <div class="card-body">
+                                <div class="card shadow-sm mb-4">
+                                    <!-- Card Header - Accordion -->
+                                    <a href="#collapseCardExample" class="d-block card-header py-3" data-toggle="collapse"
+                                        role="button" aria-expanded="true" aria-controls="collapseCardExample">
+                                        <h6 class="m-0 font-weight-bold text-primary">{{i.title}}</h6>
+                                    </a>
+                                    <!-- Card Content - Collapse -->
+                                    <div class="collapse show" id="collapseCardExample">
+                                        <div class="card-body">
+                                            {{i.body}}
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        {% endfor %}
                     </div>
     
                 </div>

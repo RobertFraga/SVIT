@@ -59,21 +59,12 @@
                     <span>Dashboard</span></a>
             </li>
 
-            <!-- Divider -->
-            <hr class="sidebar-divider">
 
             <!-- Heading -->
-            <div class="sidebar-heading">
-                Entities
-            </div>
+            
 
 
             <!-- Nav Item - Tables -->
-            <li class="nav-item">
-                <a class="nav-link" href=" ">
-                    <i class="fas fa-fw fa-table"></i>
-                    <span>Users List</span></a>
-            </li>
 
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
@@ -377,55 +368,13 @@
 
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">Create Announcement</h6>
+                            <a href="{% url "add_announcement" %}" role='btn' class='btn btn-light border'>
+                                <i class="bi bi-plus-circle"></i> + Add Announcement
+                            </a>
                         </div>
 
                         <div class="card-body">
-                            <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
-                                <div class="row">
-                                    <div class="col-sm-12 col-md-6 d-flex align-items-center">
-                                        <div class="dataTables_length d-flex align-items-center gap-2" id="dataTable_length">
-                                            <label class="d-flex align-items-center mb-2">
-                                                <button class="btn btn-light border" data-bs-toggle="modal" data-bs-target="#exampleModal">+ New Announcement</button>
-                                            </label>
-                                        </div>
-                                    </div>
-                                    
-                                    <div class="col-sm-12 col-md-6">
-                                        <div class="dataTables_length d-flex align-items-center justify-content-end gap-2" id="dataTable_length">
-                                            <label class="d-flex align-items-center justify-content-end mb-2">
-                                                Search: 
-                                                <input type="search" class="form-control form-control-sm ms-2" placeholder aria-controls="dataTable">
-                                            </label>
-                                        </div>
-                                    </div>
-
-                                    <!-- MODAL FOR ANNOUNCEMENT -->
-                                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                        <div class="modal-dialog">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                <h5 class="modal-title" id="exampleModalLabel">Add New School Announcement</h5>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <form name='add'id='modalForm' method="post" action="">
-                                                        {% csrf_token %}
-                                                        <div class="col-12">
-                                                            {{form | crispy}}
-                                                        </div>
-                                                        
-                                                        <div class="d-grid gap-12">
-                                                            <button class="btn btn-primary" type="submit">Confirm</button>
-                                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                        </div>
-                                                    </form>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            
 
                             <table class="table table-hover my-1">
                                 <div class="row">
