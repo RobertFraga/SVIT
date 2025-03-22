@@ -283,7 +283,7 @@ def student_billings(request):
 @login_required(login_url='login')
 @allowed_user(allow_roles=['faculty'])
 def faculty_dashboard(request):
-    announcement = Announcement.objects.get
+    announcement = Announcement.objects.all().order_by('-announcement_id')
     accademic_year = accademicYear.objects.get
     adviser = request.user.facultystaff
     advisoryClass = request.user.facultystaff.studentprofile_set.all()
