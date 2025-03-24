@@ -45,9 +45,10 @@ def logout_user(request):
 @login_required(login_url='login')
 @admin_only
 def admin_dashboard(request): 
-    announcement = Announcement.objects.all()
+    announcement = Announcement.objects.all().order_by('-announcement_id')
+    advisers = FacultyStaff.objects.all()
 
-    context = {'announcement': announcement}
+    context = {'announcement': announcement, 'advisers': advisers}
     return render(request, 'admin/admin_dashboard.html', context)
 
 def add_announcement(request):
