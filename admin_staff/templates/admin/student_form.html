@@ -47,9 +47,7 @@
                         <div class="col-md-3">
                             {{student.religion|as_crispy_field }}
                         </div>
-                        <div class="col-md-2">
-                            {{student.civil_status|as_crispy_field }}
-                        </div>
+                        
                         
                         <!-- SINGIT KO LANG -->
                         <div class="col-md-2">
@@ -96,12 +94,11 @@
                         <div class="col-md-3">
                             {{student.adviser|as_crispy_field }}
                         </div>
-                        <div class="col-md-12"></div>
-                        <div class="col-md-3 d-flex justify-content-center align-items-center">
-                            <button class="btn btn-primary" type="submit">✓ Confirm</button>
-                            <button class="btn btn-danger" type="submit">Discard</button>
-                        </div>
                         <div class="col-md-2">
+                        </div>
+                        <div class="col-md-3 d-flex justify-content-center align-items-center">
+                            <button class="btn btn-primary" type="submit">✓ Submit</button>
+                            <button class="btn btn-danger" type="submit">Discard</button>
                         </div>
                     </div>
                 </form>
