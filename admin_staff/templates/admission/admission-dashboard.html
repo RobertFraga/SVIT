@@ -27,7 +27,7 @@
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{% url "registrar" %}">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{% url "admission" %}">
                 <div class="sidebar-brand-icon rotate-n-15">
                     <i class="fas fa-laugh-wink"></i>
                 </div>
@@ -39,21 +39,17 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item active">
-                <a class="nav-link" href="{% url "registrar" %}">
+                <a class="nav-link" href="{% url "admission" %}">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
             </li>
+            <hr class="sidebar-divider my-0">
 
-            <!-- Divider -->
-            <hr class="sidebar-divider">
-
-            <!-- Heading -->
-            <div class="sidebar-heading">
-                Entities
-            </div>
-
-
-            <!-- Nav Item - Tables -->
+            <li class="nav-item active">
+                <a class="nav-link" href="{% url "enrollies" %}">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>Enrollies</span></a>
+            </li>
 
 
 
@@ -128,7 +124,7 @@
                     <li class="nav-item dropdown no-arrow">
                         <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
                             data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{admission.surname}}</span>
+                            <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{registrar.surname}}</span>
                             <img class="img-profile rounded-circle"
                                 src=" {% static "img/undraw_profile.svg" %}">
                         </a>
@@ -159,16 +155,40 @@
 
             </nav>
             <!-- End of Topbar -->
-            {% block content %}
             <!-- Begin Page Content -->
             
-
-                
-            <!-- /.container-fluid -->
+            {% block content %}
+            <div class="container-fluid">
+                <div class="box1 p-1" style="height: auto; flex: 2; border-radius: 13px;">
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <h6 class="m-0 font-weight-bold text-primary">School Announcement</h6>
+                        </div>
+                        {% for i in announcement %}
+                            <div class="card-body">
+                                <div class="card shadow-sm mb-4">
+                                    <!-- Card Header - Accordion -->
+                                    <a href="#collapseCardExample" class="d-block card-header py-3" data-toggle="collapse"
+                                        role="button" aria-expanded="true" aria-controls="collapseCardExample">
+                                        <h6 class="m-0 font-weight-bold text-primary">{{i.title}}</h6>
+                                    </a>
+                                    <!-- Card Content - Collapse -->
+                                    <div class="collapse show" id="collapseCardExample">
+                                        <div class="card-body">
+                                            {{i.body}}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            {% endblock content %}
 
         </div>
         <!-- End of Main Content -->
-            {% endblock content %}
 
         <!-- Footer -->
         <footer class="sticky-footer bg-white">
