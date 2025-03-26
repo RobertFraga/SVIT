@@ -513,6 +513,14 @@ def cashier_dashboard(request):
 @login_required(login_url='login')
 @allowed_user(allow_roles=['admission'])
 def admission_dashboard(request):
+    announcement = Announcement.objects.all().order_by('-announcement_id')
     admission = request.user.admissionstaff
-    context = {'admission': admission}
+    context = {'admission': admission, 'announcement': announcement}
     return render(request, 'admission/admission-dashboard.html', context)
+
+@login_required(login_url='login')
+@allowed_user(allow_roles=['admission'])
+def admission_enrollies(request):
+    enrollies = StudentProfile.objects.all()
+    context = {'enrollies': enrollies}
+    return render(request, 'admission/enrollies.html', context)
