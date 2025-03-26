@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import get_object_or_404, render, redirect
 from .models import StudentProfile, FacultyStaff, Announcement, registrarStaff, cashierStaff, admissionStaff, StudentGrade,StudentAttendance, accademicYear, level
 from django.shortcuts import render
 from django.contrib.auth import authenticate, login, logout
@@ -61,6 +61,21 @@ def add_announcement(request):
 
     context = {'announce': announce}
     return render(request, 'admin/announcement_form.html', context)
+
+def view_announcement(pk):
+    announcement = get_object_or_404(Announcement, announcement_id=pk)
+    return JsonResponse({
+        'title': announcement.title,
+        'event': announcement.event,
+        'body': announcement.body
+    })
+
+def delete_annoucement(request, pk):
+    announcement = get_object_or_404(Announcement, announcement_id=pk)
+    if  request.method=="POST":
+         announcement.delete()
+         return redirect('/')
+    return render(request,'admin/admin-dashboard.html')
 
 
 @login_required(login_url='login')

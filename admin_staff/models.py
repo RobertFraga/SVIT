@@ -148,12 +148,20 @@ class Announcement(models.Model):
     body = models.TextField()
     event = models.DateField(null=True)
 
+
+
     class Meta:
         managed = True
         db_table = 'annoucement'
     
     def __str__(self):
         return self.title
+
+
+    def save(self, *args, **kwargs):
+        self.title = self.title.capitalize()
+        self.body = self.body.capitalize()
+        super().save(*args, **kwargs)
     
 
 class registrarStaff(models.Model):
