@@ -38,6 +38,12 @@
                         <div class="col-md-2">
                             {{student.gender|as_crispy_field }}
                         </div>
+                        
+                        <div class="col-md-2">
+                            <label for="inputEmail4" class="form-label">Age:</label>
+                            <input type="text" class="form-control" id="inputEmail4">
+                        </div>
+
                         <div class="col-md-2">
                             {{student.birth_date|as_crispy_field }}
                         </div>
@@ -46,9 +52,6 @@
                         </div>
                         <div class="col-md-3">
                             {{student.religion|as_crispy_field }}
-                        </div>
-                        <div class="col-md-2">
-                            {{student.civil_status|as_crispy_field }}
                         </div>
                         
                         <!-- SINGIT KO LANG -->
