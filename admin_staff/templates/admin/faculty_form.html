@@ -1,0 +1,58 @@
+{% extends "admin/admin_dashboard.html" %}
+
+{% load crispy_forms_tags %}
+
+{% block content %}
+<form action='' method='POST'>
+    <div class="row g-3">
+        {% csrf_token %}
+        <div class="col-12">
+            {{faculty.user|as_crispy_field }}
+        </div>
+        <div class="col-md-4">
+            {{faculty.faculty_staff_id|as_crispy_field }}
+        </div>
+        <div class="col-md-4">
+            {{faculty.surname|as_crispy_field }}
+        </div>
+        <div class="col-md-4">
+            {{faculty.first_name|as_crispy_field }}
+        </div>
+        <div class="col-md-4">
+            {{faculty.middle_name|as_crispy_field }}
+        </div>
+        <div class="col-md-4">
+            {{faculty.gender|as_crispy_field }}
+        </div>
+        <div class="col-md-4">
+            {{faculty.birth_date|as_crispy_field }}
+        </div>
+        <div class="col-md-4">
+            {{faculty.birth_place|as_crispy_field }}
+        </div>
+        <div class="col-md-4">
+            {{faculty.religion|as_crispy_field }}
+        </div>
+        <div class="col-md-4">
+            {{faculty.civil_status|as_crispy_field }}
+        </div>
+        <div class="col-md-4">
+            {{faculty.contact|as_crispy_field }}
+        </div>
+        <div class="col-md-4">
+            {{faculty.email|as_crispy_field }}
+        </div>
+        <div class="col-md-4">
+            {{faculty.section|as_crispy_field }}
+        </div>
+        <div class="col-md-12">
+            {{faculty.subject|as_crispy_field }}
+        </div>
+        
+        <div class="d-grid gap-2">
+            <button class="btn btn-primary" type="submit">Confirm</button>
+        </div>
+    </div>
+</form>
+
+{% endblock content %}

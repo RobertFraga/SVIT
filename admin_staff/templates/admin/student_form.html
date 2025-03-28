@@ -1,0 +1,112 @@
+{% extends "admin/admin_dashboard.html" %}
+
+{% load crispy_forms_tags %}
+{% load static %}
+{% block content %}
+
+<!-- Custom fonts for this template-->
+
+
+<div class="container-fluid">
+    
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Add New Student User</h6>
+        </div>
+    
+        <div class="card-body">
+            <div class="container-fluid">
+                <form action='' method='POST'>
+                    <div class="row g-3">
+                        {% csrf_token %}
+                        
+                        <div class="col-md-6">
+                            {{student.user|as_crispy_field }}
+                        </div>
+                        <div class="col-md-6">
+                            {{student.student_lrn|as_crispy_field }}
+                        </div>
+                        <div class="col-md-4">
+                            {{student.surname|as_crispy_field }}
+                        </div>
+                        <div class="col-md-4">
+                            {{student.first_name|as_crispy_field }}
+                        </div>
+                        <div class="col-md-4">
+                            {{student.middle_name|as_crispy_field }}
+                        </div>
+                        <div class="col-md-2">
+                            {{student.gender|as_crispy_field }}
+                        </div>
+                        <div class="col-md-2">
+                            {{student.birth_date|as_crispy_field }}
+                        </div>
+                        <div class="col-md-3">
+                            {{student.birth_place|as_crispy_field }}
+                        </div>
+                        <div class="col-md-3">
+                            {{student.religion|as_crispy_field }}
+                        </div>
+                        
+                        
+                        <!-- SINGIT KO LANG -->
+                        <div class="col-md-2">
+                            {{student.mother_tongue|as_crispy_field }}
+                        </div>
+                        <div class="col-md-2">
+                            {{student.ethnic_group|as_crispy_field }}
+                        </div>
+                        <!-- END OF SINGIT -->
+
+                        <div class="col-md-3">
+                            {{student.contact|as_crispy_field }}
+                        </div>
+                        <div class="col-md-4">
+                            {{student.email|as_crispy_field }}
+                        </div>
+                        <div class="col-md-12"></div>
+
+                        <!-- ADD KO LANG 'TO KASI NEED 'TO MAKITA NG PANELISTS!!-->
+                        <div class="col-md-3">
+                            {{student.father_name|as_crispy_field }}
+                        </div>
+                        <div class="col-md-3">
+                            {{student.mother_maide_name|as_crispy_field }}
+                        </div>
+                        <div class="col-md-3">
+                            {{student.guardian_name|as_crispy_field }}
+                        </div>
+                        <div class="col-md-3">
+                            {{student.relationship|as_crispy_field }}
+                        </div>
+                        <div class="col-md-3">
+                            {{student.guardian_contact|as_crispy_field }}
+                        </div>
+                        <!-- END HERE!!-->
+                        <div class="col-md-12"></div>
+
+                        <div class="col-md-3">
+                            {{student.level|as_crispy_field }}
+                        </div>
+                        <div class="col-md-3">
+                            {{student.section|as_crispy_field }}
+                        </div>
+                        <div class="col-md-3">
+                            {{student.adviser|as_crispy_field }}
+                        </div>
+                        <div class="col-md-2">
+                        </div>
+                        <div class="col-md-3 d-flex justify-content-center align-items-center">
+                            <button class="btn btn-primary" type="submit">✓ Submit</button>
+                            <button class="btn btn-danger" type="submit">Discard</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+{% endblock content %}

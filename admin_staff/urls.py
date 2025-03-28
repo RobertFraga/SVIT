@@ -8,16 +8,23 @@ urlpatterns = [
     
     #admin board
     path('', views.admin_dashboard, name='home'),
-    path('update_annoucement<str:pk>', views.announcement, name='announcement'),
+    #path('update_annoucement<str:pk>', views.announcement, name='announcement'),
+    path('add_announcement', views.add_announcement, name='add_announcement'),
+    path('announcement/<int:pk>/', views.view_announcement, name='view_announcement'),
+    path('delete_announcement/<int:pk>/', views.delete_annoucement, name='delete_announcement'),
     path('class/', views.classes, name='classes'),
-    path('student/', views.student_list, name='student_list'),
     path('student/<int:pk>', views.student, name='studentinfo'),   
     path('addstudent', views.addstudent, name='addstd'),
+    path('student_form', views.student_form, name='student_form'),
 
     path('faculty-list/', views.faculty_list, name='faculty_list'),
     path('profile/<int:pk>', views.faculty_profile, name='faculty_profile'),
-    path('addflt', views.addstfaculty, name='addflt'),
-    path('chart', views.chart, name='chart'),
+    path('addfaculty', views.add_faculty, name='addfaculty'),
+    path('facultyform', views.faculty_form, name='facultyform'),
+    
+
+
+
     path('payment-history', views.payment_history, name='payment-history'),
     path("list-sections", views.jhslist_section, name="jhslist_section"),
     path('list-students', views.list_student, name="list_student"),
@@ -79,5 +86,7 @@ urlpatterns = [
     
     #admission
     path('admission-dashboard', views.admission_dashboard, name='admission'),
+    path('admission-enrollies', views.admission_enrollies, name='enrollies'),
+
     
 ]

@@ -32,15 +32,15 @@ class accademicYear(models.Model):
     ending_year = models.IntegerField(null=True, blank=True)
 
 class level(models.Model):
-    level = models.CharField(max_length=20);
-    
+    grade = models.CharField(max_length=20);
+    section_name = models.ManyToManyField("section")
     def __str__(self):
-        return self.level
+        return self.grade
 
 
 class section(models.Model):
     section_name = models.CharField(max_length=20)
-    level = models.ForeignKey("level", null=True, on_delete=models.SET_NULL)
+    
 
     def __str__(self):
         return self.section_name
@@ -97,6 +97,8 @@ class StudentProfile(models.Model):
     middle_name = models.CharField(max_length=24, blank=True, null=True)
     sufix = models.CharField(max_length=24, blank=True, null=True)
 
+    student_age = models.IntegerField(null=True)
+
     gender_choice = (
         ('Male', 'Male'),
         ('Female', 'Female'),
@@ -107,13 +109,7 @@ class StudentProfile(models.Model):
     birth_place = models.CharField(max_length=200, blank=True, null=True)
     religion = models.CharField(max_length=24, blank=True, null=True)
 
-    civil_choice = (
-        ('Single', 'Single'),
-        ('Married', 'Married'),
-        ('Divorced', 'Divorced'),
-        ('Widowed', 'Widowed'),
-    )
-    civil_status = models.CharField(max_length=10, default="Status", choices=civil_choice, blank=True, null=True)
+    
 
     mother_tongue = models.CharField(max_length=24, blank=True, null=True)
     ethnic_group = models.CharField(max_length=24, blank=True, null=True)
@@ -127,6 +123,9 @@ class StudentProfile(models.Model):
     guardian_name = models.CharField(max_length=50, blank=True, null=True)
     relationship = models.CharField(max_length=50, blank=True, null=True)
     guardian_contact = models.BigIntegerField(blank=True, null=True)
+
+    
+
 
     section = models.ForeignKey('section', null=True, on_delete=models.SET_NULL)
     adviser = models.ForeignKey('FacultyStaff', blank=True, null=True, on_delete=models.SET_NULL)
@@ -149,12 +148,20 @@ class Announcement(models.Model):
     body = models.TextField()
     event = models.DateField(null=True)
 
+
+
     class Meta:
         managed = True
         db_table = 'annoucement'
     
     def __str__(self):
         return self.title
+
+
+    def save(self, *args, **kwargs):
+        self.title = self.title.capitalize()
+        self.body = self.body.capitalize()
+        super().save(*args, **kwargs)
     
 
 class registrarStaff(models.Model):
