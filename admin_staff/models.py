@@ -106,18 +106,14 @@ class StudentProfile(models.Model):
     gender = models.CharField(max_length=24, default="Gender", choices=gender_choice, blank=True, null=True)
 
     birth_date = models.DateField()
+    age = models.IntegerField(null=True)
     birth_place = models.CharField(max_length=200, blank=True, null=True)
     religion = models.CharField(max_length=24, blank=True, null=True)
-
-    
 
     mother_tongue = models.CharField(max_length=24, blank=True, null=True)
     ethnic_group = models.CharField(max_length=24, blank=True, null=True)
 
     
-    contact = models.BigIntegerField(blank=True, null=True)
-    email = models.CharField(max_length=100, blank=True, null=True)
-
     father_name = models.CharField(max_length=50, blank=True, null=True)
     mother_maide_name = models.CharField(max_length=50, blank=True, null=True)
     guardian_name = models.CharField(max_length=50, blank=True, null=True)
@@ -125,6 +121,8 @@ class StudentProfile(models.Model):
     guardian_contact = models.BigIntegerField(blank=True, null=True)
 
     
+    
+
 
 
     section = models.ForeignKey('section', null=True, on_delete=models.SET_NULL)
