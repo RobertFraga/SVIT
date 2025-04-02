@@ -103,18 +103,49 @@ class StudentProfile(models.Model):
     )
     gender = models.CharField(max_length=24, default="Gender", choices=gender_choice)
 
-    birth_date = models.DateField()
+    birth_date = models.DateField(null=True)
+    age = models.CharField(null=True, max_length=2)
+    birth_place = models.CharField(max_length=50, null=True)
+    mother_tongue = models.CharField(max_length=24, null=True)
+    ethnic_group = models.CharField(max_length=24, null=True)
+    religion = models.CharField(max_length=24, null=True)
+
     # Adress section
     house_number = models.CharField(max_length=24, null=True)
     streets = models.CharField(max_length=24, null=True)
     barangay = models.CharField(max_length=24, null=True)
     city = models.CharField(max_length=24, null=True)
     province = models.CharField(max_length=24, null=True)
+    
+    #parent section
+    fathers_last_name = models.CharField(max_length=24, null=True)
+    fathers_name = models.CharField(max_length=24, null=True)
+    fathers_middle_name = models.CharField(max_length=24, null=True)
+    mothers_last_name = models.CharField(max_length=24, null=True)
+    mothers_name = models.CharField(max_length=24, null=True)
+    mothers_middle_name = models.CharField(max_length=24, null=True)
+    is_guardian = models.BooleanField(default=False)
 
-    
-    
+    Guardian_Full_Name = models.CharField(max_length=24, blank=True, null=True)
 
-    
+    guardian_or_parent_mobile_number = models.BigIntegerField(blank=True, null=True)
+
+    #document section
+    have_Form_137 = models.BooleanField(default=False)
+    have_Form_138 = models.BooleanField(default=False)
+    have_Good_Moral_Certificate = models.BooleanField(default=False)
+    have_PSA = models.BooleanField(default=False)
+
+
+    #remarks section
+    Transfer_Out = models.BooleanField(default=False)
+    Transfer_In = models.BooleanField(default=False)
+    Dropped = models.BooleanField(default=False)
+    Late_Enrolee = models.BooleanField(default=False)
+    CCT_Recipient = models.BooleanField(default=False)
+    Balik_Aral = models.BooleanField(default=False)
+    Learner_with_Disability = models.BooleanField(default=False)
+    Accelerated = models.BooleanField(default=False)
 
 
     section = models.ForeignKey('section', blank=True, null=True, on_delete=models.SET_NULL)

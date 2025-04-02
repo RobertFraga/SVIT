@@ -191,6 +191,41 @@
     </div>
 
     <div class="container-fluid">
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Remarks</h6>
+            </div>
+
+            <div class="card-body">
+                <div class="row g-3">
+                    {% comment %} documents {% endcomment %}
+                    <div class="col-md-3">
+                        {{student.Transfer_Out|as_crispy_field }}
+                    </div>
+                    <div class="col-md-3">
+                        {{student.Transfer_In|as_crispy_field }}
+                    </div>
+                    <div class="col-md-3">
+                        {{student.Late_Enrolee|as_crispy_field }}
+                    </div>
+                    <div class="col-md-3">
+                        {{student.CCT_Recipient|as_crispy_field }}
+                    </div>
+                    <div class="col-md-3">
+                        {{student.Balik_Aral|as_crispy_field }}
+                    </div>
+                    <div class="col-md-3">
+                        {{student.Learner_with_Disability|as_crispy_field }}
+                    </div>
+                    <div class="col-md-3">
+                        {{student.Accelerated|as_crispy_field }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid">
         <div class="d-grid gap-2">
             <button class="btn btn-primary" type="submit">✓ Submit</button>
             <button class="btn btn-danger" type="submit">Cancel</button>
