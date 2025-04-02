@@ -11,6 +11,7 @@ class announcementForm(ModelForm):
         fields = ['title', 'event', 'body']
         widgets = {
             'event': forms.DateInput(attrs={'type': 'date', 'class': 'form-control'}),
+            'event': forms.DateInput(attrs={'type': 'date', 'class': 'form-control'}),
         }
 
     def __init__(self, *args, **kwargs):
@@ -27,6 +28,7 @@ class studentForm(ModelForm):
         fields = '__all__'
         widgets = {
             'birth_date': forms.DateInput(attrs={'type': 'date', 'class': 'form-control'}),
+            'Age': forms.NumberInput(attrs={'type': 'number', 'class': 'form-control'}),
         }
 
 class facultyForm(ModelForm):

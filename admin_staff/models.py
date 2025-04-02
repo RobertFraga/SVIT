@@ -91,43 +91,57 @@ class FacultyStaff(models.Model):
 
 class StudentProfile(models.Model):
     user = models.OneToOneField(User, null=True, on_delete=models.CASCADE)
-    student_lrn = models.BigIntegerField(primary_key=True)
+    student_lrn = models.CharField(max_length=12, primary_key=True)
     surname = models.CharField(max_length=24)
     first_name = models.CharField(max_length=24)
     middle_name = models.CharField(max_length=24, blank=True, null=True)
     sufix = models.CharField(max_length=24, blank=True, null=True)
 
-    student_age = models.IntegerField(null=True)
-
     gender_choice = (
         ('Male', 'Male'),
         ('Female', 'Female'),
     )
-    gender = models.CharField(max_length=24, default="Gender", choices=gender_choice, blank=True, null=True)
+    gender = models.CharField(max_length=24, default="Gender", choices=gender_choice)
 
     birth_date = models.DateField()
-    birth_place = models.CharField(max_length=200, blank=True, null=True)
-    religion = models.CharField(max_length=24, blank=True, null=True)
+    age = models.CharField(max_length=2, null=True)
+    birth_place = models.CharField(max_length=200, null=True)
 
+    mother_tongue = models.CharField(max_length=24, null=True)
+    ethnic_group = models.CharField(max_length=24, null=True)
+    religion = models.CharField(max_length=24, null=True)
     
 
-    mother_tongue = models.CharField(max_length=24, blank=True, null=True)
-    ethnic_group = models.CharField(max_length=24, blank=True, null=True)
+    # Adress section
+    house_number = models.CharField(max_length=24, null=True)
+    streets = models.CharField(max_length=24, null=True)
+    barangay = models.CharField(max_length=24, null=True)
+    city = models.CharField(max_length=24, null=True)
+    province = models.CharField(max_length=24, null=True)
 
+    #parent section
+    fathers_last_name  = models.CharField(max_length=24, null=True) 
+    fathers_name = models.CharField(max_length=24, null=True)
+    fathers_middle_name = models.CharField(max_length=24, null=True)
+
+    mothers_last_name  = models.CharField(max_length=24, null=True)
+    mothers_name  = models.CharField(max_length=24, null=True)
+    mothers_middle_name  = models.CharField(max_length=24, null=True)
+    is_guardian = models.BooleanField(default=True)
     
-    contact = models.BigIntegerField(blank=True, null=True)
-    email = models.CharField(max_length=100, blank=True, null=True)
-
-    father_name = models.CharField(max_length=50, blank=True, null=True)
-    mother_maide_name = models.CharField(max_length=50, blank=True, null=True)
-    guardian_name = models.CharField(max_length=50, blank=True, null=True)
-    relationship = models.CharField(max_length=50, blank=True, null=True)
-    guardian_contact = models.BigIntegerField(blank=True, null=True)
-
-    
+    #guardian section
+    Guardian_Full_Name = models.CharField(max_length=50, blank=True, null=True)
+    guardian_or_parent_mobile_number = models.CharField(max_length=24, null=True)
 
 
-    section = models.ForeignKey('section', null=True, on_delete=models.SET_NULL)
+    have_Form_137 = models.BooleanField(default=False)
+    have_Form_138 = models.BooleanField(default=False)
+    have_Good_Moral_Certificate = models.BooleanField(default=False)
+    have_PSA = models.BooleanField(default=False)
+
+
+
+    section = models.ForeignKey('section', blank=True, null=True, on_delete=models.SET_NULL)
     adviser = models.ForeignKey('FacultyStaff', blank=True, null=True, on_delete=models.SET_NULL)
     level = models.ForeignKey('level', blank=True, null=True, on_delete=models.SET_NULL)
     
