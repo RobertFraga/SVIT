@@ -1,0 +1,204 @@
+{% extends "admission/admission-dashboard.html" %}
+
+{% load crispy_forms_tags %}
+{% load static %}
+{% block content %}
+
+<!-- Custom fonts for this template-->
+
+
+
+<form action="" method="POST">
+    {% csrf_token %}
+    <div class="container-fluid">
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Student Information</h6>
+            </div>
+    
+            <div class="card-body">
+                <div class="row g-3">
+                    <div class="col-md-12">
+                        {{student.student_lrn|as_crispy_field }}
+                    </div>
+                    <div class="col-md-4">
+                        {{student.surname|as_crispy_field }}
+                    </div>
+                    <div class="col-md-4">
+                        {{student.first_name|as_crispy_field }}
+                    </div>
+                    <div class="col-md-4">
+                        {{student.middle_name|as_crispy_field }}
+                    </div>
+                    <div class="col-md-2">
+                        {{student.sufix|as_crispy_field }}
+                    </div>
+                    <div class="col-md-2">
+                        {{student.gender|as_crispy_field }}
+                    </div>
+                    <div class="col-md-2">
+                        {{student.birth_date|as_crispy_field }}
+                    </div>
+                    <div class="col-md-2">
+                        {{student.age|as_crispy_field }}
+                    </div>
+                    <div class="col-md-2">
+                        {{student.birth_place|as_crispy_field }}
+                    </div>
+                    <div class="col-md-2">
+                        {{student.mother_tongue|as_crispy_field }}
+                    </div>
+                    <div class="col-md-6">
+                        {{student.ethnic_group|as_crispy_field }}
+                    </div>
+                    <div class="col-md-6">
+                        {{student.religion|as_crispy_field }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid">
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Student Address</h6>
+            </div>
+
+            <div class="card-body">
+                <div class="row g-3">
+                    {% comment %} Guardian {% endcomment %}
+                    <div class="col-md-2">
+                        {{student.house_number|as_crispy_field }}
+                    </div>
+                    <div class="col-md-5">
+                        {{student.streets|as_crispy_field }}
+                    </div>
+                    <div class="col-md-5">
+                        {{student.barangay|as_crispy_field }}
+                    </div>
+                    <div class="col-md-6">
+                        {{student.city|as_crispy_field }}
+                    </div>
+                    <div class="col-md-6">
+                        {{student.province|as_crispy_field }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid">
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Parent Information</h6>
+            </div>
+
+            <div class="card-body">
+                <div class="row g-6">
+                    <!-- Parents -->
+                    <div class="col-md-4">
+                        {{student.fathers_last_name|as_crispy_field }}
+                    </div>
+                    <div class="col-md-4">
+                        {{student.fathers_name|as_crispy_field }}
+                    </div>
+                    <div class="col-md-4">
+                        {{student.fathers_middle_name|as_crispy_field }}
+                    </div>
+                    
+                    <div class="container-fluid">
+                        <label for="">Mother's Maiden Name</label>
+                    </div>
+                    
+                    <div class="col-md-4">
+                        {{student.mothers_last_name|as_crispy_field }}
+                    </div>
+                    <div class="col-md-4">
+                        {{student.mothers_name|as_crispy_field }}
+                    </div>
+                    <div class="col-md-4">
+                        {{student.mothers_middle_name|as_crispy_field }}
+                    </div>
+                    <div class="col-md-3">
+                        {{student.is_guardian|as_crispy_field }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+
+    <div class="container-fluid">
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Guardian Information</h6>
+            </div>
+
+            <div class="card-body">
+                <div class="row g-3">
+                    {% comment %} Guardian {% endcomment %}
+                    <div class="col-md-12">
+                        {{student.Guardian_Full_Name|as_crispy_field }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid">
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Contact Number</h6>
+            </div>
+
+            <div class="card-body">
+                <div class="row g-3">
+                    {% comment %} Guardian {% endcomment %}
+                    <div class="col-md-6">
+                        {{student.guardian_or_parent_mobile_number|as_crispy_field }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid">
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Guardian Information</h6>
+            </div>
+
+            <div class="card-body">
+                <div class="row g-3">
+                    {% comment %} documents {% endcomment %}
+                    <div class="col-md-3">
+                        {{student.have_Form_137|as_crispy_field }}
+                    </div>
+                    <div class="col-md-3">
+                        {{student.have_Form_138|as_crispy_field }}
+                    </div>
+                    <div class="col-md-3">
+                        {{student.have_Good_Moral_Certificate|as_crispy_field }}
+                    </div>
+                    <div class="col-md-3">
+                        {{student.have_PSA|as_crispy_field }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid">
+        <div class="d-grid gap-2">
+            <button class="btn btn-primary" type="submit">✓ Submit</button>
+            <button class="btn btn-danger" type="submit">Cancel</button>
+        </div>
+    </div>
+</form>
+
+
+
+
+{% endblock content %}

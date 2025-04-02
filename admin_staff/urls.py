@@ -87,6 +87,8 @@ urlpatterns = [
     #admission
     path('admission-dashboard', views.admission_dashboard, name='admission'),
     path('admission-enrollies', views.admission_enrollies, name='enrollies'),
+    path('admission-student/<int:pk>', views.admission_student_profile, name='admission_student'),
+    path('admission-student-form', views.admission_student_form, name='admission_student_form'),
 
     
 ]
