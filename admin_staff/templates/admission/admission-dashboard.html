@@ -17,6 +17,18 @@
 
   <!-- Custom styles for this template-->
   <link href= "{% static "css/sb-admin-2.min.css" %}" rel="stylesheet">
+  
+  <!-- jQuery -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+  <style>
+    .logo img {
+        width: 8vw; /* Makes sure image scales properly */
+        height: auto;
+        border-radius: 100%;
+    }
+    input { text-transform: capitalize }
+  </style>
 </head>
 
 <body id="page-top">
@@ -43,7 +55,12 @@
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
             </li>
-            <hr class="sidebar-divider my-0">
+
+            <hr class="sidebar-divider">
+
+            <div class="sidebar-heading">
+                Manage Admit Students
+            </div>
 
             <li class="nav-item active">
                 <a class="nav-link" href="{% url "enrollies" %}">
@@ -156,9 +173,56 @@
             </nav>
             <!-- End of Topbar -->
             <!-- Begin Page Content -->
+
+            <div class="container-fluid mb-4 d-flex align-items-center justify-content-between bg-gradient-primary" style="height: 12vh; margin-bottom: 2vh;">
+                <div class="logo">
+                    <img src="{% static "img/logo.png" %}" alt="Logo">
+                </div>
+                
+                <div class="Title text-white">
+                    {% block heading %}
+                        <h1>Dashboard</h1>
+                    {% endblock heading %}
+                </div>
+
+                <div class="text-white" id="school year"><h3>2024-2025</h3></div>
+
+                <div class="d-flex align-items-center gap-3">
+                    <div class="text-white">
+                        <div id="current-date"></div>
+                        <div id="current-time"></div>
+                    </div>
+                </div>
+
+                <!-- jQuery Script for Live Date & Time -->
+                <script>
+                    function updateDateTime() {
+                        let now = new Date();
+
+                        // Format Date
+                        let options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+                        let dateStr = now.toLocaleDateString('en-US', options);
+
+                        // Format Time
+                        let timeStr = now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true });
+
+                        // Update elements
+                        $("#current-date").text(dateStr);
+                        $("#current-time").text(timeStr);
+                    }
+
+                    // Update time every second
+                    $(document).ready(function () {
+                        updateDateTime();
+                        setInterval(updateDateTime, 1000);
+                    });
+                </script>
+            </div>
             
             {% block content %}
-            <div class="container-fluid">
+
+            <div class="container-fluid mt-4" style=" display: flex; margin-top: 3vh; margin-bottom: 5vh;">
+
                 <div class="box1 p-1" style="height: auto; flex: 2; border-radius: 13px;">
                     
                     <div class="card">
@@ -167,7 +231,7 @@
                         </div>
                         {% for i in announcement %}
                             <div class="card-body">
-                                <div class="card shadow-sm mb-4">
+                                <div class="card shadow-sm">
                                     <!-- Card Header - Accordion -->
                                     <a href="#collapseCardExample" class="d-block card-header py-3" data-toggle="collapse"
                                         role="button" aria-expanded="true" aria-controls="collapseCardExample">
@@ -182,6 +246,103 @@
                                 </div>
                             </div>
                         {% endfor %}
+                    </div>
+                </div>
+
+                <div class="box2 p-1" style="height: auto; flex: 1; border-radius: 13px;">
+                    <!-- Content Row -->
+                    <div class="row">
+
+                        <div class="col-xl-6 col-md-12 mb-4">
+                            <div class="card border-left-info shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-s font-weight-bold text-info text-uppercase mb-1">
+                                                Active Students
+                                            </div>
+                                            <div class="h2 mb-0 font-weight-bold text-gray-800 mb-3">1,500</div>
+                                            <div class="text-xs font-weight-normal mb-1">Active Students for School Year</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xl-6 col-md-12 mb-4">
+                            <div class="card border-left-info shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-s font-weight-bold text-info text-uppercase mb-1">
+                                                Advisers</div>
+                                            <div class="h2 mb-0 font-weight-bold text-gray-800 mb-3">20</div>
+                                            <div class="text-xs font-weight-normal mb-1">20 Active Advisers</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xl-6 col-md-12 mb-4">
+                            <div class="card border-left-success shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-s font-weight-bold text-success text-uppercase mb-1">
+                                                Grade 7</div>
+                                            <div class="h2 mb-0 font-weight-bold text-gray-800 mb-3">40</div>
+                                            <div class="text-xs font-weight-normal mb-1">Active Registered Students</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xl-6 col-md-12 mb-4">
+                            <div class="card border-left-warning shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-s font-weight-bold text-warning text-uppercase mb-1">
+                                                Grade 8</div>
+                                            <div class="h2 mb-0 font-weight-bold text-gray-800 mb-3">60</div>
+                                            <div class="text-xs font-weight-normal mb-1">Active Registered Students</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xl-6 col-md-12 mb-4">
+                            <div class="card border-left-danger shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-s font-weight-bold text-danger text-uppercase mb-1">
+                                                Grade 9</div>
+                                            <div class="h2 mb-0 font-weight-bold text-gray-800 mb-3">80</div>
+                                            <div class="text-xs font-weight-normal mb-1">Active Registered Students</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xl-6 col-md-12 mb-4">
+                            <div class="card border-left-primary shadow h-100 py-2">
+                                <div class="card-body">
+                                    <div class="row no-gutters align-items-center">
+                                        <div class="col mr-2">
+                                            <div class="text-s font-weight-bold text-primary text-uppercase mb-1">
+                                                Grade 10</div>
+                                            <div class="h2 mb-0 font-weight-bold text-gray-800 mb-3">90</div>
+                                            <div class="text-xs font-weight-normal mb-1">Active Registered Students</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
