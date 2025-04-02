@@ -104,14 +104,6 @@ class StudentProfile(models.Model):
     gender = models.CharField(max_length=24, default="Gender", choices=gender_choice)
 
     birth_date = models.DateField()
-    age = models.CharField(max_length=2, null=True)
-    birth_place = models.CharField(max_length=200, null=True)
-
-    mother_tongue = models.CharField(max_length=24, null=True)
-    ethnic_group = models.CharField(max_length=24, null=True)
-    religion = models.CharField(max_length=24, null=True)
-    
-
     # Adress section
     house_number = models.CharField(max_length=24, null=True)
     streets = models.CharField(max_length=24, null=True)
@@ -119,26 +111,10 @@ class StudentProfile(models.Model):
     city = models.CharField(max_length=24, null=True)
     province = models.CharField(max_length=24, null=True)
 
-    #parent section
-    fathers_last_name  = models.CharField(max_length=24, null=True) 
-    fathers_name = models.CharField(max_length=24, null=True)
-    fathers_middle_name = models.CharField(max_length=24, null=True)
-
-    mothers_last_name  = models.CharField(max_length=24, null=True)
-    mothers_name  = models.CharField(max_length=24, null=True)
-    mothers_middle_name  = models.CharField(max_length=24, null=True)
-    is_guardian = models.BooleanField(default=False)
     
-    #guardian section
-    Guardian_Full_Name = models.CharField(max_length=50, blank=True, null=True)
-    guardian_or_parent_mobile_number = models.CharField(max_length=24, null=True)
+    
 
-
-    have_Form_137 = models.BooleanField(default=False)
-    have_Form_138 = models.BooleanField(default=False)
-    have_Good_Moral_Certificate = models.BooleanField(default=False)
-    have_PSA = models.BooleanField(default=False)
-
+    
 
 
     section = models.ForeignKey('section', blank=True, null=True, on_delete=models.SET_NULL)

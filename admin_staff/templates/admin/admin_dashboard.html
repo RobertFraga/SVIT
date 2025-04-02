@@ -75,24 +75,46 @@
             <hr class="sidebar-divider d-none d-md-block">
 
             <div class="sidebar-heading">
-                Academic Related
+                User Management
             </div>
+
+            <li class="nav-item">
+                <a class="nav-link" href="{% url "list_student" %}">
+                    <i class="fas fa-fw fa-table"></i>
+                    <span>Student Users</span></a>
+            </li>
 
             <li class="nav-item">
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
                     aria-expanded="true" aria-controls="collapseTwo">
                     <i class="fas fa-fw fa-cog"></i>
-                    <span>Classes</span>
+                    <span>Faculty Users</span>
                 </a>
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Components:</h6>
-                        <a class="collapse-item" href="{% url "jhslist_section" %}">JHS Section List</a>
-                        <a class="collapse-item" href="{% url "list_student" %}">Student List</a>
-                        <a class="collapse-item" href="{% url "faculty_list" %}">Adviser List</a>
-                        <a class="collapse-item" href="{% url "subject_teacher" %}">Subject Teacher List</a>
+                        <a class="collapse-item" href="{% url "faculty_list" %}">Advisers</a>
+                        <a class="collapse-item" href="{% url "subject_teacher" %}">Subject Teachers</a>
                     </div>
                 </div>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" href="#">
+                    <i class="fas fa-fw fa-table"></i>
+                    <span>Staff Users</span></a>
+            </li>
+            
+            <hr class="sidebar-divider d-none d-md-block">
+
+            <div class="sidebar-heading">
+                Academic Related
+            </div>
+
+            <li class="nav-item">
+                <a class="nav-link" href="{% url "jhslist_section" %}">
+                    <i class="fas fa-fw fa-table"></i>
+                    <span>JHS Sections</span></a>
             </li>
 
             <li class="nav-item">
@@ -373,12 +395,33 @@
                     {% comment %} annoucement content {% endcomment %}
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <button  role='btn' class='btn btn-light border' data-bs-toggle="modal" data-bs-target="#addModal">
-                                <i class="bi bi-plus-circle"></i> Add Announcement
-                            </button>
+                            <h6 class="m-0 font-weight-bold text-primary">Student Payment List</h6>
                         </div>
 
                         <div class="card-body">
+                            <div class="row mb-3">
+                                <div class="col-sm-12 col-md-4 d-flex align-items-end">
+                                  <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+                                    <div class="input-group dataTables_length d-flex align-items-center">
+                                        <input type="text" name="search" class="form-control bg-light border-0 small" placeholder="Search here" aria-label="Search" aria-describedby="basic-addon2">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-primary" type="submit">
+                                                <i class="fas fa-search fa-sm"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                  </form>
+                                </div>
+
+                                <div class="col-sm-3 col-md-3 d-flex align-items-center">
+                                    <div class="dataTables_length d-flex align-items-center" id="dataTable_length">
+                                      <a href="{% url "addfaculty" %}" role='btn' class='btn btn-light border' data-bs-toggle="modal" data-bs-target="#addModal">
+                                        <i class="bi bi-plus-circle"></i> New Adviser
+                                      </a>
+                                    </div>
+                                </div>
+                            </div>
+                            
                             
                             {% comment %} view announcement {% endcomment %}
                             <table class="table table-hover my-1">
@@ -420,7 +463,7 @@
                                                     </div>
                                                     <div class="modal-body">
                                                         <h5 id="announcementTitle"></h5>
-                                                        <p><strong>Event:</strong> <span id="announcementEvent"></span></p>
+                                                        <p><strong>Date:</strong> <span id="announcementEvent"></span></p>
                                                         <p><strong>Description:</strong> <span id="announcementBody"></span></p>
                                                     </div>
                                                     <div class="modal-footer">
@@ -471,6 +514,7 @@
                     });
                     </script>
                 </div>
+
                 <!-- Add Announcement Modal -->
                 <div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="addModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
@@ -486,7 +530,7 @@
                                         <input type="text" class="form-control" name="title" required>
                                     </div>
                                     <div class="mb-3">
-                                        <label for="event" class="form-label">Event</label>
+                                        <label for="event" class="form-label">Date</label>
                                         <input type="date" class="form-control" name="event" required>
                                     </div>
                                     <div class="mb-3">
