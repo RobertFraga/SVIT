@@ -530,12 +530,15 @@ def admission_enrollies(request):
 @login_required(login_url='login')
 @allowed_user(allow_roles=['admission'])
 def admission_student_profile(request, pk):
+    admission = request.user.admissionstaff
     student = StudentProfile.objects.get(student_lrn = pk)
-    return render(request, 'admission/admission-student-profile.html', {'student': student})
+    context = {'student': student, 'admission': admission}
+    return render(request, 'admission/admission-student-profile.html', context)
 
 @login_required(login_url='login')
 @allowed_user(allow_roles=['admission'])
 def admission_student_form(request):
+    admission = request.user.admissionstaff
     student = studentForm()
     if request.method == "POST":
         student = studentForm(request.POST)
@@ -543,5 +546,5 @@ def admission_student_form(request):
             student.save()
             return redirect('enrollies')
 
-    context = {'student': student}
+    context = {'student': student, 'admission': admission}
     return render(request, 'admission/admission-student-form.html', context)

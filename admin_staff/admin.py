@@ -1,6 +1,7 @@
 from django.contrib import admin
 from admin_staff.models import StudentProfile,Announcement, FacultyStaff, guidanceStaff, registrarStaff, cashierStaff, section, level, accademicYear, admissionStaff, accountingStaff
 from import_export.admin import ImportExportModelAdmin
+from django.contrib.auth.models import User
 # Register your models here.
 
 @admin.register(StudentProfile)
@@ -37,21 +38,6 @@ class faculty(admin.ModelAdmin):
     search_fields = ('surname', 'cashier_staff_id')
 
 
-
-
-""" @admin.register(section)
-class section(admin.ModelAdmin):
-    list_display = ('section_name', 'level')
-    ordering = ('level', )
- """
-
-
-
-""" @admin.register(level)
-class level(admin.ModelAdmin):
-    list_display = ('level',  )
-    ordering = ('level', ) """
-
 admin.site.register(level)
 admin.site.register(section)
 
@@ -74,3 +60,17 @@ admin.site.register(accademicYear)
 
 
 admin.site.register(admissionStaff)
+
+
+
+class ProfileInline(admin.StackedInline):
+    model = StudentProfile
+
+class UserAdmin(admin.ModelAdmin):
+    model = User
+    inlines = [ProfileInline]
+
+# Register your models here.
+admin.site.unregister(User)
+
+admin.site.register(User, UserAdmin)
