@@ -127,7 +127,7 @@ class StudentProfile(models.Model):
     mothers_last_name  = models.CharField(max_length=24, null=True)
     mothers_name  = models.CharField(max_length=24, null=True)
     mothers_middle_name  = models.CharField(max_length=24, null=True)
-    is_guardian = models.BooleanField(default=True)
+    is_guardian = models.BooleanField(default=False)
     
     #guardian section
     Guardian_Full_Name = models.CharField(max_length=50, blank=True, null=True)
