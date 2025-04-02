@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.db.models.signals import post_save
 # Create your models here.
 class StudentAttendance(models.Model):
     student_lrn = models.ForeignKey('StudentProfile', on_delete=models.CASCADE, db_column='student_lrn')
@@ -128,7 +129,7 @@ class StudentProfile(models.Model):
 
     Guardian_Full_Name = models.CharField(max_length=24, blank=True, null=True)
 
-    guardian_or_parent_mobile_number = models.BigIntegerField(blank=True, null=True)
+    guardian_or_parent_mobile_number = models.CharField(max_length=11, null=True)
 
     #document section
     have_Form_137 = models.BooleanField(default=False)
@@ -159,6 +160,15 @@ class StudentProfile(models.Model):
     
     def __str__(self):
         return self.surname
+
+
+
+def create_student_profile(sender, instance, created, **kwargs):
+    if created:
+        student_profile = StudentProfile(user=instance)
+        student_profile.save()
+        
+post_save.connect(create_student_profile, sender=User)
 
 
 
