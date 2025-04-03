@@ -57,13 +57,11 @@ class faculty(admin.ModelAdmin):
 
 
 admin.site.register(accademicYear)
-
-
 admin.site.register(admissionStaff)
 
 
 
-class ProfileInline(admin.StackedInline):
+""" class ProfileInline(admin.StackedInline):
     model = StudentProfile
 
 class UserAdmin(admin.ModelAdmin):
@@ -73,4 +71,4 @@ class UserAdmin(admin.ModelAdmin):
 # Register your models here.
 admin.site.unregister(User)
 
-admin.site.register(User, UserAdmin)
+admin.site.register(User, UserAdmin) """
