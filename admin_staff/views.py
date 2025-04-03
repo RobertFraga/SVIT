@@ -504,6 +504,7 @@ def registrar_dashboard(request):
 @login_required(login_url='login')
 @allowed_user(allow_roles=['cashier'])
 def cashier_dashboard(request):
+    announcement = Announcement.objects.all().order_by('-announcement_id')
     cashier = request.user.cashierstaff
     context = {'cashier': cashier}
     return render(request, "cashier/cashier_dashboard.html", context)

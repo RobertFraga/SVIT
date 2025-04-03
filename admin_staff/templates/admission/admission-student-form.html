@@ -11,15 +11,18 @@
 <form action="" method="POST">
     {% csrf_token %}
     <div class="container-fluid">
+
         <div class="card shadow mb-4">
             <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">Student Information</h6>
+                <h6 class="m-0 font-weight-bold text-primary">Student Personal Information</h6>
             </div>
     
             <div class="card-body">
                 <div class="row g-3">
-                    <div class="col-md-12">
+                    <div class="col-md-6">
                         {{student.student_lrn|as_crispy_field }}
+                    </div>
+                    <div class="col-md-12">
                     </div>
                     <div class="col-md-4">
                         {{student.surname|as_crispy_field }}
@@ -62,7 +65,7 @@
     <div class="container-fluid">
         <div class="card shadow mb-4">
             <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">Student Address</h6>
+                <h6 class="m-0 font-weight-bold text-primary">Student Home Address</h6>
             </div>
 
             <div class="card-body">
@@ -139,23 +142,9 @@
             <div class="card-body">
                 <div class="row g-3">
                     {% comment %} Guardian {% endcomment %}
-                    <div class="col-md-12">
+                    <div class="col-md-6">
                         {{student.Guardian_Full_Name|as_crispy_field }}
                     </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="container-fluid">
-        <div class="card shadow mb-4">
-            <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">Contact Number</h6>
-            </div>
-
-            <div class="card-body">
-                <div class="row g-3">
-                    {% comment %} Guardian {% endcomment %}
                     <div class="col-md-6">
                         {{student.guardian_or_parent_mobile_number|as_crispy_field }}
                     </div>
@@ -167,7 +156,7 @@
     <div class="container-fluid">
         <div class="card shadow mb-4">
             <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">Guardian Information</h6>
+                <h6 class="m-0 font-weight-bold text-primary">Admission Requirements</h6>
             </div>
 
             <div class="card-body">
