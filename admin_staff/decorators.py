@@ -42,9 +42,6 @@ def admin_only(view_func):
         if group == 'registrar':
             return redirect('registrar')
         
-        if group == 'guidance':
-            return redirect('guidance')
-        
         if group == 'admission':
             return redirect('admission')
         
