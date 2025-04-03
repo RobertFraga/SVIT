@@ -499,6 +499,15 @@ def registrar_dashboard(request):
     context = {'registrar': registrar}
     return render(request, 'registrar/registrar-dashboard.html', context)
 
+@login_required(login_url='login')
+@allowed_user(allow_roles=['registrar'])
+def pending(request):
+    return render(request, "registrar/pending.html")
+
+@login_required(login_url='login')
+@allowed_user(allow_roles=['registrar'])
+def add_to_class(request):
+    return render(request, "registrar/add_class.html")
 
 #cashier end
 @login_required(login_url='login')
@@ -507,6 +516,16 @@ def cashier_dashboard(request):
     cashier = request.user.cashierstaff
     context = {'cashier': cashier}
     return render(request, "cashier/cashier_dashboard.html", context)
+
+@login_required(login_url='login')
+@allowed_user(allow_roles=['cashier'])
+def payment(request):
+    return render(request, "cashier/payment.html")
+
+@login_required(login_url='login')
+@allowed_user(allow_roles=['cashier'])
+def edit_payment(request):
+    return render(request, "cashier/edit_payment.html")
 
 
 #admission end
