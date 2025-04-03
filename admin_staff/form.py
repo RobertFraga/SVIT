@@ -29,7 +29,6 @@ class studentForm(ModelForm):
         widgets = {
             'birth_date': forms.DateInput(attrs={'type': 'date', 'class': 'form-control'}),
             'Age': forms.NumberInput(attrs={'type': 'number', 'class': 'form-control'}),
-            'choice_field': forms.RadioSelect,
         }
 
 class facultyForm(ModelForm):

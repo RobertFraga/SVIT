@@ -102,7 +102,7 @@ class StudentProfile(models.Model):
         ('Male', 'Male'),
         ('Female', 'Female'),
     )
-    gender = models.CharField(max_length=24, default="Gender", choices=gender_choice)
+    gender = models.BooleanField(default=False, choices=gender_choice)
 
     birth_date = models.DateField(null=True)
     age = models.CharField(null=True, max_length=2)
@@ -137,33 +137,6 @@ class StudentProfile(models.Model):
     have_Good_Moral_Certificate = models.BooleanField(default=False)
     have_PSA = models.BooleanField(default=False)
     
-    
-    
-    OPTION_1 = "Transfer_Out"
-    OPTION_2 = "Transfer_In"
-    OPTION_3 = "Dropped"
-    OPTION_4 = "Late_Enrolee"
-    OPTION_5 = "CCT_Recipient"
-    OPTION_6 = "Balik_Aral"
-    OPTION_7 = "Learner_with_Disability"
-    OPTION_8 = "Accelerated"
-
-    Remarks = [
-        (OPTION_1, "Transfer_Out"),
-        (OPTION_2, "Transfer_In"),
-        (OPTION_3, "Dropped"),
-        (OPTION_4, "Late_Enrolee"),
-        (OPTION_5, "CCT_Recipient"),
-        (OPTION_6, "Balik_Aral"),
-        (OPTION_7, "Learner_with_Disability"),
-        (OPTION_8, "Accelerated"),
-    ]
-
-    choice_field = models.CharField(
-        max_length=40,
-        choices=Remarks,
-        default="Select Remarks",
-    )
 
     #remarks section
     Transfer_Out = models.BooleanField(default=False)
