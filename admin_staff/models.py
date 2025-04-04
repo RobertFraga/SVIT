@@ -102,7 +102,7 @@ class StudentProfile(models.Model):
         ('Male', 'Male'),
         ('Female', 'Female'),
     )
-    gender = models.BooleanField(default=False, choices=gender_choice)
+    gender = models.CharField(max_length=6, default=False, choices=gender_choice)
 
     birth_date = models.DateField(null=True)
     age = models.CharField(null=True, max_length=2)
