@@ -7,7 +7,8 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from .decorators import unauthenticated_user, allowed_user, admin_only
-from .form import announcementForm, studentForm, facultyForm
+from .form import announcementForm, studentForm, facultyForm, UserForm
+
 from django.db.models import Q
 # Create your views here.
 from django.utils.timezone import now
@@ -559,11 +560,24 @@ def admission_student_profile(request, pk):
 def admission_student_form(request):
     admission = request.user.admissionstaff
     student = studentForm()
+    user = UserCreationForm()
     if request.method == "POST":
-        student = studentForm(request.POST)
-        if student.is_valid():
+        student_form = studentForm(request.POST)
+        user_form = UserCreationForm(request.POST)
+
+        if student_form.is_valid() and user_form.is_valid():
+            user = user_form.save(commit=False)
+            user.set_password(user.password)  # Hash password
+            user.save()
+
+            # Assign the created user to the student profile
+            student = student_form.save(commit=False)
+            student.user = user  # ✅ Automatically assign the user
             student.save()
+            group = Group.objects.get(name='student')
+            user.groups.add(group)
+
             return redirect('enrollies')
 
-    context = {'student': student, 'admission': admission}
+    context = {'student': student, 'admission': admission, 'user': user}
     return render(request, 'admission/admission-student-form.html', context)

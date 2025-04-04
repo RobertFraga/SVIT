@@ -1,6 +1,7 @@
 from django.forms import ModelForm
 from django import forms
 from .models import Announcement, StudentProfile, FacultyStaff
+from django.contrib.auth.models import User
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Field
 
@@ -26,9 +27,18 @@ class studentForm(ModelForm):
     class Meta:
         model = StudentProfile
         fields = '__all__'
+        exclude = ['user']
         widgets = {
             'birth_date': forms.DateInput(attrs={'type': 'date', 'class': 'form-control'}),
             'Age': forms.NumberInput(attrs={'type': 'number', 'class': 'form-control'}),
+        }
+
+class UserForm(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ['username', 'password']
+        widgets = {
+            'password': forms.PasswordInput(),
         }
 
 class facultyForm(ModelForm):
