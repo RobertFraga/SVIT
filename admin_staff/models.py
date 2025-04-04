@@ -1,6 +1,5 @@
 from django.db import models
 from django.contrib.auth.models import User
-from django.db.models.signals import post_save
 # Create your models here.
 class StudentAttendance(models.Model):
     student_lrn = models.ForeignKey('StudentProfile', on_delete=models.CASCADE, db_column='student_lrn')
@@ -163,12 +162,7 @@ class StudentProfile(models.Model):
 
 
 
-def create_student_profile(sender, instance, created, **kwargs):
-    if created:
-        student_profile = StudentProfile(user=instance)
-        student_profile.save()
-        
-post_save.connect(create_student_profile, sender=User)
+
 
 
 

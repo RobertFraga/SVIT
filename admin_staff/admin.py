@@ -4,11 +4,17 @@ from import_export.admin import ImportExportModelAdmin
 from django.contrib.auth.models import User
 # Register your models here.
 
-@admin.register(StudentProfile)
-class students(ImportExportModelAdmin):
-    list_display = ('student_lrn', 'surname', 'first_name', 'adviser','section') 
-    ordering = ('student_lrn', )
-    search_fields = ('surname', 'student_lrn')
+class StudentProfileAdmin(admin.ModelAdmin):
+    list_display = ('user', 'surname', 'student_lrn')
+
+admin.site.register(StudentProfile, StudentProfileAdmin)
+
+
+# @admin.register(StudentProfile)
+# class students(ImportExportModelAdmin):
+#     list_display = ('surname', 'first_name', 'adviser','section') 
+#     ordering = ('surname', )
+#     search_fields = ('surname',)
 
 @admin.register(FacultyStaff)
 class faculty(admin.ModelAdmin):
