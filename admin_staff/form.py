@@ -30,7 +30,18 @@ class studentForm(ModelForm):
         exclude = ['user']
         widgets = {
             'birth_date': forms.DateInput(attrs={'type': 'date', 'class': 'form-control'}),
-            'Age': forms.NumberInput(attrs={'type': 'number', 'class': 'form-control'}),
+            'age': forms.TextInput(
+                attrs={
+                    'min': 14,
+                    'max': 16,
+                    'maxlength': '2',
+                    'minlength': '2',  
+                    'inputmode': 'numeric',  # mobile numeric keyboard
+                    'pattern': '[0-9]*',  # numeric only
+                    'style': 'appearance: textfield; -moz-appearance: textfield;'  # removes spinners in some browsers
+                }
+            ),
+            'status': forms.RadioSelect
         }
 
 class UserForm(forms.ModelForm):

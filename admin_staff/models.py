@@ -137,15 +137,22 @@ class StudentProfile(models.Model):
     have_PSA = models.BooleanField(default=False)
     
 
-    #remarks section
-    Transfer_Out = models.BooleanField(default=False)
-    Transfer_In = models.BooleanField(default=False)
-    Dropped = models.BooleanField(default=False)
-    Late_Enrolee = models.BooleanField(default=False)
-    CCT_Recipient = models.BooleanField(default=False)
-    Balik_Aral = models.BooleanField(default=False)
-    Learner_with_Disability = models.BooleanField(default=False)
-    Accelerated = models.BooleanField(default=False)
+    STATUS_CHOICES = [
+        ('transfer_out', 'Transfer Out'),
+        ('transfer_in', 'Transfer In'),
+        ('dropped', 'Dropped'),
+        ('late_enrolee', 'Late Enrolee'),
+        ('cct_recipient', 'CCT Recipient'),
+        ('balik_aral', 'Balik Aral'),
+        ('learner_with_disability', 'Learner with Disability'),
+        ('accelerated', 'Accelerated'),
+    ]
+    
+    status = models.CharField(
+        max_length=100,
+        choices=STATUS_CHOICES,
+        default='transfer_out'
+    )
 
 
     section = models.ForeignKey('section', blank=True, null=True, on_delete=models.SET_NULL)
