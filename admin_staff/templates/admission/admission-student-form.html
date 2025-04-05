@@ -125,11 +125,11 @@
                         {{student.fathers_middle_name|as_crispy_field }}
                     </div>
                     
-                    <div class="container-fluid">
-                        <label for="">Mother's Maiden Name</label>
-                    </div>
+                    {% comment %} <div class="col-md-4">
+                    </div> {% endcomment %}
                     
                     <div class="col-md-4">
+                        <label for="">Mother's Maiden Name</label>
                         {{student.mothers_last_name|as_crispy_field }}
                     </div>
                     <div class="col-md-4">
@@ -182,73 +182,67 @@
         </div>
     </div>
 
-    <div class="container-fluid">
-        <div class="card shadow mb-4">
-            <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">Guardian Information</h6>
-            </div>
 
-            <div class="card-body">
-                <div class="row g-3">
-                    {% comment %} documents {% endcomment %}
-                    <div class="col-md-3">
-                        {{student.have_Form_137|as_crispy_field }}
+    <div class="container-fluid">
+        <div class="row">
+            <!-- First Column: Document Needed -->
+            <div class="col-md-6">
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary">Document Needed</h6>
                     </div>
-                    <div class="col-md-3">
-                        {{student.have_Form_138|as_crispy_field }}
+                    <div class="card-body">
+                        <div class="row g-3">
+                            {% comment %} Documents {% endcomment %}
+                            <div class="col-md-9">
+                                {{ student.have_Form_137|as_crispy_field }}
+                            </div>
+                            <div class="col-md-9">
+                                {{ student.have_Form_138|as_crispy_field }}
+                            </div>
+                            <div class="col-md-9">
+                                {{ student.have_Good_Moral_Certificate|as_crispy_field }}
+                            </div>
+                            <div class="col-md-9">
+                                {{ student.have_PSA|as_crispy_field }}
+                            </div>
+                        </div>
                     </div>
-                    <div class="col-md-3">
-                        {{student.have_Good_Moral_Certificate|as_crispy_field }}
+                </div>
+            </div>
+            
+            <!-- Second Column: Remarks -->
+            <div class="col-md-6">
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary">Remarks</h6>
                     </div>
-                    <div class="col-md-3">
-                        {{student.have_PSA|as_crispy_field }}
+                    <div class="card-body">
+                        <div class="row g-3">
+                            {% comment %} Status {% endcomment %}
+                            <div class="col-md-12">
+                                {{ student.status|as_crispy_field }}
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    
 
+    
     <div class="container-fluid">
-        <div class="card shadow mb-4">
-            <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">Remarks</h6>
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <button class="btn btn-primary w-100" type="submit">✓ Submit</button>
             </div>
-
-            <div class="card-body">
-                <div class="row g-3">
-                    {% comment %} documents {% endcomment %}
-                    <div class="col-md-3">
-                        {{student.Transfer_Out|as_crispy_field }}
-                    </div>
-                    <div class="col-md-3">
-                        {{student.Transfer_In|as_crispy_field }}
-                    </div>
-                    <div class="col-md-3">
-                        {{student.Late_Enrolee|as_crispy_field }}
-                    </div>
-                    <div class="col-md-3">
-                        {{student.CCT_Recipient|as_crispy_field }}
-                    </div>
-                    <div class="col-md-3">
-                        {{student.Balik_Aral|as_crispy_field }}
-                    </div>
-                    <div class="col-md-3">
-                        {{student.Learner_with_Disability|as_crispy_field }}
-                    </div>
-                    <div class="col-md-3">
-                        {{student.Accelerated|as_crispy_field }}
-                    </div>
-                </div>
+            <div class="col-md-6 mb-3">
+                <button class="btn btn-danger w-100" type="submit">Cancel</button>
             </div>
         </div>
     </div>
-
-    <div class="container-fluid">
-        <div class="d-grid gap-2">
-            <button class="btn btn-primary" type="submit">✓ Submit</button>
-            <button class="btn btn-danger" type="submit">Cancel</button>
-        </div>
-    </div>
+    
 </form>
 
 
