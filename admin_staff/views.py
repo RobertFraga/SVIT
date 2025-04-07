@@ -5,7 +5,6 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import Group
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from django.contrib.auth.forms import UserCreationForm
 from .decorators import unauthenticated_user, allowed_user, admin_only
 from .form import announcementForm, studentForm, facultyForm, UserForm
 
@@ -560,10 +559,10 @@ def admission_student_profile(request, pk):
 def admission_student_form(request):
     admission = request.user.admissionstaff
     student = studentForm()
-    user = UserCreationForm()
+    user = UserForm()
     if request.method == "POST":
         student_form = studentForm(request.POST)
-        user_form = UserCreationForm(request.POST)
+        user_form = UserForm(request.POST)
 
         if student_form.is_valid() and user_form.is_valid():
             user = user_form.save(commit=False)

@@ -20,6 +20,18 @@
                 <div class="row g-3">
                     <div class="col-md-12">
                         {{user | crispy }}
+                        <script>
+                            // Optional: Add JS restriction to allow only digits and limit to 11
+                            document.addEventListener('DOMContentLoaded', function () {
+                                const input = document.querySelector('input[name="username"]');
+                                input.setAttribute('type', 'tel');  // makes mobile keyboards numeric
+                                input.setAttribute('maxlength', '11');
+                    
+                                input.addEventListener('input', function () {
+                                    this.value = this.value.replace(/\D/g, '').slice(0, 11); // removes non-digits
+                                });
+                            });
+                        </script>
                     </div>
                 </div>
             </div>
@@ -60,6 +72,50 @@
                     <div class="col-md-2">
                         {{student.age|as_crispy_field }}
                     </div>
+                    <script>
+                        document.addEventListener('DOMContentLoaded', function () {
+                            const ageInput = document.querySelector('input[name="age"]');
+                            if (ageInput) {
+                                ageInput.setAttribute('type', 'number');  // enables numeric keyboard on mobile
+                                ageInput.setAttribute('min', '0');
+                    
+                                // Optional: Remove non-numeric characters just in case
+                                ageInput.addEventListener('input', function () {
+                                    this.value = this.value.replace(/\D/g, '');
+                                });
+                            }
+                        });
+                    </script>
+                    <script>
+                        document.addEventListener('DOMContentLoaded', function () {
+                            const ageInput = document.querySelector('input[name="age"]');
+                            if (ageInput) {
+                                ageInput.setAttribute('type', 'number');
+                                ageInput.setAttribute('maxlength', '11');  // Limits the input to 2 digits
+                        
+                                // Prevent users from typing more than 2 digits or a number greater than 99
+                                ageInput.addEventListener('input', function () {
+                                    if (this.value > 99) {
+                                        this.value = this.value.slice(0, 2);  
+                                    }
+                                    // Restrict non-numeric characters (if something else is typed in)
+                                    this.value = this.value.replace(/\D/g, '');
+                                });
+                            }
+                        });
+                    </script>
+                    <style>
+                        /* Remove spinner buttons for number inputs (cross-browser) */
+                        input[type="number"]::-webkit-outer-spin-button,
+                        input[type="number"]::-webkit-inner-spin-button {
+                            -webkit-appearance: none;
+                            margin: 0;
+                        }
+                        input[type="number"] {
+                            -moz-appearance: textfield; /* Firefox */
+                        }
+                    </style>
+                        
                     <div class="col-md-2">
                         {{student.birth_place|as_crispy_field }}
                     </div>
@@ -125,11 +181,11 @@
                         {{student.fathers_middle_name|as_crispy_field }}
                     </div>
                     
-                    {% comment %} <div class="col-md-4">
-                    </div> {% endcomment %}
+                    <div class="col-md-12">
+                        <label for=""><i>Mother's Maiden Name</i></label>
+                    </div>
                     
                     <div class="col-md-4">
-                        <label for="">Mother's Maiden Name</label>
                         {{student.mothers_last_name|as_crispy_field }}
                     </div>
                     <div class="col-md-4">
@@ -177,6 +233,21 @@
                     <div class="col-md-6">
                         {{student.guardian_or_parent_mobile_number|as_crispy_field }}
                     </div>
+                    <script>
+                        document.addEventListener('DOMContentLoaded', function () {
+                            const mobileInput = document.querySelector('input[name="guardian_or_parent_mobile_number"]');
+                            if (mobileInput) {
+                                mobileInput.setAttribute('inputmode', 'numeric');  // Numeric keyboard on mobile
+                                mobileInput.setAttribute('pattern', '[0-9]*');  // Restrict pattern to numbers only
+                                mobileInput.setAttribute('maxlength', '11');  // Optional: limit max number length
+                        
+                                // Prevent users from typing non-numeric characters
+                                mobileInput.addEventListener('input', function () {
+                                    this.value = this.value.replace(/\D/g, '');  // Replace non-digits with nothing
+                                });
+                            }
+                        });
+                    </script>
                 </div>
             </div>
         </div>
