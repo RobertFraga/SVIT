@@ -139,7 +139,7 @@
                         {{student.mothers_middle_name|as_crispy_field }}
                     </div>
                     <div class="col-md-3">
-                        {{student.is_guardian|as_crispy_field }}
+                        {{student.is_guardian|as_crispy_field  }}
                     </div>
                 </div>
             </div>
@@ -148,7 +148,7 @@
 
     
 
-    <div class="container-fluid">
+    <div class="container-fluid" id="guardian-info-container">
         <div class="card shadow mb-4">
             <div class="card-header py-3">
                 <h6 class="m-0 font-weight-bold text-primary">Guardian Information</h6>
@@ -245,6 +245,26 @@
     
 </form>
 
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const guardianCheckbox = document.querySelector('input[name="is_guardian"]');  // Use the name attribute
+        const guardianInfoContainer = document.getElementById('guardian-info-container');
+
+        // Initially hide the Guardian Information if is_guardian is checked
+        if (guardianCheckbox.checked) {
+            guardianInfoContainer.style.display = 'none';
+        }
+
+        // Add event listener to toggle visibility of Guardian Information
+        guardianCheckbox.addEventListener('change', function() {
+            if (guardianCheckbox.checked) {
+                guardianInfoContainer.style.display = 'none'; // Hide the Guardian Information
+            } else {
+                guardianInfoContainer.style.display = 'block'; // Show the Guardian Information
+            }
+        });
+    });
+</script>
 
 
 
