@@ -13,6 +13,36 @@
     <div class="container-fluid">
         <div class="card shadow mb-4">
             <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Student Account</h6>
+            </div>
+
+            <div class="card-body">
+                <div class="row g-3">
+                    <div class="col-md-12">
+                        {{user | crispy }}
+                        <script>
+                            // Optional: Add JS restriction to allow only digits and limit to 11
+                            document.addEventListener('DOMContentLoaded', function () {
+                                const input = document.querySelector('input[name="username"]');
+                                input.setAttribute('type', 'tel');  // makes mobile keyboards numeric
+                                input.setAttribute('maxlength', '11');
+                    
+                                input.addEventListener('input', function () {
+                                    this.value = this.value.replace(/\D/g, '').slice(0, 11); // removes non-digits
+                                });
+                            });
+                        </script>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="container-fluid">
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
                 <h6 class="m-0 font-weight-bold text-primary">Student Information</h6>
             </div>
     
@@ -42,6 +72,50 @@
                     <div class="col-md-2">
                         {{student.age|as_crispy_field }}
                     </div>
+                    <script>
+                        document.addEventListener('DOMContentLoaded', function () {
+                            const ageInput = document.querySelector('input[name="age"]');
+                            if (ageInput) {
+                                ageInput.setAttribute('type', 'number');  // enables numeric keyboard on mobile
+                                ageInput.setAttribute('min', '0');
+                    
+                                // Optional: Remove non-numeric characters just in case
+                                ageInput.addEventListener('input', function () {
+                                    this.value = this.value.replace(/\D/g, '');
+                                });
+                            }
+                        });
+                    </script>
+                    <script>
+                        document.addEventListener('DOMContentLoaded', function () {
+                            const ageInput = document.querySelector('input[name="age"]');
+                            if (ageInput) {
+                                ageInput.setAttribute('type', 'number');
+                                ageInput.setAttribute('maxlength', '11');  // Limits the input to 2 digits
+                        
+                                // Prevent users from typing more than 2 digits or a number greater than 99
+                                ageInput.addEventListener('input', function () {
+                                    if (this.value > 99) {
+                                        this.value = this.value.slice(0, 2);  
+                                    }
+                                    // Restrict non-numeric characters (if something else is typed in)
+                                    this.value = this.value.replace(/\D/g, '');
+                                });
+                            }
+                        });
+                    </script>
+                    <style>
+                        /* Remove spinner buttons for number inputs (cross-browser) */
+                        input[type="number"]::-webkit-outer-spin-button,
+                        input[type="number"]::-webkit-inner-spin-button {
+                            -webkit-appearance: none;
+                            margin: 0;
+                        }
+                        input[type="number"] {
+                            -moz-appearance: textfield; /* Firefox */
+                        }
+                    </style>
+                        
                     <div class="col-md-2">
                         {{student.birth_place|as_crispy_field }}
                     </div>
@@ -107,8 +181,8 @@
                         {{student.fathers_middle_name|as_crispy_field }}
                     </div>
                     
-                    <div class="container-fluid">
-                        <label for="">Mother's Maiden Name</label>
+                    <div class="col-md-12">
+                        <label for=""><i>Mother's Maiden Name</i></label>
                     </div>
                     
                     <div class="col-md-4">
@@ -121,7 +195,7 @@
                         {{student.mothers_middle_name|as_crispy_field }}
                     </div>
                     <div class="col-md-3">
-                        {{student.is_guardian|as_crispy_field }}
+                        {{student.is_guardian|as_crispy_field  }}
                     </div>
                 </div>
             </div>
@@ -130,7 +204,7 @@
 
     
 
-    <div class="container-fluid">
+    <div class="container-fluid" id="guardian-info-container">
         <div class="card shadow mb-4">
             <div class="card-header py-3">
                 <h6 class="m-0 font-weight-bold text-primary">Guardian Information</h6>
@@ -159,80 +233,109 @@
                     <div class="col-md-6">
                         {{student.guardian_or_parent_mobile_number|as_crispy_field }}
                     </div>
+                    <script>
+                        document.addEventListener('DOMContentLoaded', function () {
+                            const mobileInput = document.querySelector('input[name="guardian_or_parent_mobile_number"]');
+                            if (mobileInput) {
+                                mobileInput.setAttribute('inputmode', 'numeric');  // Numeric keyboard on mobile
+                                mobileInput.setAttribute('pattern', '[0-9]*');  // Restrict pattern to numbers only
+                                mobileInput.setAttribute('maxlength', '11');  // Optional: limit max number length
+                        
+                                // Prevent users from typing non-numeric characters
+                                mobileInput.addEventListener('input', function () {
+                                    this.value = this.value.replace(/\D/g, '');  // Replace non-digits with nothing
+                                });
+                            }
+                        });
+                    </script>
                 </div>
             </div>
         </div>
     </div>
 
-    <div class="container-fluid">
-        <div class="card shadow mb-4">
-            <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">Guardian Information</h6>
-            </div>
 
-            <div class="card-body">
-                <div class="row g-3">
-                    {% comment %} documents {% endcomment %}
-                    <div class="col-md-3">
-                        {{student.have_Form_137|as_crispy_field }}
+    <div class="container-fluid">
+        <div class="row">
+            <!-- First Column: Document Needed -->
+            <div class="col-md-6">
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary">Document Needed</h6>
                     </div>
-                    <div class="col-md-3">
-                        {{student.have_Form_138|as_crispy_field }}
+                    <div class="card-body">
+                        <div class="row g-3">
+                            {% comment %} Documents {% endcomment %}
+                            <div class="col-md-9">
+                                {{ student.have_Form_137|as_crispy_field }}
+                            </div>
+                            <div class="col-md-9">
+                                {{ student.have_Form_138|as_crispy_field }}
+                            </div>
+                            <div class="col-md-9">
+                                {{ student.have_Good_Moral_Certificate|as_crispy_field }}
+                            </div>
+                            <div class="col-md-9">
+                                {{ student.have_PSA|as_crispy_field }}
+                            </div>
+                        </div>
                     </div>
-                    <div class="col-md-3">
-                        {{student.have_Good_Moral_Certificate|as_crispy_field }}
+                </div>
+            </div>
+            
+            <!-- Second Column: Remarks -->
+            <div class="col-md-6">
+                <div class="card shadow mb-4">
+                    <div class="card-header py-3">
+                        <h6 class="m-0 font-weight-bold text-primary">Remarks</h6>
                     </div>
-                    <div class="col-md-3">
-                        {{student.have_PSA|as_crispy_field }}
+                    <div class="card-body">
+                        <div class="row g-3">
+                            {% comment %} Status {% endcomment %}
+                            <div class="col-md-12">
+                                {{ student.status|as_crispy_field }}
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    
 
+    
     <div class="container-fluid">
-        <div class="card shadow mb-4">
-            <div class="card-header py-3">
-                <h6 class="m-0 font-weight-bold text-primary">Remarks</h6>
+        <div class="row">
+            <div class="col-md-6 mb-3">
+                <button class="btn btn-primary w-100" type="submit">✓ Submit</button>
             </div>
-
-            <div class="card-body">
-                <div class="row g-3">
-                    {% comment %} documents {% endcomment %}
-                    <div class="col-md-3">
-                        {{student.Transfer_Out|as_crispy_field }}
-                    </div>
-                    <div class="col-md-3">
-                        {{student.Transfer_In|as_crispy_field }}
-                    </div>
-                    <div class="col-md-3">
-                        {{student.Late_Enrolee|as_crispy_field }}
-                    </div>
-                    <div class="col-md-3">
-                        {{student.CCT_Recipient|as_crispy_field }}
-                    </div>
-                    <div class="col-md-3">
-                        {{student.Balik_Aral|as_crispy_field }}
-                    </div>
-                    <div class="col-md-3">
-                        {{student.Learner_with_Disability|as_crispy_field }}
-                    </div>
-                    <div class="col-md-3">
-                        {{student.Accelerated|as_crispy_field }}
-                    </div>
-                </div>
+            <div class="col-md-6 mb-3">
+                <button class="btn btn-danger w-100" type="submit">Cancel</button>
             </div>
         </div>
     </div>
-
-    <div class="container-fluid">
-        <div class="d-grid gap-2">
-            <button class="btn btn-primary" type="submit">✓ Submit</button>
-            <button class="btn btn-danger" type="submit">Cancel</button>
-        </div>
-    </div>
+    
 </form>
 
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const guardianCheckbox = document.querySelector('input[name="is_guardian"]');  // Use the name attribute
+        const guardianInfoContainer = document.getElementById('guardian-info-container');
+
+        // Initially hide the Guardian Information if is_guardian is checked
+        if (guardianCheckbox.checked) {
+            guardianInfoContainer.style.display = 'none';
+        }
+
+        // Add event listener to toggle visibility of Guardian Information
+        guardianCheckbox.addEventListener('change', function() {
+            if (guardianCheckbox.checked) {
+                guardianInfoContainer.style.display = 'none'; // Hide the Guardian Information
+            } else {
+                guardianInfoContainer.style.display = 'block'; // Show the Guardian Information
+            }
+        });
+    });
+</script>
 
 
 

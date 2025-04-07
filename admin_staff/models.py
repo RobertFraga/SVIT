@@ -1,6 +1,5 @@
 from django.db import models
 from django.contrib.auth.models import User
-from django.db.models.signals import post_save
 # Create your models here.
 class StudentAttendance(models.Model):
     student_lrn = models.ForeignKey('StudentProfile', on_delete=models.CASCADE, db_column='student_lrn')
@@ -102,7 +101,7 @@ class StudentProfile(models.Model):
         ('Male', 'Male'),
         ('Female', 'Female'),
     )
-    gender = models.BooleanField(default=False, choices=gender_choice)
+    gender = models.CharField(max_length=6, default=False, choices=gender_choice)
 
     birth_date = models.DateField(null=True)
     age = models.CharField(null=True, max_length=2)
@@ -138,15 +137,22 @@ class StudentProfile(models.Model):
     have_PSA = models.BooleanField(default=False)
     
 
-    #remarks section
-    Transfer_Out = models.BooleanField(default=False)
-    Transfer_In = models.BooleanField(default=False)
-    Dropped = models.BooleanField(default=False)
-    Late_Enrolee = models.BooleanField(default=False)
-    CCT_Recipient = models.BooleanField(default=False)
-    Balik_Aral = models.BooleanField(default=False)
-    Learner_with_Disability = models.BooleanField(default=False)
-    Accelerated = models.BooleanField(default=False)
+    STATUS_CHOICES = [
+        ('transfer_out', 'Transfer Out'),
+        ('transfer_in', 'Transfer In'),
+        ('dropped', 'Dropped'),
+        ('late_enrolee', 'Late Enrolee'),
+        ('cct_recipient', 'CCT Recipient'),
+        ('balik_aral', 'Balik Aral'),
+        ('learner_with_disability', 'Learner with Disability'),
+        ('accelerated', 'Accelerated'),
+    ]
+    
+    status = models.CharField(
+        max_length=100,
+        choices=STATUS_CHOICES,
+        default='transfer_out'
+    )
 
 
     section = models.ForeignKey('section', blank=True, null=True, on_delete=models.SET_NULL)
@@ -163,12 +169,7 @@ class StudentProfile(models.Model):
 
 
 
-def create_student_profile(sender, instance, created, **kwargs):
-    if created:
-        student_profile = StudentProfile(user=instance)
-        student_profile.save()
-        
-post_save.connect(create_student_profile, sender=User)
+
 
 
 
