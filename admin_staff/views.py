@@ -7,13 +7,14 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .decorators import unauthenticated_user, allowed_user, admin_only
 from .form import announcementForm, studentForm, facultyForm, UserForm
-
+from django.contrib.auth.forms import UserCreationForm
 from django.db.models import Q
-# Create your views here.
 from django.utils.timezone import now
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 import json
+# Create your views here.
+
 
 
 

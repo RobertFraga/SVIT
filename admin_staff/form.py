@@ -47,7 +47,13 @@ class UserForm(UserCreationForm):
     username = forms.CharField(
         max_length=11,
         min_length=11,
-        label='Phone Number',
+        label='Username',
+        required=True,
+        error_messages={
+            'required': 'Username is required.',
+            'max_length': 'Username must be exactly 11 digits.',
+            'min_length': 'Username must be exactly 11 digits.'
+        },
         help_text='Enter exactly 11 digits.',
     )
 
