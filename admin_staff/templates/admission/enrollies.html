@@ -46,7 +46,6 @@
                               <div class="col-sm-12">
                                 <thead>
                                     <tr>
-                                        <th scope="col">User:</th>
                                         <th scope="col">LRN:</th>
                                         <th scope="col">Surname</th>
                                         <th scope="col">Name</th>
@@ -57,10 +56,9 @@
                                 <tbody>
                                   {% for i in enrollies %}
                                         <tr>
-                                          <td>{{i.user}}</td>
                                           <td>{{i.student_lrn}}</td>
-                                          <td>{{i.first_name}}</td>
                                           <td>{{i.surname}}</td>
+                                          <td>{{i.first_name}}</td>
                                           <td>{{i.level}}</td>
                                           <td>
                                             <a href="#" class="btn btn-warning btn-icon-split btn-sm">
