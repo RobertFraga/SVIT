@@ -82,6 +82,8 @@ urlpatterns = [
     path('registrar-dashboard', views.registrar_dashboard, name='registrar'),
     path('pending-list', views.pending, name='pending'),
     path('add-to-class', views.add_to_class, name='add_class'),
+    path('grades-submission', views.submission, name='submission'),
+    path('masterlist-grades', views.adviser_grades, name='adviser_grades'),
 
     #cashier end
     path('cashier-dashboard', views.cashier_dashboard, name='cashier'),

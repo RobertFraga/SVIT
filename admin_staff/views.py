@@ -509,6 +509,19 @@ def pending(request):
 def add_to_class(request):
     return render(request, "registrar/add_class.html")
 
+@login_required(login_url='login')
+@allowed_user(allow_roles=['registrar'])
+def submission(request):
+    return render(request, "registrar/submission.html")
+
+@login_required(login_url='login')
+@allowed_user(allow_roles=['registrar'])
+def adviser_grades(request):
+    return render(request, "registrar/adviser_grades.html")
+
+
+
+
 #cashier end
 @login_required(login_url='login')
 @allowed_user(allow_roles=['cashier'])
