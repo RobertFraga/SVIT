@@ -37,9 +37,15 @@ class studentForm(ModelForm):
     
     def clean_age(self):
         age = self.cleaned_data.get('age')
+        try:
+            age = int(age)
+        except (ValueError, TypeError):
+            raise forms.ValidationError("Age must be a number.")
+
         if age < 0 or age > 99:
             raise forms.ValidationError("Age must be between 0 and 99.")
-        return age  
+
+        return age
 
 
 
