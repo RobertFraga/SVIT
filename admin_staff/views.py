@@ -9,6 +9,7 @@ from .decorators import unauthenticated_user, allowed_user, admin_only
 from .form import announcementForm, studentForm, facultyForm, UserForm
 from django.contrib.auth.forms import UserCreationForm
 from django.db.models import Q
+from django.contrib.auth.models import User
 from django.utils.timezone import now
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
@@ -23,14 +24,19 @@ import json
 @unauthenticated_user
 def login_user(request):
     if request.method == "POST":
-        username = request.POST['username'];
-        password = request.POST['password'];
+        username = request.POST['username']
+        password = request.POST['password']
         user = authenticate(request, username=username, password=password)
+
+        if not User.objects.filter(username=username).exists():
+            messages.error(request, "User does not exist")
+            return redirect('login')
+
         if user is not None:
             login(request, user)
             return redirect('home')
         else:
-            messages.success(request, ("invalid username or password, try again"))
+            messages.success(request, "Password is incorrect")
             return redirect('login')      
     else:
         context = {}    
@@ -567,7 +573,6 @@ def admission_student_form(request):
 
         if student_form.is_valid() and user_form.is_valid():
             user = user_form.save(commit=False)
-            user.set_password(user.password)  # Hash password
             user.save()
 
             # Assign the created user to the student profile
