@@ -19,7 +19,7 @@
             <div class="card-body">
                 <div class="row g-3">
                     <div class="col-md-12">
-                        {{user | crispy }}
+                        {{user.username | as_crispy_field }}
                         <script>
                             // Optional: Add JS restriction to allow only digits and limit to 11
                             document.addEventListener('DOMContentLoaded', function () {
@@ -32,6 +32,12 @@
                                 });
                             });
                         </script>
+                    </div>
+                    <div class="col-md-12">
+                        {{user.password1 | as_crispy_field }}
+                    </div>
+                    <div class="col-md-12">
+                        {{user.password2 | as_crispy_field }}
                     </div>
                 </div>
             </div>
