@@ -565,8 +565,8 @@ def admission_student_profile(request, pk):
 @allowed_user(allow_roles=['admission'])
 def admission_student_form(request):
     admission = request.user.admissionstaff
-    student = studentForm()
-    user = UserForm()
+    # student = studentForm()
+    # user = UserForm()
     if request.method == "POST":
         student_form = studentForm(request.POST)
         user_form = UserForm(request.POST)
@@ -583,6 +583,13 @@ def admission_student_form(request):
             user.groups.add(group)
 
             return redirect('enrollies')
+        
+        else:
+            pass
+    
+    else:
+        student_form = studentForm()
+        user_form = UserForm()
 
-    context = {'student': student, 'admission': admission, 'user': user}
+    context = {'student': student_form, 'admission': admission, 'user': user_form}
     return render(request, 'admission/admission-student-form.html', context)
