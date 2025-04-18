@@ -65,8 +65,13 @@ class UserForm(UserCreationForm):
 
     def clean_username(self):
         username = self.cleaned_data.get('username')
+
         if not re.fullmatch(r'\d{11}', username):
             raise forms.ValidationError("Username must be exactly 11 digits (numbers only).")
+        
+        if User.objects.filter(username=username).exists():
+            raise forms.ValidationError("Username already exists. Please choose a different one.")
+        
         return username
 
     class Meta:
