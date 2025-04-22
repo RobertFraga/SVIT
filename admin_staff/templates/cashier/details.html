@@ -22,49 +22,42 @@
             <div class="card-body">
                 <div class="form">
                     <div class="row g-3">
-                        <fieldset class="col-12 mb-2" disabled>
+                        <fieldset class="col-6 mb-2" disabled>
                             <label for="inputEmail4" class="form-label">Student LRN</label>
-                            <input type="text" class="form-control" id="inputEmail4" placeholder='student LRN' value="">
+                            <input type="text" class="form-control" id="inputEmail4" value="{{ payment.student_lrn }}">
                         </fieldset>
-                        <fieldset class="col-12 mb-2" disabled>
+                        <fieldset class="col-6 mb-2" disabled>
                             <label for="inputEmail4" class="form-label">Full Name</label>
-                            <input type="text" class="form-control" id="inputEmail4" placeholder='student LRN' value="">
+                            <input type="text" class="form-control" id="inputEmail4" value="{{ payment.student_lrn.first_name }} {{ payment.student_lrn.surname }}">
                         </fieldset>
-                        <fieldset class="col-md-4 mb-2" disabled>
+                        <fieldset class="col-6 mb-2" disabled>
                             <label for="inputEmail4" class="form-label">Grade Level</label>
-                            <input type="text" class="form-control" id="inputEmail4" placeholder='student LRN' value="">
+                            <input type="text" class="form-control" id="inputEmail4" value="{{ payment.student_lrn.level }}">
                         </fieldset>
-                        <fieldset class="col-md-4 mb-2" disabled>
+                        <fieldset class="col-6 mb-2" disabled>
                             <label for="inputEmail4" class="form-label">Section</label>
-                            <input type="text" class="form-control" id="inputEmail4" placeholder='student LRN' value="">
+                            <input type="text" class="form-control" id="inputEmail4" placeholder='student LRN' value="{{ payment.student_lrn.section }}">
                         </fieldset>
-
-                        <fieldset class="col-md-12 mb-2" disabled></fieldset>
 
                         <fieldset class="col-md-7 mb-2" disabled>
                             <label for="inputEmail4" class="form-label">Payment Method:</label>
-                            <select id="inputState" class="form-control" placeholder="Select...">
-                                <option>Credit/Debit Card Payment</option>
-                                <option>Bank Transfer</option>
-                                <option>Mobile Payment Apps</option>
-                                <option>Office Transaction</option>
-                            </select>
+                            <input type="text" class="form-control" id="inputEmail4" value="{{ payment.payment_type  }}">
                         </fieldset>
                         <fieldset class="col-md-5 mb-2" disabled>
                             <label for="inputEmail4" class="form-label">Transaction ID</label>
-                            <input type="number" class="form-control" id="inputEmail4" placeholder='student LRN' value="">
+                            <input type="number" class="form-control" id="inputEmail4"  value="{{payment.payment_id }}">
                         </fieldset>
                         <fieldset class="col-md-5 mb-2" disabled>
                             <label for="inputEmail4" class="form-label">Receipt Date</label>
-                            <input type="number" class="form-control" id="inputEmail4" placeholder='student LRN' value="">
+                            <input type="date" class="form-control" id="receiptDate"  value="{{payment.date|date:'Y-m-d'}}">
                         </fieldset>
                         <fieldset class="col-md-5 mb-2" disabled>
                             <label for="inputEmail4" class="form-label">Amount</label>
-                            <input type="number" class="form-control" id="inputEmail4" placeholder='student LRN' value="">
+                            <input type="number" class="form-control" id="amount"  value="{{payment.amount}}">
                         </fieldset>
                         <fieldset class="col-12" disabled>
                             <label for="inputEmail4" class="form-label">Payment Description</label>
-                            <input type="text" class="form-control" id="inputEmail4" placeholder='student LRN' value="">
+                            <input type="text" class="form-control" id="paymentDescription"  value="{{payment.description}}">
                         </fieldset>
                     </div>
                 </div>

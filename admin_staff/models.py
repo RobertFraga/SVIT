@@ -165,7 +165,7 @@ class StudentProfile(models.Model):
         db_table = 'student_profile'
     
     def __str__(self):
-        return self.surname
+        return f"{self.student_lrn}- {self.surname} {self.first_name}" 
 
 
 
@@ -383,7 +383,7 @@ class payment(models.Model):
     payment_type = models.CharField(max_length=50, default="Status", choices=payment_options, blank=True, null=True)
 
     description = models.TextField(null=True, blank=True)
-    
+
     class Meta:
         managed = True
         db_table = 'payment'

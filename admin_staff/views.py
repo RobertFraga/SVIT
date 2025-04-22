@@ -529,7 +529,7 @@ def cashier_dashboard(request):
 @allowed_user(allow_roles=['cashier'])
 def payment_views(request):
     cashier = request.user.cashierstaff
-    payments = payment.objects.select_related('student_lrn').all()
+    payments = payment.objects.select_related('student_lrn').order_by('-date', '-payment_id')
     
     if request.method == "POST":
         payment_form = paymentForm(request.POST)
@@ -545,14 +545,29 @@ def payment_views(request):
     context = {'cashier': cashier, 'payment_form': payment_form, 'payment': payments}
     return render(request, "cashier/payment.html", context)
 
+
+def delete_payment(request, payment_id):
+    # Fetch the payment object using the correct model reference
+    payment_instance = get_object_or_404(payment, payment_id=payment_id)
+
+    # Handle the deletion only on POST request
+    if request.method == 'POST':
+        payment_instance.delete()  # Delete the payment object
+        messages.success(request, "Payment record deleted successfully.")
+        return redirect('payment')  # Redirect to the list of payments after deletion
+    
+    # Optionally render the payment detail for confirmation (this can be omitted if not needed)
+    context = {'payment': payment_instance}
+    return render(request, "cashier/payment.html", context)
+
 @login_required(login_url='login')
 @allowed_user(allow_roles=['cashier'])
-def edit_payment(request):
+def details(request, payment_id):
     cashier = request.user.cashierstaff
-    context = {'cashier': cashier}
-
-
-    return render(request, "cashier/edit_payment.html", context)
+    
+    payment_instance = get_object_or_404(payment, pk=payment_id)
+    context = { 'cashier': cashier, 'payment': payment_instance }
+    return render(request, "cashier/details.html", context)
 
 
 #admission end
