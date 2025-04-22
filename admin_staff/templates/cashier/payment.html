@@ -1,11 +1,13 @@
 {% extends "cashier/cashier_dashboard.html" %}
-
 {% block heading %}
   <h1>Payment History</h1>
 {% endblock heading %}
+{{ payment_form.media }}
+{% include 'django_select2/django_select2.html' %}
 {% load crispy_forms_tags %}
 {% load static %}
 {% block content %}
+
 
 
 <!-- Begin Page Content -->
@@ -55,10 +57,9 @@
         
               <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">Add New Payment Record</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
         
-              <form method="post">
+              <form method="post"  >
                 <div class="modal-body">
                   {% csrf_token %}
                   {{ payment_form|crispy }}
@@ -73,7 +74,7 @@
             </div>
           </div>
         </div>
-
+        
         <table class="table table-hover my-1">
           <div class="row">
             <div class="col-sm-12">
@@ -89,16 +90,21 @@
               </thead>
               <tbody>
                 {% for i in payment %}
-                <tr>
+                  <tr>
                     <td>{{ i.student_lrn.surname }} {{ i.student_lrn.first_name}}</td>
                     <td>{{ i.payment_type }}</td>
                     <td>{{ i.payment_id }}</td>
                     <td>{{ i.date }}</td>
                     <td>{{ i.student.level }}</td>
                     <td>
+                      <a href="{% url 'details' i.payment_id %}" class="btn btn-warning btn-sm">view</a>
                       <a href="" class="btn btn-primary btn-sm">Edit</a>
-                      <a href="" class="btn btn-danger btn-sm">Delete</a>
+                      <form method="post" action="{% url 'delete_payment' i.payment_id %}" style="display:inline;">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                      </form>
                     </td>
+                  </tr>
                 {% endfor %}
               </tbody>
             </div>
@@ -107,6 +113,7 @@
       </div>
     </div>
 </div>
+
 
   
 <!-- Bootstrap core JavaScript-->
