@@ -367,3 +367,26 @@ class accountingStaff(models.Model):
     
     def __str__(self):
         return self.surname
+    
+
+class payment(models.Model):
+    payment_id = models.AutoField(primary_key=True)
+    student_lrn = models.ForeignKey('StudentProfile', on_delete=models.CASCADE, db_column='student_lrn')
+    amount = models.FloatField()
+    date = models.DateField()
+    payment_options = (
+        ('Credit/Debit Card Payment', 'Credit/Debit Card Payment'),
+        ('Bank Transfer', 'Bank Transfer'),
+        ('Mobile Payment Apps', 'Mobile Payment Apps'),
+        ('Office Transaction', 'Office Transaction'),
+    )
+    payment_type = models.CharField(max_length=50, default="Status", choices=payment_options, blank=True, null=True)
+
+    description = models.TextField(null=True, blank=True)
+    
+    class Meta:
+        managed = True
+        db_table = 'payment'
+    
+    def __str__(self):
+        return f"Payment {self.payment_id} - {self.student_lrn}"

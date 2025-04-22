@@ -1,12 +1,12 @@
 from django.shortcuts import get_object_or_404, render, redirect
-from .models import StudentProfile, FacultyStaff, Announcement, registrarStaff, cashierStaff, admissionStaff, StudentGrade,StudentAttendance, accademicYear, level
+from .models import StudentProfile, FacultyStaff, Announcement, registrarStaff, cashierStaff, admissionStaff, StudentGrade,StudentAttendance, accademicYear, level, payment
 from django.shortcuts import render
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import Group
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .decorators import unauthenticated_user, allowed_user, admin_only
-from .form import announcementForm, studentForm, facultyForm, UserForm
+from .form import announcementForm, studentForm, facultyForm, UserForm, paymentForm
 from django.contrib.auth.forms import UserCreationForm
 from django.db.models import Q
 from django.contrib.auth.models import User
@@ -521,18 +521,38 @@ def add_to_class(request):
 @allowed_user(allow_roles=['cashier'])
 def cashier_dashboard(request):
     cashier = request.user.cashierstaff
-    context = {'cashier': cashier}
+    announcement = Announcement.objects.all().order_by('-announcement_id')
+    context = {'cashier': cashier, 'announcement': announcement}
     return render(request, "cashier/cashier_dashboard.html", context)
 
 @login_required(login_url='login')
 @allowed_user(allow_roles=['cashier'])
-def payment(request):
-    return render(request, "cashier/payment.html")
+def payment_views(request):
+    cashier = request.user.cashierstaff
+    payments = payment.objects.select_related('student_lrn').all()
+    
+    if request.method == "POST":
+        payment_form = paymentForm(request.POST)
+        if payment_form.is_valid():
+            payment_form.save()
+            messages.success(request, "Payment record created successfully.")
+            return redirect('payment')
+        else:
+            messages.error(request, "Error creating payment record.")
+    else:
+        payment_form = paymentForm()
+
+    context = {'cashier': cashier, 'payment_form': payment_form, 'payment': payments}
+    return render(request, "cashier/payment.html", context)
 
 @login_required(login_url='login')
 @allowed_user(allow_roles=['cashier'])
 def edit_payment(request):
-    return render(request, "cashier/edit_payment.html")
+    cashier = request.user.cashierstaff
+    context = {'cashier': cashier}
+
+
+    return render(request, "cashier/edit_payment.html", context)
 
 
 #admission end

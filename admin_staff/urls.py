@@ -85,7 +85,7 @@ urlpatterns = [
 
     #cashier end
     path('cashier-dashboard', views.cashier_dashboard, name='cashier'),
-    path('student-payment-record', views.payment, name='payment'),
+    path('student-payment-record', views.payment_views, name='payment'),
     path('edit-payment-record', views.edit_payment, name='edit_payment'),
     
     #admission
