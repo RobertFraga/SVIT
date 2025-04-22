@@ -1,7 +1,7 @@
 from django.forms import ModelForm
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
-from .models import Announcement, StudentProfile, FacultyStaff
+from .models import Announcement, StudentProfile, FacultyStaff, payment
 from django.contrib.auth.models import User
 from crispy_forms.helper import FormHelper
 from crispy_forms.layout import Layout, Field
@@ -87,3 +87,15 @@ class facultyForm(ModelForm):
         model = FacultyStaff
         fields = '__all__'
 
+
+class paymentForm(ModelForm):
+    class Meta:
+        model = payment
+        fields = '__all__'
+        exclude = ['status']
+        widgets = {
+            'date': forms.DateInput(attrs={'type': 'date', 'class': 'form-control'}),
+            'amount': forms.NumberInput(attrs={'class': 'form-control'}),
+            'payment_type': forms.Select(attrs={'class': 'form-control'}),
+            'reference_number': forms.TextInput(attrs={'class': 'form-control'}),
+        }
