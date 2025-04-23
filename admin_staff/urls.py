@@ -49,6 +49,8 @@ urlpatterns = [
     path('grades', views.student_grades, name='student-grades'),
     path('schedule', views.student_schedule, name='student-schedule'),
     path('billings', views.student_billings, name='student-payment-history'),
+    path('student/payment/<int:payment_id>/', views.payment_detail, name='payment_detail'),
+
 
 
 

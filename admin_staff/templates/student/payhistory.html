@@ -7,44 +7,9 @@
 
 
 <div class="container-fluid p-3 mb-5" style="height: 100vh;">
-
     <div class="card shadow mb-5">
-
         <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">List of Subjects and Quarterly Grades</h6>
-        </div>
-
-    <!-- jQuery Script for Live Date & Time -->
-    <script>
-        function updateDateTime() {
-            let now = new Date();
-
-            // Format Date
-            let options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-            let dateStr = now.toLocaleDateString('en-US', options);
-
-            // Format Time
-            let timeStr = now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: true });
-
-            // Update elements
-            $("#current-date").text(dateStr);
-            $("#current-time").text(timeStr);
-        }
-
-        // Update time every second
-        $(document).ready(function () {
-            updateDateTime();
-            setInterval(updateDateTime, 1000);
-        });
-    </script>
-</div>
-
-<div class="container-fluid p-3 mb-5" style="height: 100vh;">
-
-    <div class="card shadow mb-5">
-
-        <div class="card-header py-3">
-            <h6 class="m-0 font-weight-bold text-primary">List of Subjects and Quarterly Grades</h6>
+            <h6 class="m-0 font-weight-bold text-primary">Payment history</h6>
         </div>
 
         <div class="card-body">
@@ -55,22 +20,24 @@
                         <th>Payment Date</th>
                         <th>Amount</th>
                         <th>Payment Method</th>
-                        <th>Payment Status</th>
                     </tr>
                 </thead>
                 <tbody>
+                    {% for payment in payments %}
                     <tr>
-                        <td>1</td>
-                        <td>2024-09-01</td>
-                        <td>₹ 5000</td>
-                        <td>Cash</td>
-                        <td>Paid</td>
+                        <td><a href="{% url 'payment_detail' payment.payment_id %}">{{ payment.payment_id }}</a></td>
+                        <td>{{ payment.date|date:'Y-m-d' }}</td>
+                        <td>{{ payment.amount }}</td>
+                        <td>{{ payment.payment_type }}</td>
                     </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="4" class="text-center">No payment records found.</td>
+                    </tr>
+                    {% endfor %}
                 </tbody>
             </table>
-            </div>
-    
-
+        </div>
 </div>
 
 {% endblock content %}

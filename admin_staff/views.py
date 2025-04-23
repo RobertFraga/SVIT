@@ -297,9 +297,26 @@ def student_schedule(request):
 def student_billings(request):
     student = request.user.studentprofile
     accademic_year = accademicYear.objects.get
-    context = {'student': student, 'accademic_year': accademic_year}
+    payments = payment.objects.filter(student_lrn=student).order_by('-date')  
+    context = {
+        'student': student,
+        'accademic_year': accademic_year,
+        'payments': payments,
+    }
     return render(request, 'student/payhistory.html', context)
 
+@login_required(login_url='login')
+@allowed_user(allow_roles=['student'])
+def payment_detail(request, payment_id):
+    student = request.user.studentprofile
+    accademic_year = accademicYear.objects.get
+    payment_bbj = get_object_or_404(payment, pk=payment_id, student_lrn=request.user.studentprofile)
+    context = {
+        'student': student,
+        'payment': payment_bbj,
+        'accademic_year': accademic_year,
+    }
+    return render(request, 'student/payment_detail.html', context)
 
 
 #faculty end

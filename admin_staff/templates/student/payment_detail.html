@@ -1,0 +1,18 @@
+{% extends "student/student_dashboard.html" %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="card shadow-sm">
+        <div class="card-header">
+            <h5 class="mb-0">Payment Details</h5>
+        </div>
+        <div class="card-body">
+            <p><strong>Payment ID:</strong> {{ payment.payment_id }}</p>
+            <p><strong>Date:</strong> {{ payment.date|date:'Y-m-d' }}</p>
+            <p><strong>Amount:</strong> ₱{{ payment.amount }}</p>
+            <p><strong>Payment Method:</strong> {{ payment.payment_type }}</p>
+            <p><strong>Description:</strong> {{ payment.description }}</p>
+        </div>
+    </div>
+</div>
+{% endblock %}
