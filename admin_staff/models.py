@@ -31,6 +31,9 @@ class accademicYear(models.Model):
     starting_year = models.IntegerField(null=True, blank=True)
     ending_year = models.IntegerField(null=True, blank=True)
 
+    def __str__(self):
+        return self.starting_year
+
 class level(models.Model):
     grade = models.CharField(max_length=20);
     section_name = models.ManyToManyField("section")
