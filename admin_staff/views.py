@@ -520,7 +520,11 @@ def fetch_students(request):
 @allowed_user(allow_roles=['registrar'])
 def registrar_dashboard(request):
     registrar = request.user.registrarstaff
-    context = {'registrar': registrar}
+    announcement = Announcement.objects.all().order_by('-announcement_id')
+    context = {
+        'registrar': registrar,
+        'announcement': announcement
+    }
     return render(request, 'registrar/registrar-dashboard.html', context)
 
 @login_required(login_url='login')

@@ -45,36 +45,36 @@
                           <div class="row">
                               <div class="col-sm-12">
                                 <thead>
-                                    <tr>
-                                        <th scope="col">LRN:</th>
-                                        <th scope="col">Surname</th>
-                                        <th scope="col">Name</th>
-                                        <th scope="col">Grade Level</th>
-                                        <th scope="col">Action</th>
-                                    </tr>
+                                  <tr>
+                                      <th scope="col">LRN:</th>
+                                      <th scope="col">Surname</th>
+                                      <th scope="col">Name</th>
+                                      <th scope="col">Grade Level</th>
+                                      <th scope="col">Action</th>
+                                  </tr>
                                 </thead>
                                 <tbody>
                                   {% for i in enrollies %}
-                                        <tr>
-                                          <td>{{i.student_lrn}}</td>
-                                          <td>{{i.surname}}</td>
-                                          <td>{{i.first_name}}</td>
-                                          <td>{{i.level}}</td>
-                                          <td>
-                                            <a href="#" class="btn btn-warning btn-icon-split btn-sm">
-                                              <span class="icon text-white-50">
-                                                  <i class="fas fa-exclamation-triangle"></i>
-                                              </span>
-                                              <span class="text">Archive</span>
-                                            </a>
-                                            <a href="" class="btn btn-info btn-icon-split btn-sm">
-                                              <span class="icon text-white-50">
-                                                  <i class="fas fa-info-circle"></i>
-                                              </span>
-                                              <span class="text">View</span>
-                                            </a>  
-                                          </td>
-                                        </tr>
+                                    <tr>
+                                      <td>{{i.student_lrn}}</td>
+                                      <td>{{i.surname|title}}</td>
+                                      <td>{{i.first_name|title}}</td>
+                                      <td>{{i.level}}</td>
+                                      <td>
+                                        <a href="#" class="btn btn-warning btn-icon-split btn-sm">
+                                          <span class="icon text-white-50">
+                                              <i class="fas fa-exclamation-triangle"></i>
+                                          </span>
+                                          <span class="text">Archive</span>
+                                        </a>
+                                        <a href="" class="btn btn-info btn-icon-split btn-sm">
+                                          <span class="icon text-white-50">
+                                              <i class="fas fa-info-circle"></i>
+                                          </span>
+                                          <span class="text">View</span>
+                                        </a>  
+                                      </td>
+                                    </tr>
                                   {% endfor %}
                                 </tbody>
                               </div>
