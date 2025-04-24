@@ -14,19 +14,19 @@
         </fieldset>
         <fieldset class="col-md-4" disabled>
             <label for="inputsurname" class="form-label">Surname</label>
-            <input type="text" class="form-control" id="inputsurname" value="{{student.surname}}">
+            <input type="text" class="form-control" id="inputsurname" value="{{student.surname|title}}">
         </fieldset>
         <fieldset class="col-md-4" disabled>
             <label for="inputname" class="form-label">Name</label>
-            <input type="text" class="form-control" id="inputname" value="{{student.first_name}}">
+            <input type="text" class="form-control" id="inputname" value="{{student.first_name|title}}">
         </fieldset>
         <fieldset class="col-md-4" disabled>
             <label for="inputmiddle" class="form-label">Middle Name</label>
-            <input type="text" class="form-control" id="inputmiddle" value="{{student.middle_name}}">
+            <input type="text" class="form-control" id="inputmiddle" value="{{student.middle_name|title}}">
         </fieldset>
         <fieldset class="col-md-2" disabled>
             <label for="inputState" class="form-label">Gender</label>
-            <input type="text" class="form-control" id="inputgender" value="{{student.gender}}">
+            <input type="text" class="form-control" id="inputgender" value="{{student.gender|title}}">
         </fieldset>
         <fieldset class="col-md-2" disabled>
             <label for="inputbirth" class="form-label">Birth Date</label>
@@ -48,11 +48,11 @@
         <!-- SINGIT KO LANG -->
         <fieldset class="col-md-2" disabled>
             <label for="inputEmail4" class="form-label">Mother Tongue:</label>
-            <input type="text" class="form-control" id="inputEmail4" value="{{student.mother_tongue}}">
+            <input type="text" class="form-control" id="inputEmail4" value="{{student.mother_tongue|title}}">
         </fieldset>
         <fieldset class="col-md-2" disabled>
             <label for="inputEmail4" class="form-label">Ethnic Group:</label>
-            <input type="text" class="form-control" id="inputEmail4" value="{{student.ethnic_group}}">
+            <input type="text" class="form-control" id="inputEmail4" value="{{student.ethnic_group|title}}">
         </fieldset>
         <!-- END OF SINGIT -->
 
@@ -66,19 +66,19 @@
         <!-- ADD KO LANG 'TO KASI NEED 'TO MAKITA NG PANELISTS!!-->
         <fieldset class="col-md-3" disabled>
             <label for="inputEmail4" class="form-label">Father's Name:</label>
-            <input type="text" class="form-control" id="inputEmail4" value="{{student.father_name}}">
+            <input type="text" class="form-control" id="inputEmail4" value="{{student.father_name|title}}">
         </fieldset>
         <fieldset class="col-md-3" disabled>
             <label for="inputEmail4" class="form-label">Mother's Maiden Name:</label>
-            <input type="text" class="form-control" id="inputEmail4" value="{{student.mother_maide_name}}">
+            <input type="text" class="form-control" id="inputEmail4" value="{{student.mother_maide_name|title}}">
         </fieldset>
         <fieldset class="col-md-3" disabled>
             <label for="inputEmail4" class="form-label">Guardian Name:</label>
-            <input type="text" class="form-control" id="inputEmail4" value="{{student.guardian_name}}">
+            <input type="text" class="form-control" id="inputEmail4" value="{{student.guardian_name|title}}">
         </fieldset>
         <fieldset class="col-md-3" disabled>
             <label for="inputEmail4" class="form-label">Relationship:</label>
-            <input type="text" class="form-control" id="inputEmail4" value="{{student.relationship}}">
+            <input type="text" class="form-control" id="inputEmail4" value="{{student.relationship|title}}">
         </fieldset>
         <fieldset class="col-md-4" disabled>
             <label for="inputEmail4" class="form-label">Contact No. of Parent or Guardian:</label>
