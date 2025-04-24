@@ -1,0 +1,101 @@
+{% extends "registrar/registrar-dashboard.html" %}
+
+{% block heading %}
+  <h1>Grades Submission</h1>
+{% endblock heading %}
+
+{% load static %}
+{% block content %}
+
+<!-- Custom fonts for this template-->
+<link href= "{% static "vendor/fontawesome-free/css/all.min.css" %}" rel="stylesheet" type="text/css">
+<link href= "{% static "https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" %}" rel="stylesheet">
+
+<div class="container-fluid mt-4" style="margin-top: 3vh; margin-bottom: 5vh;">
+
+    <div class="card shadow-sm mb-4">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">Class Masterlist</h6>
+        </div>
+
+        <div class="card-body">
+            <table class="table table-hover table-bordered my-1">
+                <div class="row">
+                    <div class="col-sm-12">
+                            <thead>
+                                <tr>
+                                    <th>STUDENT NAME</th>
+                                    <th colspan="8" scope="col" class="text-center"><b>(SUBJECT CODE)</b></th>
+                                    <th>REMARKS</th>
+                                </tr>
+                                <tr>
+                                    <th scope="col"></th>
+                                    <th scope="col">ENG</th>
+                                    <th scope="col">FIL</th>
+                                    <th scope="col">MATH</th>
+                                    <th scope="col">SCI</th>
+                                    <th scope="col">AP</th>
+                                    <th scope="col">MAPEH</th>
+                                    <th scope="col">TLE</th>
+                                    <th scope="col">GMRC</th>
+                                    <th scope="col"></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Joebert Martin</td>
+                                    <td>85</td>
+                                    <td>86</td>
+                                    <td>87</td>
+                                    <td>88</td>
+                                    <td>89</td>
+                                    <td>90</td>
+                                    <td>91</td>
+                                    <td>92</td>
+                                    <td>PASSED</td>
+                                </tr>
+                            </tbody>
+                    </div>
+                </div>
+            </table>
+        </div>
+
+        <div class="card-footer">
+            <div class="d-flex justify-content-between">
+                <a href="{% url "submission" %}" class="btn btn-primary btn-icon-split d-flex justify-content-between mb-2">
+                    <span class="icon text-white-50">
+                        <i class="bi bi-back"></i>
+                    </span>
+                    <span class="text">Back</span>
+                    <span></span>
+                </a>
+                <a class="btn btn-success btn-icon-split d-flex justify-content-between mb-2" id="archive-btn" data-click="archive">
+                    <span class="icon text-white-50">
+                        <i class="bi bi-check-square"></i>
+                    </span>
+                    <span class="text">Post</span>
+                    <span></span>
+                </a>
+
+
+
+                <script>
+                    document.addEventListener('DOMContentLoaded', function () {
+                        document.getElementById('archive-btn').addEventListener('click', function (e) {
+                            if (!confirm("Are you sure you want to post this?")) {
+                                e.preventDefault();
+                            } else {
+                                console.log("Confirmed!");
+                            }
+                        });
+                    });
+                </script>
+                
+                               
+            </div>
+        </div>
+    </div>
+
+</div>
+
+{% endblock content %}
