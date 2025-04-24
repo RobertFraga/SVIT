@@ -29,7 +29,7 @@ class announcementForm(ModelForm):
 class studentForm(ModelForm):
     class Meta:
         model = StudentProfile
-        fields = ['level', 'section', 'adviser']
+        fields = '__all__'
         exclude = ['user']
         widgets = {
             'level': forms.Select(attrs={'class': 'form-control'}),
@@ -50,6 +50,20 @@ class studentForm(ModelForm):
             raise forms.ValidationError("Age must be between 0 and 99.")
 
         return age
+    
+
+class registrarForm(ModelForm):
+    class Meta:
+        model = StudentProfile
+        fields = ['level', 'section', 'adviser']
+        exclude = ['user']
+        widgets = {
+            'level': forms.Select(attrs={'class': 'form-control'}),
+            'section': forms.Select(attrs={'class': 'form-control'}),
+            'adviser': forms.Select(attrs={'class': 'form-control'}),
+            'birth_date': forms.DateInput(attrs={'type': 'date', 'class': 'form-control'}),
+            'status': forms.RadioSelect
+        }
 
 
 

@@ -6,7 +6,7 @@ from django.contrib.auth.models import Group
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .decorators import unauthenticated_user, allowed_user, admin_only
-from .form import announcementForm, studentForm, facultyForm, UserForm, paymentForm
+from .form import announcementForm, studentForm, facultyForm, UserForm, paymentForm, registrarForm
 from django.contrib.auth.forms import UserCreationForm
 from django.db.models import Q
 from django.contrib.auth.models import User
@@ -543,10 +543,10 @@ def pending(request):
 def add_to_class(request, student_lrn):
     registrar = request.user.registrarstaff
     student = get_object_or_404(StudentProfile, student_lrn=student_lrn)
-    updateform = studentForm(instance=student)
+    updateform = registrarForm(instance=student)
 
     if request.method == "POST":
-        updateform = studentForm(request.POST, instance=student)
+        updateform = registrarForm(request.POST, instance=student)
         if updateform.is_valid():
             updateform.save()
             messages.success(request, "Student added to class successfully.")
@@ -554,7 +554,7 @@ def add_to_class(request, student_lrn):
         else:
             messages.error(request, "Error adding student to class.")
     else:
-        updateform = studentForm(instance=student)
+        updateform = registrarForm(instance=student)
 
 
     context = {
@@ -663,9 +663,9 @@ def admission_student_form(request):
             student.save()
             group = Group.objects.get(name='student')
             user.groups.add(group)
+            messages.success(request, "Student create successfully.")
 
             return redirect('enrollies')
-        
         else:
             pass
     
