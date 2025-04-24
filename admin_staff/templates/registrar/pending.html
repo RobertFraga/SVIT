@@ -17,136 +17,52 @@
         </div>
 
         <div class="card-body">
-            <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
-                <div class="row">   
-                    <div class="col-sm-12 col-md-9 d-flex align-items-center">
-                        <div class="dataTables_length d-flex align-items-center gap-2" id="dataTable_length">
-                            <label class="d-flex align-items-center mb-2">
-                                <span class="me-2">Filter by Grade:</span>
-                                <select class="form-control" id="filterGrade" style="width: auto;">
-                                    <option selected>All Grades</option>
-                                    <option>Grade 7</option>
-                                    <option>Grade 8</option>
-                                    <option>Grade 9</option>
-                                    <option>Grade 10</option>
-                                </select>
-                            </label>
+          <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
+              <div class="row justify-content-start">
+                  <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
+                    <div class="input-group">
+                        <input type="text" class="form-control bg-light border-0 small" placeholder="Search student" aria-label="Search" aria-describedby="basic-addon2">
+                        <div class="input-group-append">
+                            <button class="btn btn-primary" type="button">
+                                <i class="fas fa-search fa-sm"></i>
+                            </button>
                         </div>
                     </div>
-                    
-                    <div class="col-sm-12 col-md-3">
-                        <div class="dataTables_length d-flex align-items-center justify-content-end gap-2" id="dataTable_length">
-                            <label class="d-flex align-items-center justify-content-end mb-2">
-                                Search: 
-                                <input type="search" class="form-control form-control-sm ms-2" placeholder aria-controls="dataTable">
-                            </label>
-                        </div>
-                    </div>
-                </div>
-                
+                  </form>
+              </div>
+          </div>
 
-                <div class="modal fade" id="newPayment" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                      <div class="modal-content">
-
-                        <div class="modal-header">
-                          <h5 class="modal-title" id="exampleModalLabel">Add New Payment Record</h5>
-                          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-
-                        <div class="modal-body">
-                          <form class="row g-2">
-                            <div class="col-12 mb-2">
-                              <label for="inputEmail4" class="form-label">Student LRN:</label>
-                              <input type="email" class="form-control" id="inputEmail4" placeholder="Type here...">
-                            </div>
-                            <div class="col-12 mb-2">
-                              <label for="inputEmail4" class="form-label">Full Name:</label>
-                              <input type="email" class="form-control" id="inputEmail4" placeholder="Given Name, Middle Name, Surname">
-                            </div>
-                            <div class="col-md-4 mb-2">
-                              <label for="inputAddress" class="form-label">Grade Level:</label>
-                              <select id="inputState" class="form-control" placeholder="Select...">
-                                <option>Grade 7</option>
-                                <option>Grade 8</option>
-                                <option>Grade 9</option>
-                                <option>Grade 10</option>
-                              </select>
-                            </div>
-                            <div class="col-md-4 mb-2">
-                              <label for="inputAddress" class="form-label">Section:</label>
-                              <select id="inputState" class="form-control" placeholder="Select...">
-                                <option>Exodus</option>
-                                <option>Genesis</option>
-                              </select>
-                            </div>
-
-                            <div class="col-md-12 mb2"></div>
-
-                            <div class="col-md-7 mb-2">
-                              <label for="inputPassword4" class="form-label">Payment Method:</label>
-                              <select id="inputState" class="form-control" placeholder="Select...">
-                                <option>Credit/Debit Card Payment</option>
-                                <option>Bank Transfer</option>
-                                <option>Mobile Payment Apps</option>
-                                <option>Office Transaction</option>
-                              </select>
-                            </div>
-                            <div class="col-md-5 mb-2">
-                              <label for="inputAddress" class="form-label">Transaction ID:</label>
-                              <input type="numeric" class="form-control" id="inputPassword4" placeholder="Type here...">
-                            </div>
-                            <div class="col-md-5 mb-2">
-                              <label for="inputAddress" class="form-label">Receipt Date:</label>
-                              <input type="date" class="form-control" id="inputDate" placeholder="e.g. Genesis">
-                            </div>
-                            <div class="col-md-5 mb-2">
-                              <label for="inputCity" class="form-label">Amount:</label>
-                              <input type="number" class="form-control" id="Number of Students">
-                            </div>
-                            <div class="col-md-12 mb2">
-                              <label for="exampleFormControlTextarea1" class="form-label">Payment Description</label>
-                              <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-                            </div>
-                          </form>
-                        </div>
-
-                        <div class="modal-footer">
-                          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                          <button type="button" class="btn btn-primary">Submit Record</button>
-                        </div>
-                      </div>
-                    </div>
-                </div>
+          <table class="table table-hover my-1">
+            <div class="row">
+              <div class="col-sm-12">
+                <thead>
+                    <tr>
+                        <th scope="col">LRN</th>
+                        <th scope="col">Full Name</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for i in enrollies %}
+                      {% if not i.section %}
+                      <tr>
+                        <td>{{i.student_lrn}}</td>
+                        <td>{{i.first_name}}{{i.surname}}</td>
+                        <td>
+                        <a href="{% url "add_class" %}" class="btn btn-info btn-icon-split btn-sm">
+                            <span class="icon text-white-50">
+                                <i class="fas fa-info-circle"></i>
+                            </span>
+                            <span class="text">Add to Class</span>
+                        </a>
+                        </td>
+                      </tr>
+                      {% endif %}
+                    {% endfor %}
+                </tbody>
+              </div>
             </div>
-
-            <table class="table table-hover my-1">
-                <div class="row">
-                    <div class="col-sm-12">
-                            <thead>
-                                <tr>
-                                    <th scope="col">LRN</th>
-                                    <th scope="col">Full Name</th>
-                                    <th scope="col">Action</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>136644080056</td>
-                                    <td>John Doe</td>
-                                    <td>
-                                    <a href="{% url "add_class" %}" class="btn btn-info btn-icon-split btn-sm">
-                                        <span class="icon text-white-50">
-                                            <i class="fas fa-info-circle"></i>
-                                        </span>
-                                        <span class="text">Add to Class</span>
-                                    </a>
-                                    </td>
-                                </tr>
-                            </tbody>
-                    </div>
-                </div>
-            </table>
+          </table>
         </div>
     </div>
     

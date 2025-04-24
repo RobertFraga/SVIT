@@ -526,7 +526,13 @@ def registrar_dashboard(request):
 @login_required(login_url='login')
 @allowed_user(allow_roles=['registrar'])
 def pending(request):
-    return render(request, "registrar/pending.html")
+    registrar = request.user.registrarstaff
+    enrollies = StudentProfile.objects.all()
+    context = {
+        'registrar': registrar,
+        'enrollies': enrollies
+    }
+    return render(request, "registrar/pending.html", context)
 
 @login_required(login_url='login')
 @allowed_user(allow_roles=['registrar'])
