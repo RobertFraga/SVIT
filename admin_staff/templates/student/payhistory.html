@@ -25,7 +25,18 @@
                 <tbody>
                     {% for payment in payments %}
                     <tr>
-                        <td><a href="{% url 'payment_detail' payment.payment_id %}">{{ payment.payment_id }}</a></td>
+                        <td>
+                            <a href="javascript:void(0)" class="payment-link"
+                                data-bs-toggle="modal"
+                                data-bs-target="#paymentModal"
+                                data-id="{{ payment.payment_id }}"
+                                data-date="{{ payment.date|date:'Y-m-d' }}"
+                                data-amount="{{ payment.amount }}"
+                                data-type="{{ payment.payment_type }}"
+                                data-description="{{ payment.description }}">
+                                {{ payment.payment_id }}
+                            </a>
+                        </td>
                         <td>{{ payment.date|date:'Y-m-d' }}</td>
                         <td>{{ payment.amount }}</td>
                         <td>{{ payment.payment_type }}</td>
@@ -38,6 +49,49 @@
                 </tbody>
             </table>
         </div>
+    </div>
+    
+    
+    <!-- Payment Detail Modal -->
+    <div class="modal fade" id="paymentModal" tabindex="-1" aria-labelledby="paymentModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="paymentModalLabel">Payment Details</h5>
+            </div>
+            <div class="modal-body">
+                <p><strong>Payment ID:</strong> <span id="modalPaymentId"></span></p>
+                <p><strong>Date:</strong> <span id="modalPaymentDate"></span></p>
+                <p><strong>Amount:</strong> ₱<span id="modalPaymentAmount"></span></p>
+                <p><strong>Payment Method:</strong> <span id="modalPaymentType"></span></p>
+                <p><strong>Description:</strong> <span id="modalPaymentDescription"></span></p>
+            </div>            
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+    
+    </div>
+    
 </div>
 
 {% endblock content %}
+
+{% block script %}
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const paymentLinks = document.querySelectorAll('.payment-link');
+        
+            paymentLinks.forEach(link => {
+                link.addEventListener('click', function () {
+                    document.getElementById('modalPaymentId').textContent = this.dataset.id;
+                    document.getElementById('modalPaymentDate').textContent = this.dataset.date;
+                    document.getElementById('modalPaymentAmount').textContent = this.dataset.amount;
+                    document.getElementById('modalPaymentType').textContent = this.dataset.type;
+                    document.getElementById('modalPaymentDescription').textContent = this.dataset.description;
+                });
+            });
+        });        
+    </script>
+{% endblock %}

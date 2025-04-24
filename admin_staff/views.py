@@ -540,8 +540,28 @@ def pending(request):
 
 @login_required(login_url='login')
 @allowed_user(allow_roles=['registrar'])
-def add_to_class(request):
-    return render(request, "registrar/add_class.html")
+def add_to_class(request, student_lrn):
+    registrar = request.user.registrarstaff
+    student = get_object_or_404(StudentProfile, student_lrn=student_lrn)
+    updateform = studentForm(instance=student)
+
+    if request.method == "POST":
+        updateform = studentForm(request.POST, instance=student)
+        if updateform.is_valid():
+            updateform.save()
+            messages.success(request, "Student added to class successfully.")
+            return redirect('pending')
+        else:
+            messages.error(request, "Error adding student to class.")
+    else:
+        updateform = studentForm(instance=student)
+
+
+    context = {
+        'updateform': updateform,
+        'registrar': registrar,
+    }
+    return render(request, "registrar/add_class.html", context)
 
 #cashier end
 @login_required(login_url='login')

@@ -29,9 +29,12 @@ class announcementForm(ModelForm):
 class studentForm(ModelForm):
     class Meta:
         model = StudentProfile
-        fields = '__all__'
+        fields = ['level', 'section', 'adviser']
         exclude = ['user']
         widgets = {
+            'level': forms.Select(attrs={'class': 'form-control'}),
+            'section': forms.Select(attrs={'class': 'form-control'}),
+            'adviser': forms.Select(attrs={'class': 'form-control'}),
             'birth_date': forms.DateInput(attrs={'type': 'date', 'class': 'form-control'}),
             'status': forms.RadioSelect
         }
