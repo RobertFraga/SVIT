@@ -563,6 +563,31 @@ def add_to_class(request, student_lrn):
     }
     return render(request, "registrar/add_class.html", context)
 
+
+@login_required(login_url='login')
+@allowed_user(allow_roles=['registrar'])
+def submission(request):
+    registrar = request.user.registrarstaff
+    students = StudentProfile.objects.all()
+
+    context = {
+        'registar': registrar,
+        'students': students
+    }
+    return render(request, "registrar/submission.html", context)
+
+@login_required(login_url='login')
+@allowed_user(allow_roles=['registrar'])
+def adviser_grades(request):
+    registrar = request.user.registrarstaff
+    students = StudentProfile.objects.all()
+
+    context = {
+        'registar': registrar,
+        'students': students
+    }
+    return render(request, "registrar/adviser_grades.html", context)
+
 #cashier end
 @login_required(login_url='login')
 @allowed_user(allow_roles=['cashier'])
