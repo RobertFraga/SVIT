@@ -662,9 +662,9 @@ def admission_enrollies(request):
 
 @login_required(login_url='login')
 @allowed_user(allow_roles=['admission'])
-def admission_student_profile(request, pk):
+def admission_student_profile(request, student_lrn):
     admission = request.user.admissionstaff
-    student = StudentProfile.objects.get(student_lrn = pk)
+    student = StudentProfile.objects.get(student_lrn = student_lrn)
     context = {'student': student, 'admission': admission}
     return render(request, 'admission/admission-student-profile.html', context)
 
