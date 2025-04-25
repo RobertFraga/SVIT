@@ -71,12 +71,26 @@
                                     <div class="container-fluid">
                                         {% if messages %}
                                             {% for message in messages %}
-                                                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                                <div class="alert alert-success fade-message" role="alert">
                                                     {{ message }}
                                                 </div>
                                             {% endfor %}
+                                      
+                                            <script>
+                                              document.addEventListener("DOMContentLoaded", function () {
+                                                const messages = document.querySelectorAll('.fade-message');
+                                                messages.forEach(function(message) {
+                                                  setTimeout(() => {
+                                                    message.style.transition = "opacity 1s ease-out";
+                                                    message.style.opacity = "0";
+                                                    setTimeout(() => message.style.display = "none", 1000);
+                                                  }, 3000);
+                                                });
+                                              });
+                                            </script>
                                         {% endif %}
                                     </div>
+                                      
 
                                     <form method="post">
                                       {% csrf_token %}

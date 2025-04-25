@@ -64,6 +64,8 @@ def add_announcement(request):
         announce = announcementForm(request.POST)
         if announce.is_valid():
             announce.save()
+            messages.success(request, "Annoucement Successfully Created")
+            
             return redirect('/')
 
     context = {'announce': announce}
