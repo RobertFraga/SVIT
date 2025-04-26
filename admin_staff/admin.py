@@ -42,7 +42,22 @@ class announcement(admin.ModelAdmin):
 
 
 admin.site.register(level)
-admin.site.register(section)
+#admin.site.register(section)
+
+
+@admin.register(section)
+class section(admin.ModelAdmin):
+    list_display = ('section_name', 'level', 'adviser')
+    
+
+class SectionInline(admin.TabularInline):  # or StackedInline if you want vertical
+    model = section
+    extra = 1  # number of empty forms to add
+
+class LevelAdmin(admin.ModelAdmin):
+    inlines = [SectionInline]
+
+
 
 admin.site.register(accademicYear)
 admin.site.register(admissionStaff)
