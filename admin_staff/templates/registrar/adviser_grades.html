@@ -31,7 +31,7 @@
                             <td>{{ student.section }}</td> 
                             <td>
                                 <!-- You can put edit/view/post grade buttons here -->
-                                <a href="#" class="btn btn-primary btn-sm">Post Grade</a>
+                                <a href="{% url "grades_student" student.student_lrn %}" class="btn btn-primary btn-sm">Post Grade</a>
                             </td>
                         </tr>
                     {% empty %}
