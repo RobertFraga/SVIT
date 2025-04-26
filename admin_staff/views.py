@@ -378,7 +378,7 @@ def advisory_grades(request, pk):
     return render(request, 'faculty/faculty-student-grade.html', context)
 
 
-
+@login_required(login_url='login')
 def get_student_grades(request, student_lrn):
     if request.headers.get('x-requested-with') == 'XMLHttpRequest':  # AJAX request check
         grades = StudentGrade.objects.filter(student_lrn=student_lrn)
@@ -401,7 +401,7 @@ def get_student_grades(request, student_lrn):
 
 @csrf_exempt
 @login_required(login_url='login')
-@allowed_user(allow_roles=['faculty', 'admin'])
+@allowed_user(allow_roles=['faculty', 'admin', 'registrar'])
 def save_grade(request):
     if request.method == "POST":
         try:
@@ -594,6 +594,19 @@ def adviser_grades(request, section_id):
         'students': students,
     }
     return render(request, "registrar/adviser_grades.html", context)
+
+@login_required(login_url='login')
+@allowed_user(allow_roles=['registrar'])
+def grades_student(request, pk):
+    registrar = request.user.registrarstaff
+    student = StudentProfile.objects.get(student_lrn = pk)
+    
+    context = {
+        'registrar': registrar,
+        'student': student,
+    }
+    return render(request, "registrar/registrar-student-grades.html", context)
+
 
 def load_sections(request):
     level_id = request.GET.get('level')

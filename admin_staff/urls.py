@@ -86,6 +86,10 @@ urlpatterns = [
     path('add-to-class/<str:student_lrn>', views.add_to_class, name='add_class'),
     path('grades-submission', views.submission, name='submission'),
     path('adviser-grades/<int:section_id>/', views.adviser_grades, name='adviser_grades'),
+    path('grades_student/<int:pk>', views.grades_student, name="grades_student"),
+
+
+
     path('ajax/load-sections/', views.load_sections, name='ajax_load_sections'),
     path('ajax/get-adviser/', views.get_adviser, name='ajax_get_adviser'),
 
