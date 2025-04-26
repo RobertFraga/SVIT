@@ -61,7 +61,9 @@
                             <tbody>
                                 {% for i in sections %}
                                         <tr>
-                                            <td>{{ i.adviser.first_name|title }} {{ sec.adviser.surname|title }}</td>
+                                            <td class="text-truncate" style="max-width: 100px;">
+                                                {{ i.adviser.first_name|title }} {{ i.adviser.surname|title }}
+                                            </td>
                                             <td>{{ i.level.grade }}</td>
                                             <td>{{ i.section_name }}</td>
                                             <td>
