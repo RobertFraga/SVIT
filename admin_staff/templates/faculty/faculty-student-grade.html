@@ -59,13 +59,41 @@
                         <td><strong>{{ grades.SCI.final_grade|default_if_none:'' }}</strong></td>
                     </tr>
                     <tr>
-                        <td>PE</td>
-                        <td>Physical Education</td>
+                        <td>AP</td>
+                        <td>Araling Panlipunan</td>
                         <td contenteditable="true" class="editable">{{ grades.PE.first_grading|default_if_none:'' }}</td>
                         <td contenteditable="true" class="editable">{{ grades.PE.second_grading|default_if_none:'' }}</td>
                         <td contenteditable="true" class="editable">{{ grades.PE.third_grading|default_if_none:'' }}</td>
                         <td contenteditable="true" class="editable">{{ grades.PE.fourth_grading|default_if_none:'' }}</td>
                         <td><strong>{{ grades.PE.final_grade|default_if_none:'' }}</strong></td>
+                    </tr>
+                    <tr>
+                        <td>MAPEH</td>
+                        <td>Music, Arts, PE, and Health</td>
+                        <td contenteditable="true" class="editable">{{ grades.MAPEH.first_grading|default_if_none:'' }}</td>
+                        <td contenteditable="true" class="editable">{{ grades.MAPEH.second_grading|default_if_none:'' }}</td>
+                        <td contenteditable="true" class="editable">{{ grades.MAPEH.third_grading|default_if_none:'' }}</td>
+                        <td contenteditable="true" class="editable">{{ grades.MAPEH.fourth_grading|default_if_none:'' }}</td>
+                        <td><strong>{{ grades.MAPEH.final_grade|default_if_none:'' }}</strong></td>
+                    </tr>
+                    
+                    <tr>
+                        <td>GMRC</td>
+                        <td>Good Manners and Right Conduct</td>
+                        <td contenteditable="true" class="editable">{{ grades.COMP.first_grading|default_if_none:'' }}</td>
+                        <td contenteditable="true" class="editable">{{ grades.COMP.second_grading|default_if_none:'' }}</td>
+                        <td contenteditable="true" class="editable">{{ grades.COMP.third_grading|default_if_none:'' }}</td>
+                        <td contenteditable="true" class="editable">{{ grades.COMP.fourth_grading|default_if_none:'' }}</td>
+                        <td><strong>{{ grades.COMP.final_grade|default_if_none:'' }}</strong></td>
+                    </tr>
+                    <tr>
+                        <td>TLE</td>
+                        <td>Technology and Livelihood Education</td>
+                        <td contenteditable="true" class="editable">{{ grades.COMP.first_grading|default_if_none:'' }}</td>
+                        <td contenteditable="true" class="editable">{{ grades.COMP.second_grading|default_if_none:'' }}</td>
+                        <td contenteditable="true" class="editable">{{ grades.COMP.third_grading|default_if_none:'' }}</td>
+                        <td contenteditable="true" class="editable">{{ grades.COMP.fourth_grading|default_if_none:'' }}</td>
+                        <td><strong>{{ grades.COMP.final_grade|default_if_none:'' }}</strong></td>
                     </tr>
                 </tbody>
             </table>
