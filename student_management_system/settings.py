@@ -43,7 +43,6 @@ INSTALLED_APPS = [
     'admin_staff',
     'import_export',
     'bootstrap5',
-    'django_select2',
 ]
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap4"
 CRISPY_TEMPLATE_PACK = "bootstrap4"

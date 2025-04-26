@@ -22,5 +22,4 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('admin_staff.urls')),
     path('login/', auth_views.LoginView.as_view(), name='login'),
-    path('select2/', include('django_select2.urls')),
 ]
