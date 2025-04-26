@@ -580,13 +580,18 @@ def submission(request):
 
 @login_required(login_url='login')
 @allowed_user(allow_roles=['registrar'])
-def adviser_grades(request):
+def adviser_grades(request, section_id):
     registrar = request.user.registrarstaff
-    students = StudentProfile.objects.all()
+
+    # FIX THIS:
+    selected_section = get_object_or_404(section, id=section_id)
+
+    students = StudentProfile.objects.filter(section=selected_section)
 
     context = {
-        'registar': registrar,
-        'students': students
+        'registrar': registrar,
+        'section': selected_section,
+        'students': students,
     }
     return render(request, "registrar/adviser_grades.html", context)
 
