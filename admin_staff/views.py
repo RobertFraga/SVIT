@@ -1,5 +1,5 @@
 from django.shortcuts import get_object_or_404, render, redirect
-from .models import StudentProfile, FacultyStaff, Announcement, registrarStaff, cashierStaff, admissionStaff, StudentGrade,StudentAttendance, accademicYear, level, payment
+from .models import StudentProfile, FacultyStaff, Announcement, registrarStaff, cashierStaff, admissionStaff, StudentGrade,StudentAttendance, accademicYear, level, payment, section
 from django.shortcuts import render
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import Group
@@ -570,11 +570,11 @@ def add_to_class(request, student_lrn):
 @allowed_user(allow_roles=['registrar'])
 def submission(request):
     registrar = request.user.registrarstaff
-    students = StudentProfile.objects.all()
+    sections = section.objects.select_related('level', 'adviser').all()
 
     context = {
         'registar': registrar,
-        'students': students
+        'sections': sections
     }
     return render(request, "registrar/submission.html", context)
 
@@ -589,6 +589,21 @@ def adviser_grades(request):
         'students': students
     }
     return render(request, "registrar/adviser_grades.html", context)
+
+def load_sections(request):
+    level_id = request.GET.get('level')
+    sections = section.objects.filter(level_id=level_id).values('id', 'section_name')
+    return JsonResponse(list(sections), safe=False)
+
+def get_adviser(request):
+    section_id = request.GET.get('section')
+    sections = section.objects.get(id=section_id)
+    adviser = sections.adviser
+    return JsonResponse({'adviser_id': adviser.faculty_staff_id if adviser else None})
+
+
+
+
 
 #cashier end
 @login_required(login_url='login')

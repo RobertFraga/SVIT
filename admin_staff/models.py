@@ -36,14 +36,14 @@ class accademicYear(models.Model):
 
 class level(models.Model):
     grade = models.CharField(max_length=20);
-    section_name = models.ManyToManyField("section")
     def __str__(self):
         return self.grade
 
 
 class section(models.Model):
     section_name = models.CharField(max_length=20)
-    
+    level = models.ForeignKey(level, on_delete=models.CASCADE, related_name='sections', null=True, blank=True)
+    adviser = models.ForeignKey('FacultyStaff', on_delete=models.SET_NULL, null=True, blank=True)
 
     def __str__(self):
         return self.section_name
@@ -79,7 +79,6 @@ class FacultyStaff(models.Model):
 
     contact = models.BigIntegerField(blank=True, null=True)
     email = models.CharField(max_length=100, blank=True, null=True)
-    section = models.OneToOneField('section', blank=True, null=True, on_delete=models.SET_NULL)
 
     
     class Meta:

@@ -52,21 +52,18 @@
                     <div class="col-sm-12">
                             <thead>
                                 <tr>
-                                    <th scope="col">StudentName</th>
+                                    <th scope="col">Adviser</th>
                                     <th scope="col">Grade Level</th>
                                     <th scope="col">Section</th>
-                                    <th scope="col">Adviser</th>
                                     <th scope="col">Action</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                {% for i in students %}
-                                    {% if i.section and i.adviser %}
+                                {% for i in sections %}
                                         <tr>
-                                            <td>{{i.first_name|title}} {{i.surname|title}}</td>
-                                            <td>{{i.level}}</td>
-                                            <td>{{i.section}}</td>
-                                            <td>{{i.adviser|title}}</td>
+                                            <td>{{ i.adviser.first_name|title }} {{ sec.adviser.surname|title }}</td>
+                                            <td>{{ i.level.grade }}</td>
+                                            <td>{{ i.section_name }}</td>
                                             <td>
                                             <a href="{% url "adviser_grades" %}" class="btn btn-info btn-icon-split btn-sm">
                                                 <span class="icon text-white-50">
@@ -76,7 +73,6 @@
                                             </a>
                                             </td>
                                         </tr>
-                                    {% endif %}
                                 {% endfor %}
                             </tbody>
                     </div>

@@ -86,6 +86,8 @@ urlpatterns = [
     path('add-to-class/<str:student_lrn>', views.add_to_class, name='add_class'),
     path('grades-submission', views.submission, name='submission'),
     path('masterlist-grades', views.adviser_grades, name='adviser_grades'),
+    path('ajax/load-sections/', views.load_sections, name='ajax_load_sections'),
+    path('ajax/get-adviser/', views.get_adviser, name='ajax_get_adviser'),
 
     #cashier end
     path('cashier-dashboard', views.cashier_dashboard, name='cashier'),
